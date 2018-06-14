@@ -1,0 +1,222 @@
+@import "../../../node_modules/bootstrap/scss/bootstrap-grid.scss";
+
+.page-home{
+    background-color: #F3F7F7;
+    min-height: calc(100% - 50px - .3rem);
+  .jumbotron .title{
+    font-size: 2rem;
+    font-weight: 300;
+    line-height: 1.2;
+    color: #666;
+  }
+  .jumbotron .description{
+    color: #9EACB4;
+    font-family: sans-serif;
+    font-size: 1.2rem;
+    font-weight: 100;
+  }
+  .jumbotron {
+    padding: 1rem 2rem;
+    background-color: #ffff;
+    box-shadow: 0px 2px 1px rgba(0, 0, 0, 0.07);
+  }
+  .card-columns {
+    @include media-breakpoint-only(lg) {
+      column-count: 2;
+    }
+    @include media-breakpoint-only(xl) {
+      column-count: 2;
+    }
+  } 
+  .container-fluid{
+    padding-left: 50px;
+    padding-right: 50px;
+  }
+  .card{
+    box-shadow: 1px 3px 2px rgba(0, 0, 0, 0.1);
+  }
+  .card-title{
+    color: #666;
+    margin: 0px;
+  }
+  .list-group-item{
+    color: #686868;
+  }
+  .card-text{
+    color: #9EACB4;
+    font-family: sans-serif;
+    font-weight: 100;
+  }
+  .course-list-view {
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    flex-wrap: wrap;
+    padding: 0 5%;
+    padding-bottom: 1em;
+    .course-section-container {
+      flex: 0 1 30%;
+      box-sizing: border-box;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      align-items: center;
+      padding: 1em 2em;
+      margin: 1em .5em auto .5em;
+      border: 1px solid rgba(119, 119, 119, 0.04);
+      border-radius: 4px;
+      min-width: 400px;
+      position: relative;
+      background: rgba(white, .27);
+      .img-course-container {
+        box-sizing: border-box;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 1;
+        img {
+          width: 50%;
+          height: 50%;
+        }
+      }
+      .details-course-container {
+        padding-top: .5em;
+        z-index: 1;
+        .title-course {
+          font-weight: 900;
+          text-align: center;
+          text-transform: uppercase;
+          color: #e0560a;
+          font-size: 32px;
+        }
+        .description-course {
+          text-align: justify;
+          padding-top: .5em;
+          padding-left: .5em;
+          overflow: hidden;
+          color:#666;
+        }
+      }
+      a {
+        cursor: pointer;
+        align-self: flex-end;
+        text-decoration: none;
+        color: #e0560a;
+        margin: 1em .5em 0 .5em;
+        padding: .6em 1em;
+        z-index: 1;
+      }
+      &::before{
+       
+        border-radius: 4px;
+        content: " " !important;
+        height: 100%;
+        left: 0;
+        opacity: 0;
+        pointer-events: none;
+        position: absolute;
+        top: 0;
+        -webkit-transform: scale(0.96);
+        transform: scale(0.96);
+        width: 100%;
+        z-index: 0;
+      }
+      &:hover {
+     
+        a:last-child {
+          background: #e0560a;
+          color: white;
+          align-self: flex-end;
+          text-decoration: none;
+          border-radius: 1em;
+        }
+        &::before{
+          background: white;
+          -webkit-animation: tapAnimation 0.25s cubic-bezier(0.31, 1, 0.34, 1) forwards;
+          animation: tapAnimation 0.25s cubic-bezier(0.31, 1, 0.34, 1) forwards;
+        }
+      }
+      @keyframes tapAnimation {
+        0% {
+          opacity: 1;
+          -webkit-transform: scale(0.96);
+                  transform: scale(0.96); }
+        100% {
+          opacity: 1;
+          -webkit-transform: scale(1);
+                  transform: scale(1); } }
+      
+    }
+  }
+  .round-preloader{
+    border-radius: 100%!important;
+    width: 50px;
+    height: 50px;
+}
+.animated--title{
+    height: 10px;
+    width: 250px;
+}
+.animated--short-title{
+    height: 10px;
+    width: 80px;
+}
+.animated--description{
+    height: 10px;
+}
+.animated--checkbox{
+    height: 17px;
+    width: 41px;
+    border-radius: 34px!important;
+    display: inline-block;
+    vertical-align: middle;
+    margin-left: 10px;
+}
+  .animated-background {
+    -webkit-animation-duration: 1s;
+    animation-duration: 1s;
+    -webkit-animation-fill-mode: forwards;
+    animation-fill-mode: forwards;
+    -webkit-animation-iteration-count: infinite;
+    animation-iteration-count: infinite;
+    -webkit-animation-name: placeHolderShimmer;
+    animation-name: placeHolderShimmer;
+    -webkit-animation-timing-function: linear;
+    animation-timing-function: linear;
+    background: #f6f7f8;
+    background: #eeeeee;
+    background: -webkit-gradient(linear, left top, right top, color-stop(8%, #eeeeee), color-stop(18%, #dddddd), color-stop(33%, #eeeeee));
+    background: -webkit-linear-gradient(left, #eeeeee 8%, #dddddd 18%, #eeeeee 33%);
+    background: linear-gradient(to right, #eeeeee 8%, #dee1e4bf 18%, #eeeeee 38%);
+    -webkit-background-size: 800px 104px;
+    background-size: 800px 104px;
+    height: 96px;
+    position: relative;
+  }
+  @-webkit-keyframes placeHolderShimmer {
+    0% {
+      background-position: -468px 0
+    }
+    100% {
+      background-position: 468px 0
+    }
+  }
+  
+  @keyframes placeHolderShimmer {
+    0% {
+      background-position: -468px 0
+    }
+    100% {
+      background-position: 468px 0
+    }
+  }
+  .list-group-item:hover {
+    background-color: #F6F6F6;
+  }
+  .list-group .check{
+    background-color: #F6F6F6;
+  }
+  
+}
