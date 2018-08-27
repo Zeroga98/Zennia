@@ -35,6 +35,8 @@
   border-radius: 100px;
   margin-left: calc(15% - 20px);
   padding: 5px 10px;
+  display: inline-block;
+  text-decoration: none;
 }
 .login-btn img{
   width: 8%;
@@ -45,4 +47,6 @@
 .login-btn span{
   display: inline-block;
   vertical-align: middle;
+  color: #666;
+  text-decaration: none;
 }
