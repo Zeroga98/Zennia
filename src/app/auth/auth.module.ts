@@ -4,12 +4,14 @@ import { CommonModule } from '@angular/common';
 import { AuthRoutingModule } from './auth-routing.module';
 import { AuthComponent } from './auth.component';
 import { NgProgressModule } from 'ngx-progressbar';
+import { SharedModule } from '../shared';
 
 @NgModule({
   imports: [
     CommonModule,
     AuthRoutingModule,
-    NgProgressModule
+    NgProgressModule,
+    SharedModule
   ],
   declarations: [
     AuthComponent

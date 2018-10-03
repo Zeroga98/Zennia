@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Location } from '@angular/common';
 import { Router } from '@angular/router';
 
+import { AuthService } from '../../../shared/services';
+
 @Component({
   selector: 'app-layout-header',
   templateUrl: './header.component.html',
@@ -9,36 +11,34 @@ import { Router } from '@angular/router';
 })
 export class HeaderComponent implements OnInit {
   
-  route: string;
+  public route: string;
+  public user: any;
 
   constructor(
     location: Location,
-    router: Router
+    router: Router,
+    private authService: AuthService
   ) { 
-    router.events.subscribe((val) => {
-      if(location.path() != ''){
-        this.route = location.path();
-      } else {
-        this.route = 'Home'
-      }
-    });
+    router.events.subscribe((val) => this.route = ((location.path() != '')? location.path(): 'Home') );
+    this.authService.$user.subscribe(user => this.user = user); 
   }
 
   ngOnInit() {
 
   }
-  items: string[] = [
-    'The first choice!',
-    'And another choice for you.',
-    'but wait! A third!'
-  ];
+
+  public logout(){
+    this.authService.logout();
+  }
  
   onHidden(): void {
     console.log('Dropdown is hidden');
   }
+
   onShown(): void {
     console.log('Dropdown is shown');
   }
+
   isOpenChange(): void {
     console.log('Dropdown state is changed');
   }

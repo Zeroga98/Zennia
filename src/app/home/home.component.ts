@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { NgProgress } from 'ngx-progressbar';
+import { Observable } from 'rxjs';
+
+import { AuthService, CourseService } from '../shared/services';
 
 @Component({
   selector: 'app-home',
@@ -8,16 +11,25 @@ import { NgProgress } from 'ngx-progressbar';
 })
 export class HomeComponent implements OnInit {
 
+  public courses: [];
+
   constructor(
-    public ngProgress: NgProgress
+    private ngProgress: NgProgress,
+    private authService: AuthService,
+    private courseService: CourseService
   ) { }
 
   ngOnInit() {
-    this.ngProgress.start();
+    //this.ngProgress.start();
+    //setTimeout(() => { this.ngProgress.done(); }, 1000); 
+    this.getCourses();
+  }
 
-    setTimeout(() => {
-         this.ngProgress.done();
-     }, 1000); 
+  private getCourses(){
+    this.courseService.getCourses()
+    .subscribe(data => {
+      this.courses = data;
+    });
   }
 
 }
