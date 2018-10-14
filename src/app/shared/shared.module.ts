@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 import { SharedRoutingModule } from './shared-routing.module';
-import { AuthService, ApiService, CourseService } from './services';
+import { AuthService, ApiService, CourseService, LessonService, ApiJudgeService } from './services';
 import { ReversePipe } from './pipes';
 
 @NgModule({
@@ -15,6 +15,12 @@ import { ReversePipe } from './pipes';
   declarations: [
   	ReversePipe
   ],
-  providers: [ AuthService, ApiService, CourseService ]
+  providers: [ 
+  	AuthService, 
+  	ApiService, 
+  	CourseService, 
+  	LessonService, 
+  	ApiJudgeService 
+  ]
 })
 export class SharedModule { }

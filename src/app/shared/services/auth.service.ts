@@ -3,6 +3,7 @@ import { ApiService } from './api.service';
 import { Router } from '@angular/router';
 import { Subject } from 'rxjs/Subject';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
+import { AngularFirestore } from 'angularfire2/firestore';
 
 import { ChairaAuth } from '../constanst';
 
@@ -14,7 +15,8 @@ export class AuthService {
 
     constructor(
         private api: ApiService,
-        private router: Router
+        private router: Router,
+        private firestore: AngularFirestore
     ) { }
  
     public getAccessToken(code: string) {
@@ -35,6 +37,17 @@ export class AuthService {
       localStorage.setItem("access_token", data.access_token);
       localStorage.setItem("refresh_token", data.refresh_token);
       localStorage.setItem("user", data.scope);
+    }
+
+    public saveUserFirebase(user: any){
+      this.firestore.collection('usuarios')
+      .add({ 
+        correo: user.CORREO,
+        foto: user.FOTO,
+        genero: user.GENERO,
+        nombres: user.NOMBRES,
+        rol: user.ROL
+      });
     }
 
     public setUser(user){

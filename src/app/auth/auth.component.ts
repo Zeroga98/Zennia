@@ -35,13 +35,18 @@ export class AuthComponent implements OnInit {
     .subscribe(data => {
       console.log(data);
     }, error => {
-      let response = JSON.parse(error.error.text.replace('{"d":null}', ''));
-      if(response.state == 'OK'){
-        this.authService.saveDataLocalStorage(JSON.parse(error.error.text.replace('{"d":null}', '')));
-        this.authService.setUser(this.authService.getUserLocalStorage());
-        this.router.navigate(['/']);
+      if(error.status != 0){
+        let response = JSON.parse(error.error.text.replace('{"d":null}', ''));
+        if(response.state == 'OK'){
+          this.authService.saveDataLocalStorage(JSON.parse(error.error.text.replace('{"d":null}', '')));
+          this.authService.setUser(this.authService.getUserLocalStorage());
+          this.authService.saveUserFirebase(this.authService.getUserLocalStorage());
+          this.router.navigate(['/curso/home']);
+        } else {
+          console.log(response);
+        }
       } else {
-        console.log(response);
+        console.log("Ocurrio un problema en el servidor de Chairá, intentalo más tarde");
       }
     });
   }

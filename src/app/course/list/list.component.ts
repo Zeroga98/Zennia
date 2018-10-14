@@ -2,16 +2,16 @@ import { Component, OnInit } from '@angular/core';
 import { NgProgress } from 'ngx-progressbar';
 import { Observable } from 'rxjs';
 
-import { AuthService, CourseService } from '../shared/services';
+import { AuthService, CourseService } from '../../shared/services';
 
 @Component({
-  selector: 'app-home',
-  templateUrl: './home.component.html',
-  styleUrls: ['./home.component.scss']
+  selector: 'app-list',
+  templateUrl: './list.component.html',
+  styleUrls: ['./list.component.scss']
 })
-export class HomeComponent implements OnInit {
+export class ListComponent implements OnInit {
 
-  public courses: [];
+  public courses: any = [];
 
   constructor(
     private ngProgress: NgProgress,

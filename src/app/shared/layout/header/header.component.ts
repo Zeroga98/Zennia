@@ -13,13 +13,17 @@ export class HeaderComponent implements OnInit {
   
   public route: string;
   public user: any;
+  public is_invited: boolean;
 
   constructor(
     location: Location,
     router: Router,
     private authService: AuthService
   ) { 
-    router.events.subscribe((val) => this.route = ((location.path() != '')? location.path(): 'Home') );
+    router.events.subscribe((val) => {
+      this.route = ((location.path() != '')? location.path(): 'Home');
+      this.is_invited = this.route.indexOf("login") != -1;
+    });
     this.authService.$user.subscribe(user => this.user = user); 
   }
 

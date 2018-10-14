@@ -9,6 +9,10 @@ const routes: Routes = [
   {
     path: 'curso',
     loadChildren: './course/course.module#CourseModule'
+  },
+  {
+    path: 'curso/:course_id/leccion',
+    loadChildren: './lesson/lesson.module#LessonModule'
   }
 ];
 

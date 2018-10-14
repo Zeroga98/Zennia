@@ -1,11 +1,11 @@
-<div class="page-home ">
+<div class="page-list">
   <div class="jumbotron">
     <h1 class="title">Tenemos 4 Cursos para ti</h1>
     <p class="description">Inscritibe y certificate para que logres ser el mejor</p>
   </div>
   <div class="container-fluid">
     <div class="row">
-      <div class="col-7">
+      <div class="col-xs-12 col-md-12 col-lg-7">
         <div class="card-columns">
           <section *ngFor="let course of courses">
             <div class="card">
@@ -13,9 +13,7 @@
                 <h5 class="card-title text-center">{{course.nombre}}</h5>
               </div>
               <ul class="list-group list-group-flush">
-                <li [routerLink]="['/curso']" class="list-group-item hand" *ngFor="let lesson of course.lecciones">{{lesson.nombre}}</li>
-
-
+                <li [routerLink]="['/curso', course.id, 'leccion', lesson.id, 'evaluar']" class="list-group-item hand" *ngFor="let lesson of course.lecciones">{{lesson.nombre}}</li>
                 <!-- EJEMPLO DE ITEM SELECCIONADO
                   <li [routerLink]="['/curso']" class="list-group-item check">Entradas</li>
                 -->
@@ -24,19 +22,19 @@
           </section>
         </div>
       </div>
-      <div class="col-5 ">
-        <div class="card col-8 offset-2">
-          <div class="card-body text-center">
-            <h5 class="card-title">Tu Progreso</h5>
-            <img src="./assets/bici.png" width="160" alt="">
-            <p class="card-text">Rueditas de bici</p>
-            <div class="animated-background animated--title" style="width: 300px; height: 15px; margin: 8px auto;"></div>
-            <div class="animated-background animated--title" style="width: 300px; height: 15px; margin: 8px auto;"></div>
-            <div class="animated-background animated--title" style="width: 300px; height: 15px; margin: 8px auto;"></div>
-            <div class="animated-background animated--title" style="width: 300px; height: 15px; margin: 8px auto;"></div>
-            <div class="animated-background animated--title" style="width: 100px; height: 15px; margin: 18px auto;"></div>
-          </div>
-        </div>
+      <div class="col-sm-12 col-md-12 col-lg-5">
+          <div class="card col-8 offset-2">
+              <div class="card-body text-center">
+                <h5 class="card-title">Tu Progreso</h5>
+                <img src="./assets/bici.png" width="160" alt="">
+                <p class="card-text">Rueditas de bici</p>
+                <div class="animated-background animated--title" style="width: auto; height: 15px; margin: 8px auto;"></div>
+                <div class="animated-background animated--title" style="width: auto; height: 15px; margin: 8px auto;"></div>
+                <div class="animated-background animated--title" style="width: auto; height: 15px; margin: 8px auto;"></div>
+                <div class="animated-background animated--title" style="width: auto; height: 15px; margin: 8px auto;"></div>
+                <div class="animated-background animated--title" style="width: auto; height: 15px; margin: 18px auto;"></div>
+              </div>
+            </div>
       </div>
     </div>
     <!--   <div class="course-list-view"   >

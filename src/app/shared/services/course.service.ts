@@ -6,12 +6,13 @@ import { AngularFirestore } from 'angularfire2/firestore';
 import { combineLatest, defer, Observable, Observer } from 'rxjs';
 import { map, switchMap, take } from 'rxjs/operators';
 
-/*export const leftJoin = () => { ...proOnly }*/
-
 import { ApiService } from './api.service';
 
 @Injectable()
 export class CourseService {
+
+	private courseCurrent: Subject<any> = new BehaviorSubject<any>(null);
+	public $courseCurrent = this.courseCurrent.asObservable();
 
     constructor(
         private api: ApiService,
@@ -35,6 +36,22 @@ export class CourseService {
 			    observer.next(courses_complete);
 			    observer.complete();
 	    	});
+    	});
+    }
 
+    public getCourseById(id: string){
+    	return new Observable((observer) => {
+    		let data_parse: any;
+	    	this.firestore.doc(`cursos/${ id }`).snapshotChanges()
+	    	.subscribe((course: any) => {
+	    		data_parse = { id: course.payload.id, ...course.payload.data() }
+			    observer.next(data_parse);
+			    observer.complete();
+	    	});
+    	});
+    }
+
+    public setCourseCurrent(course: any){
+    	this.courseCurrent.next(course);
     }
 }

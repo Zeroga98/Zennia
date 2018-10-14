@@ -8,14 +8,11 @@ import { environment } from '../environments/environment';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { AuthModule } from './auth/auth.module';
-import { HomeModule } from './home/home.module';
 import { NgProgressModule } from 'ngx-progressbar';
-import {
-  HeaderComponent
-} from './shared';
+import { HeaderComponent } from './shared';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { AngularFontAwesomeModule } from 'angular-font-awesome';
-
+import { MonacoEditorModule } from 'ngx-monaco-editor';
 
 @NgModule({
   imports: [
@@ -23,16 +20,16 @@ import { AngularFontAwesomeModule } from 'angular-font-awesome';
     AppRoutingModule,
     BrowserModule,
     AuthModule,
-    HomeModule,
     NgProgressModule,
     BsDropdownModule.forRoot(),
+    MonacoEditorModule.forRoot(),
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule,
     AngularFontAwesomeModule
   ],
   declarations: [
     AppComponent,
-    HeaderComponent,
+    HeaderComponent
   ],
   bootstrap: [
     AppComponent

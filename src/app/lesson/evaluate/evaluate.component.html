@@ -1,0 +1,24 @@
+<div class="page-evaluate ">
+  <div class="jumbotron">
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb" style="margin: 0px;background-color: white; padding: 0">
+        <li *ngIf="course" style="font-size: 1.5rem; " class="breadcrumb-item"><a style="color: #333;" [routerLink]="['/curso/home']">{{course.nombre}}</a></li>
+        <li *ngIf="lesson" style="font-size: 1.3rem; padding: 3px" class="breadcrumb-item active" aria-current="page">{{lesson.nombre}}</li>
+      </ol>
+    </nav>
+  </div>
+  <select (change)="changeLanguage($event.target.value)">
+   <option [value]="language.id" *ngFor="let language of languages">{{language.name}}</option>
+  </select>
+  <ngx-monaco-editor class="my-code-editor" [options]="editorOptions" [(ngModel)]="submission.source_code" (onInit)="ngEditInit($event)"></ngx-monaco-editor>
+  <button (click)="sendSubmission()">Ejecutar</button>
+  <button (click)="sendSubmission()">Enviar</button>
+
+  <h4 *ngIf="submission.response && submission.response.stdout">
+    {{submission.response.stdout}}
+  </h4>
+  <h4 *ngIf="submission.response && (!submission.response.stdout || submission.response.compile_output)">
+    Error de compilación:
+    {{(submission.response.message)? submission.response.message: submission.response.compile_output}}
+  </h4>
+</div>
