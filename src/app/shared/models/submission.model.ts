@@ -10,8 +10,13 @@ export class Submission {
 export class responseSubmission {
 	public status: statusSubmission;
 	public time: string;
+	public compile_output: string;
 	public message: string;
 	public stdout: string;
+	public stderr: string;
+	public typeSend: string;
+	public messageErrorFinal: string;
+	public stateFinal: boolean;
 }
 
 export class statusSubmission {

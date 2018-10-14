@@ -14,10 +14,11 @@ export class EvaluateComponent implements OnInit {
 
   public subscribeCourse;
   public subscribeLesson;
+  public isSubmiting: boolean = false;
+  public course: any;
+  public lesson: any;
+  public languages = Languages.languages;
   public editInit: boolean = false;
-	public course: any;
-	public lesson: any;
-	public languages = Languages.languages;
 	public editorOptions;
   public submission: Submission;
 
@@ -25,6 +26,7 @@ export class EvaluateComponent implements OnInit {
     private courseService: CourseService,
     private lessonService: LessonService,
     private apiJudgeService: ApiJudgeService) { 
+
     this.submission = new Submission();
     this.submission.source_code = this.languages[0].code_init;
     this.submission.language_id = this.languages[0].id;
@@ -44,17 +46,17 @@ export class EvaluateComponent implements OnInit {
 
   ngOnDestroy(){
     this.subscribeCourse.unsubscribe();
-    this.subscribeLesson.unsubscribe();
+    this.subscribeLesson.unsubscribe(); 
   }
 
   ngEditInit(edit) {
     const monaco = window['monaco'];
     if (!this.editInit) {
       this.editInit = true;
+
       let languageRegister = [];
       this.languages.forEach((item: any) => {
-        let is_register = languageRegister.find(register => { return register == item.resume });
-        if(!is_register){
+        if(!languageRegister.find(register => { return register == item.resume })){
           languageRegister.push(item.resume);
           if(snippets[item.resume]){
             monaco.languages.registerCompletionItemProvider(item.resume, {
@@ -68,13 +70,26 @@ export class EvaluateComponent implements OnInit {
     }
   }
 
-  public sendSubmission(){
-    this.apiJudgeService.submission(this.submission)
-    .subscribe((data: responseSubmission) => {
-      this.submission.response = data;
-      console.log(this.submission.response);
-      console.log(data.status);
-    });
+  public sendSubmission(type: string){
+    if(!this.isSubmiting){
+      this.isSubmiting = true;
+      this.apiJudgeService.submission(this.submission)
+      .subscribe((data: responseSubmission) => {
+        this.submission.response = data;
+        this.submission.response.typeSend = type;
+
+        if(!this.submission.response.stdout || this.submission.response.compile_output){
+          this.submission.response.messageErrorFinal = (this.submission.response.stderr)? this.submission.response.stderr: 
+          (this.submission.response.message)? this.submission.response.message: this.submission.response.compile_output;
+        }
+
+        if(type == 'send'){
+          //Guardar resultado
+        }
+        console.log(this.submission.response);
+        this.isSubmiting = false;
+      });
+    }
   }
 
   public changeLanguage(language_id: any) {
