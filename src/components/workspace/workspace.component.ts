@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 
 import * as snippets from '../../snippets';
 import { Languages } from '../../app/shared/constanst';
@@ -12,6 +12,7 @@ import { CourseService, LessonService, ApiJudgeService } from '../../app/shared/
 })
 export class WorkspaceComponent implements OnInit {
 
+	@Input('submission') submissionExtra: any;
 	public isSubmiting: boolean = false;
 	public languages = Languages.languages;
 	public editInit: boolean = false;
@@ -25,17 +26,14 @@ export class WorkspaceComponent implements OnInit {
 		this.editorOptions = { theme: 'vs-dark', language: this.languages[0].resume }
 	}
 
-	ngOnInit() {
-	}
+	ngOnInit() {}
 
-	ngOnDestroy() {
-	}
+	ngOnDestroy() {}
 
 	ngEditInit(edit) {
 		const monaco = window['monaco'];
 		if (!this.editInit) {
 			this.editInit = true;
-
 			let languageRegister = [];
 			this.languages.forEach((item: any) => {
 				if (!languageRegister.find(register => { return register == item.resume })) {
@@ -55,14 +53,15 @@ export class WorkspaceComponent implements OnInit {
 	public sendSubmission(type: string) {
 		if (!this.isSubmiting) {
 			this.isSubmiting = true;
-			this.submission.stdin = (type == 'send') ? this.submission.stdin : this.submission.test_stdin;
-			this.apiJudgeService.submission(this.submission)
+			this.submission = { ...this.submission, ...this.submissionExtra};
+			this.submission.stdin = (type == 'run') ? this.submission.test_stdin : this.submission.stdin_real;
+			this.apiJudgeService.submission(this.clearSubmission())
 				.subscribe((data: responseSubmission) => {
 					this.submission.response = data;
 					this.submission.response.typeSend = type;
-
 					if (!this.submission.response.stdout || this.submission.response.compile_output) {
-						this.submission.response.messageErrorFinal = (this.submission.response.stderr) ? this.submission.response.stderr :
+						this.submission.response.messageErrorFinal = 
+							(this.submission.response.stderr) ? this.submission.response.stderr :
 							(this.submission.response.message) ? this.submission.response.message : this.submission.response.compile_output;
 					}
 
@@ -81,5 +80,13 @@ export class WorkspaceComponent implements OnInit {
 		this.submission.response = undefined;
 		this.submission.source_code = language.code_init;
 		this.editorOptions = Object.assign({}, this.editorOptions, { language: language.resume });
+	}
+
+	private clearSubmission(){
+		let clear = Object.assign({}, this.submission);	
+		delete clear["test_stdin"];
+		delete clear["stdin_real"];
+		delete clear["response"];
+		return clear;
 	}
 }

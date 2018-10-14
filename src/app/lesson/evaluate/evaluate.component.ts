@@ -25,13 +25,7 @@ export class EvaluateComponent implements OnInit {
 
   ngOnInit() {
     this.subscribeCourse = this.courseService.$courseCurrent.subscribe(course => this.course = course);
-    this.subscribeLesson = this.lessonService.$lessonCurrent.subscribe((lesson: any) => { 
-      if(lesson){
-        this.lesson = lesson;
-        //this.submission = { ...this.submission, ...lesson.submission};
-        //console.log(this.submission);
-      } 
-    });
+    this.subscribeLesson = this.lessonService.$lessonCurrent.subscribe((lesson: any) => this.lesson = lesson);
   }
 
   ngOnDestroy(){
