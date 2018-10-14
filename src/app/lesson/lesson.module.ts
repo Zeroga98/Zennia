@@ -5,7 +5,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { LessonRoutingModule } from './lesson-routing.module';
 import { LessonComponent } from './lesson.component';
 import { EvaluateComponent } from './evaluate/evaluate.component';
-import { MonacoEditorModule } from 'ngx-monaco-editor';
+import { ComponentsModule } from '../../components';
 
 @NgModule({
   imports: [
@@ -13,7 +13,7 @@ import { MonacoEditorModule } from 'ngx-monaco-editor';
   	ReactiveFormsModule,
     CommonModule,
     LessonRoutingModule,
-    MonacoEditorModule.forRoot()
+    ComponentsModule
   ],
   declarations: [LessonComponent, EvaluateComponent]
 })

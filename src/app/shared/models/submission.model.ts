@@ -2,6 +2,7 @@ export class Submission {
 	public source_code: any;
 	public language_id: number;
 	public stdin: string;
+	public test_stdin: string;
 	public expected_output: string;
 	public cpu_time_limit: number;
 	public response: responseSubmission;
