@@ -8,7 +8,8 @@ import { CourseService, LessonService, ApiJudgeService } from '../../app/shared/
 @Component({
 	selector: 'app-workspace',
 	templateUrl: './workspace.component.html',
-	styleUrls: ['./workspace.component.scss']
+	styleUrls: ['./workspace.component.scss'],
+	styles: ['monaco-editor { height: 500px!important; }'],
 })
 export class WorkspaceComponent implements OnInit {
 
