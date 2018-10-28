@@ -6,6 +6,7 @@ import { AngularFirestoreModule } from 'angularfire2/firestore';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { AngularFontAwesomeModule } from 'angular-font-awesome';
 import { MonacoEditorModule } from 'ngx-monaco-editor';
+import { FroalaEditorModule, FroalaViewModule } from 'angular-froala-wysiwyg';
 
 import { environment } from '../environments/environment';
 import { AppRoutingModule } from './app-routing.module';
@@ -23,6 +24,8 @@ import { HeaderComponent } from './shared';
     NgProgressModule,
     BsDropdownModule.forRoot(),
     MonacoEditorModule.forRoot(),
+    FroalaEditorModule.forRoot(), 
+    FroalaViewModule.forRoot(),
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule,
     AngularFontAwesomeModule

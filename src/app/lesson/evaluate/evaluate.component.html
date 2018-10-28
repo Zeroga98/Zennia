@@ -8,5 +8,5 @@
     </nav>
   </div>
 
-  <app-workspace [submission]="((lesson)? lesson.submission: undefined)"></app-workspace>
+  <app-workspace *ngIf="lesson" [submission]="lesson.submission" [content-problem]="lesson.problema" (send-problem)="sendProblem($event)"></app-workspace>
 </div>

@@ -19,16 +19,46 @@ export class LessonService {
         private firestore: AngularFirestore
     ) { }
 
+    public test(id: string, output: string){
+        this.firestore.doc(`lecciones/${ id }`)
+        .set({
+            submission: { expected_output: output }
+        }, { merge: true })
+        .then(data => {
+            console.log(data);
+        });
+    }
+
     public getLessonById(id: string): Observable<any>{
     	return new Observable((observer) => {
-    		let data_parse: any;
 	    	this.firestore.doc(`lecciones/${ id }`).snapshotChanges()
 	    	.subscribe((lesson: any) => {
-	    		data_parse = { id: lesson.payload.id, ...lesson.payload.data() }
-			    observer.next(data_parse);
+			    observer.next({ id: lesson.payload.id, ...lesson.payload.data() });
 			    observer.complete();
 	    	});
     	});
+    }
+
+    public saveResult(user_id: string, lesson_id: string, submission: any){
+        let state = true;
+        return new Observable((observer) => {
+            let subscribe = this.firestore.doc(`resultado_lecciones/${ user_id }-${ lesson_id }`).snapshotChanges()
+            .subscribe((responses: any) => {
+                if(state){
+                    state = false;
+                    this.firestore.doc(`resultado_lecciones/${ user_id }-${ lesson_id }`)
+                    .set({
+                        estado: (responses.payload.data().estado)? true: (submission.status == 'Accepted'),
+                        responses: [ ...responses.payload.data().responses, ...submission ]
+                    }, { merge: true })
+                    .then(data => {
+                        subscribe.unsubscribe();
+                        observer.complete();
+                    });
+                }
+                //observer.next(data_parse);
+            });
+        });
     }
 
     public setLessonCurrent(lesson: any){

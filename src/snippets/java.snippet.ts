@@ -33,6 +33,13 @@ export var java = [
       documentation: "Finds a substring of a string.",
       detail: 'Scanner',
       insertText: 'Scanner tec = new Scanner(System.in);'
+    },
+    {
+      label: 'for',
+      kind: 'Method',
+      documentation: "Finds a substring of a string.",
+      detail: 'for',
+      insertText: 'for(int i = 0; i < Things.length; i++){\n\n}'
     }
 
 ]

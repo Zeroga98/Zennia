@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
 
 import * as snippets from '../../snippets';
 import { Languages } from '../../app/shared/constanst';
@@ -14,20 +14,28 @@ import { CourseService, LessonService, ApiJudgeService } from '../../app/shared/
 export class WorkspaceComponent implements OnInit {
 
 	@Input('submission') submissionExtra: any;
+	@Input('content-problem') contentProblem: any;
+	@Output('send-problem') sendProblem = new EventEmitter();
 	public isSubmiting: boolean = false;
 	public languages = Languages.languages;
 	public editInit: boolean = false;
-	public editorOptions;
+	public monacoOptions;
 	public submission: Submission;
+	public froalaOptions: any = { 
+		pluginsEnabled: [], 
+		toolbarButtons: [], 
+		events : { 'froalaEditor.initialized' : function(e, editor) { editor.edit.off(); } }
+	};
 
-	constructor(private apiJudgeService: ApiJudgeService) {
+	constructor(private apiJudgeService: ApiJudgeService, private lessonService: LessonService) {
 		this.submission = new Submission();
 		this.submission.source_code = this.languages[0].code_init;
 		this.submission.language_id = this.languages[0].id;
-		this.editorOptions = { theme: 'vs-dark', language: this.languages[0].resume }
+		this.monacoOptions = { theme: 'vs-dark', language: this.languages[0].resume }
 	}
 
-	ngOnInit() {}
+	ngOnInit() {
+	}
 
 	ngOnDestroy() {}
 
@@ -65,11 +73,9 @@ export class WorkspaceComponent implements OnInit {
 							(this.submission.response.stderr) ? this.submission.response.stderr :
 							(this.submission.response.message) ? this.submission.response.message : this.submission.response.compile_output;
 					}
+					if (type == 'send')
+						this.sendProblem.emit(this.submission.response);
 
-					if (type == 'send') {
-						//Guardar resultado
-					}
-					console.log(this.submission.response);
 					this.isSubmiting = false;
 				});
 		}
@@ -80,7 +86,7 @@ export class WorkspaceComponent implements OnInit {
 		this.submission.language_id = language_id;
 		this.submission.response = undefined;
 		this.submission.source_code = language.code_init;
-		this.editorOptions = Object.assign({}, this.editorOptions, { language: language.resume });
+		this.monacoOptions = Object.assign({}, this.monacoOptions, { language: language.resume });
 	}
 
 	private clearSubmission(){
@@ -91,3 +97,27 @@ export class WorkspaceComponent implements OnInit {
 		return clear;
 	}
 }
+
+/*
+import java.util.Scanner;
+public class Main {
+    public static void main(String[] args) {
+        Scanner tec = new Scanner(System.in);
+        int cases = tec.nextInt();
+        for(int i = 0; i < cases; i++){
+            int x = tec.nextInt();
+            int total = 0;
+            for(int j = 0; j < x; j++){
+                total += (j + 1);
+                if(total == x){
+                    System.out.println(x + " eh perfeito");
+                    break;
+                } else if(total > x){
+                    System.out.println(x + " nao eh perfeito");
+                    break;
+                }
+            }
+        }
+    }
+}
+*/

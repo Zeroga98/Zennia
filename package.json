@@ -23,6 +23,7 @@
     "@angular/router": "^5.2.0",
     "@ngx-progressbar/core": "^5.0.1",
     "angular-font-awesome": "^3.1.2",
+    "angular-froala-wysiwyg": "^2.8.5",
     "angularfire2": "^5.0.0-rc.9",
     "bootstrap": "^4.0.0",
     "child_process": "^1.0.2",

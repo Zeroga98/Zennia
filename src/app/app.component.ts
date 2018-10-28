@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { NgProgress } from '@ngx-progressbar/core';
 
-import { AuthService } from './shared/services';
+import { AuthService, UserService } from './shared/services';
 
 @Component({
   selector: 'app-root',
@@ -11,8 +11,15 @@ import { AuthService } from './shared/services';
 export class AppComponent {
   title = 'app';
 
-  constructor(private authService: AuthService){
-  	if(this.authService.isAuth())
+  constructor(
+  	private authService: AuthService,
+  	private userService: UserService
+  	){
+  	if(this.authService.isAuth()){
+  		this.userService.getUser(this.authService.getUserLocalStorage().CORREO)
+  		.subscribe(data => this.userService.setUserCurrent(data));
+  		
   		this.authService.setUser(this.authService.getUserLocalStorage());
+  	}
   }
 }
