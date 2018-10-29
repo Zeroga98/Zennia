@@ -19,12 +19,12 @@ export class UserService {
         private firestore: AngularFirestore
     ) { }
 
-    public getUser(email: string): Observable<any>{
+    public getUser(id: string): Observable<any>{
     	return new Observable((observer) => {
-	    	this.firestore.collection('usuarios', ref => ref.where('correo', '==', email))
+	    	this.firestore.doc(`usuarios/${ id }`)
 	    	.snapshotChanges()
 	    	.subscribe((user: any) => {
-			    observer.next({ id: user[0].payload.doc.id, ...user[0].payload.doc.data() });
+			    observer.next({ id: user.payload.id, ...user.payload.data() });
 			    observer.complete();
 	    	});
     	});

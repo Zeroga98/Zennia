@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Location } from '@angular/common';
 import { Router } from '@angular/router';
 
-import { AuthService } from '../../../shared/services';
+import { UserService, AuthService } from '../../../shared/services';
 
 @Component({
   selector: 'app-layout-header',
@@ -18,13 +18,15 @@ export class HeaderComponent implements OnInit {
   constructor(
     location: Location,
     router: Router,
+    private userService: UserService,
     private authService: AuthService
+
   ) { 
     router.events.subscribe((val) => {
       this.route = ((location.path() != '')? location.path(): 'Home');
       this.is_invited = this.route.indexOf("login") != -1;
     });
-    this.authService.$user.subscribe(user => this.user = user); 
+    this.userService.$userCurrent.subscribe(user => this.user = user); 
   }
 
   ngOnInit() {

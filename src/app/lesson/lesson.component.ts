@@ -26,7 +26,8 @@ export class LessonComponent implements OnInit {
       		this.lessonId = params['lesson_id'];
       		this.courseId = params['course_id'];
       		this.getCourseById();
-      		this.getLessonById();
+          if(this.lessonId != 'new')
+      		  this.getLessonById();
     	});
   	}
 

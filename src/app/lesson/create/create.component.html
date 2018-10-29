@@ -1,0 +1,6 @@
+<h1>Crear</h1>
+<input type="text" placeholder="Nombre lección" [(ngModel)]="new_lesson.name">
+<div [froalaEditor]="froalaOptions" [(froalaModel)]="new_lesson.problema"></div>
+<input type="text" placeholder="Tiempo limite" [(ngModel)]="new_lesson.submission.cpu_time_limit">
+<input type="text" placeholder="Datos de entrada" [(ngModel)]="new_lesson.submission.stdin_real">
+<ngx-monaco-editor style="height:100px!important" class="my-code-editor" [options]="monacoOptions" [(ngModel)]="new_lesson.submission.expected_output"></ngx-monaco-editor>

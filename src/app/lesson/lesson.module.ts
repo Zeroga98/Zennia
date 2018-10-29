@@ -1,10 +1,13 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FroalaEditorModule, FroalaViewModule } from 'angular-froala-wysiwyg';
+import { MonacoEditorModule } from 'ngx-monaco-editor';
 
 import { LessonRoutingModule } from './lesson-routing.module';
 import { LessonComponent } from './lesson.component';
 import { EvaluateComponent } from './evaluate/evaluate.component';
+import { CreateComponent } from './create/create.component';
 import { ComponentsModule } from '../../components';
 
 @NgModule({
@@ -13,9 +16,12 @@ import { ComponentsModule } from '../../components';
   	ReactiveFormsModule,
     CommonModule,
     LessonRoutingModule,
-    ComponentsModule
+    ComponentsModule,
+    FroalaEditorModule.forRoot(), 
+    FroalaViewModule.forRoot(),
+    MonacoEditorModule.forRoot()
   ],
-  declarations: [LessonComponent, EvaluateComponent]
+  declarations: [LessonComponent, EvaluateComponent, CreateComponent]
 })
 
 export class LessonModule { }

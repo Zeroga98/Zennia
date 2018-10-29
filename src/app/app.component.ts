@@ -16,10 +16,8 @@ export class AppComponent {
   	private userService: UserService
   	){
   	if(this.authService.isAuth()){
-  		this.userService.getUser(this.authService.getUserLocalStorage().CORREO)
+  		this.userService.getUser(localStorage.getItem("token"))
   		.subscribe(data => this.userService.setUserCurrent(data));
-  		
-  		this.authService.setUser(this.authService.getUserLocalStorage());
   	}
   }
 }

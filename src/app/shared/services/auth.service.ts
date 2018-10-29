@@ -4,20 +4,38 @@ import { Router } from '@angular/router';
 import { Subject } from 'rxjs/Subject';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { AngularFirestore } from 'angularfire2/firestore';
+import { combineLatest, defer, Observable, Observer } from 'rxjs';
 
 import { ChairaAuth } from '../constanst';
 
 @Injectable()
 export class AuthService {
 
-    private user: Subject<any> = new BehaviorSubject<any>(null);
-    public $user = this.user.asObservable();
-
     constructor(
         private api: ApiService,
         private router: Router,
         private firestore: AngularFirestore
     ) { }
+
+    public login(email: string, password: string){
+      return new Observable((observer) => {
+        this.firestore.collection('usuarios', ref => 
+          ref
+          .where('correo', '==', email)
+          .where('contrasena', '==', password)
+         )
+        .snapshotChanges()
+        .subscribe((user: any) => {
+          if(user.length > 0){
+            delete user[0].payload.doc.data()['contrasena'];
+            observer.next({ state: 'OK', user: { id: user[0].payload.doc.id, ...user[0].payload.doc.data() }});
+          } else {
+            observer.next({ state: 'ERROR', type: "user_not_exist"});
+          }
+          observer.complete();
+        });
+      });
+    }
  
     public getAccessToken(code: string) {
         return this.api.post(
@@ -33,10 +51,9 @@ export class AuthService {
             });
     }
 
-    public saveDataLocalStorage(data: any){
-      localStorage.setItem("access_token", data.access_token);
-      localStorage.setItem("refresh_token", data.refresh_token);
-      localStorage.setItem("user", data.scope);
+    public saveDataLocalStorage(user: any){
+      localStorage.setItem("name", user.nombres);
+      localStorage.setItem("token", user.id);
     }
 
     public saveUserFirebase(user: any){
@@ -50,16 +67,8 @@ export class AuthService {
       });
     }
 
-    public setUser(user){
-      this.user.next(user);
-    }
-
-    public getUserLocalStorage(){
-      return JSON.parse(localStorage.getItem('user'))[0];
-    }
-
     public isAuth(){
-      return localStorage.getItem('user') != null;
+      return localStorage.getItem('token') != null;
     }
 
     public logout(){

@@ -22,6 +22,7 @@
     "@angular/platform-browser-dynamic": "^5.2.0",
     "@angular/router": "^5.2.0",
     "@ngx-progressbar/core": "^5.0.1",
+    "angular-archwizard": "^3.0.0",
     "angular-font-awesome": "^3.1.2",
     "angular-froala-wysiwyg": "^2.8.5",
     "angularfire2": "^5.0.0-rc.9",

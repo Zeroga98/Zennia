@@ -19,7 +19,7 @@ export class LessonService {
         private firestore: AngularFirestore
     ) { }
 
-    public test(id: string, output: string){
+    public test(id: string, output: string){ 
         this.firestore.doc(`lecciones/${ id }`)
         .set({
             submission: { expected_output: output }
