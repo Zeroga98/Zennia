@@ -13,7 +13,7 @@
                 <h5 class="card-title text-center">{{course.nombre}}</h5>
               </div>
               <ul class="list-group list-group-flush">
-                <li [routerLink]="['/curso', course.id, 'leccion', lesson.id, 'evaluar']" class="list-group-item hand" *ngFor="let lesson of course.lecciones">{{lesson.nombre}}</li>
+                <li (click)="redirectLesson(course, lesson)" class="list-group-item hand" *ngFor="let lesson of course.lecciones">{{lesson.nombre}}</li>
                 <!-- EJEMPLO DE ITEM SELECCIONADO
                   <li [routerLink]="['/curso']" class="list-group-item check">Entradas</li>
                 -->

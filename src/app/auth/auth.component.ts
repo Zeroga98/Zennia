@@ -4,7 +4,7 @@ import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms'
 import { NgProgress } from 'ngx-progressbar';
 
 import { ChairaAuth } from '../shared/constanst';
-import { AuthService } from '../shared/services';
+import { AuthService, UserService } from '../shared/services';
 
 @Component({
   selector: 'app-auth',
@@ -22,7 +22,8 @@ export class AuthComponent implements OnInit {
     private formBuilder: FormBuilder,
     private router: Router,
     private activateRouter: ActivatedRoute,
-    private authService: AuthService
+    private authService: AuthService,
+    private userService: UserService
   ) { 
     this.form = this.formBuilder.group({
       'email': this.formBuilder.control('', [Validators.required]),
@@ -44,6 +45,7 @@ export class AuthComponent implements OnInit {
     .subscribe((data: any) => {
       if(data.state == 'OK'){
         this.authService.saveDataLocalStorage(data.user);
+        this.userService.setUserCurrent(data.user)
         this.router.navigate(['/curso/home']);
       } else {
         console.log(data.type);

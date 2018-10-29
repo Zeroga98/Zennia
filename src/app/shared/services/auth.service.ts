@@ -56,7 +56,7 @@ export class AuthService {
       localStorage.setItem("token", user.id);
     }
 
-    public saveUserFirebase(user: any){
+    public signup(user: any){
       this.firestore.collection('usuarios')
       .add({ 
         correo: user.CORREO,

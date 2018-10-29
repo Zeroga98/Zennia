@@ -30,7 +30,5 @@ export class UserService {
     	});
     }
 
-    public setUserCurrent(user: any){
-    	this.userCurrent.next(user);
-    }
+    public setUserCurrent = (user: any) => this.userCurrent.next(user);
 }
