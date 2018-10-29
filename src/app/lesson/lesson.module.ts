@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FroalaEditorModule, FroalaViewModule } from 'angular-froala-wysiwyg';
 import { MonacoEditorModule } from 'ngx-monaco-editor';
+import { ArchwizardModule } from 'angular-archwizard';
 
 import { LessonRoutingModule } from './lesson-routing.module';
 import { LessonComponent } from './lesson.component';
@@ -19,7 +20,8 @@ import { ComponentsModule } from '../../components';
     ComponentsModule,
     FroalaEditorModule.forRoot(), 
     FroalaViewModule.forRoot(),
-    MonacoEditorModule.forRoot()
+    MonacoEditorModule.forRoot(),
+    ArchwizardModule
   ],
   declarations: [LessonComponent, EvaluateComponent, CreateComponent]
 })

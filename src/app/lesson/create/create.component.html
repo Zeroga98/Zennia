@@ -1,6 +1,16 @@
-<h1>Crear</h1>
-<input type="text" placeholder="Nombre lección" [(ngModel)]="new_lesson.name">
-<div [froalaEditor]="froalaOptions" [(froalaModel)]="new_lesson.problema"></div>
-<input type="text" placeholder="Tiempo limite" [(ngModel)]="new_lesson.submission.cpu_time_limit">
-<input type="text" placeholder="Datos de entrada" [(ngModel)]="new_lesson.submission.stdin_real">
-<ngx-monaco-editor style="height:100px!important" class="my-code-editor" [options]="monacoOptions" [(ngModel)]="new_lesson.submission.expected_output"></ngx-monaco-editor>
+<aw-wizard>
+  <aw-wizard-step stepTitle="Paso 1">
+    <input type="text" placeholder="Nombre lección" [(ngModel)]="new_lesson.name">
+    <input type="text" placeholder="Descripción lección" [(ngModel)]="new_lesson.description">
+    <div [froalaEditor]="froalaOptions" [(froalaModel)]="new_lesson.contenido"></div>
+    <button type="button" awNextStep>Siguiente</button>
+  </aw-wizard-step>
+  <aw-wizard-step stepTitle="Paso 2" awOptionalStep>
+    <input type="text" placeholder="Tiempo limite" [(ngModel)]="new_lesson.submission.cpu_time_limit">
+	<input type="text" placeholder="Datos de entrada" [(ngModel)]="new_lesson.submission.stdin_real">
+	<ngx-monaco-editor class="my-code-editor" [options]="monacoOptions" [(ngModel)]="new_lesson.submission.expected_output"></ngx-monaco-editor>
+	<div [froalaEditor]="froalaOptions" [(froalaModel)]="new_lesson.problema"></div>
+    <button type="button" awPreviousStep>Atrás</button>
+    <button type="submit">Crear</button>
+  </aw-wizard-step>
+</aw-wizard>
