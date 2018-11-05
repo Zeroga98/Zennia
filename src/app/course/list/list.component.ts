@@ -41,10 +41,10 @@ export class ListComponent implements OnInit {
     });
   }
 
-  public redirectLesson(course: any, lesson: any){
+  public redirectLesson(course: any, lesson: any, type: string){
     if(this.user){
-      if(this.user.rol == 'ADMIN')
-        this.router.navigate(['/curso', course.id, 'leccion', 'new', 'create']);
+      if(this.user.rol == 'ADMIN' || type)
+        this.router.navigate(['/curso', course.id, 'leccion', (type == 'new'? 'new': lesson.id), 'admin']);
       else
         this.router.navigate(['/curso', course.id, 'leccion', lesson.id, 'evaluar']);
     }

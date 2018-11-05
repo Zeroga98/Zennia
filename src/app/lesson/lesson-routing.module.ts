@@ -14,7 +14,7 @@ const routes: Routes = [{
         component: EvaluateComponent,
     },
     { 
-        path: 'create', 
+        path: 'admin', 
         component: CreateComponent,
     }
   ]

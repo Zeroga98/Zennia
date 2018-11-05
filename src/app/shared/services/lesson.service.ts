@@ -19,13 +19,28 @@ export class LessonService {
         private firestore: AngularFirestore
     ) { }
 
-    public test(id: string, output: string){ 
-        this.firestore.doc(`lecciones/${ id }`)
-        .set({
-            submission: { expected_output: output }
-        }, { merge: true })
-        .then(data => {
-            console.log(data);
+    public createLesson(data: any, course_id: string){ 
+        let state = true;
+        return new Observable((observer) => {
+            data.fecha_registro = new Date();
+            this.firestore.collection(`lecciones`).add(data)
+            .then(new_lesson => {
+                let subscribe = this.firestore.doc(`cursos/${ course_id }`).snapshotChanges()
+                .subscribe((course: any) => {
+                    if(state){
+                        state = false;
+                        this.firestore.doc(`cursos/${ course_id }`)
+                        .set({
+                            lecciones: [ ...course.payload.data().lecciones, new_lesson ]
+                        }, { merge: true })
+                        .then(data => {
+                            subscribe.unsubscribe();
+                            observer.next(new_lesson.id);
+                            observer.complete();
+                        });
+                    }
+                });
+            });
         });
     }
 

@@ -28,8 +28,8 @@ export class CourseService {
 			        let item = course.payload.doc.data();
 			        let course_structure = { id: course.payload.doc.id, ...item, lecciones: [] };
 			        item.lecciones.map(async (lec: any) => {
-			          let res = await lec.get();
-			          course_structure.lecciones.push({ id: res.id, ...res.data() });
+			          	let res = await lec.get();
+			          	course_structure.lecciones.push({ id: res.id, ...res.data() });
 			        });
 			        courses_complete.push(course_structure);
 			    });
