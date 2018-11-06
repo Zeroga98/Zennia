@@ -51,20 +51,34 @@ export class LessonService {
 			    observer.next({ id: lesson.payload.id, ...lesson.payload.data() });
 			    observer.complete();
 	    	});
-    	});
+    	}); 
+    }
+
+    public updateLesson(data: any, lesson_id: string){
+        return new Observable((observer) => {
+            this.firestore.doc(`lecciones/${ lesson_id }`)
+            .set(data, { merge: true })
+            .then(data => {
+                observer.next();
+                observer.complete();
+            });
+        });
     }
 
     public saveResult(user_id: string, lesson_id: string, submission: any){
         let state = true;
+        let id = `resultado_lecciones/${ user_id }-${ lesson_id }`;
         return new Observable((observer) => {
-            let subscribe = this.firestore.doc(`resultado_lecciones/${ user_id }-${ lesson_id }`).snapshotChanges()
+            let subscribe = this.firestore.doc(id).snapshotChanges()
             .subscribe((responses: any) => {
                 if(state){
                     state = false;
-                    this.firestore.doc(`resultado_lecciones/${ user_id }-${ lesson_id }`)
+                    let new_responses = (responses.payload.data())? [ ...responses.payload.data().responses, ...submission ]: [ submission ];
+
+                    this.firestore.doc(id)
                     .set({
-                        estado: (responses.payload.data().estado)? true: (submission.status == 'Accepted'),
-                        responses: [ ...responses.payload.data().responses, ...submission ]
+                        estado: (responses.payload.data() && responses.payload.data().estado)? true: (submission.status == 'Accepted'),
+                        responses: new_responses
                     }, { merge: true })
                     .then(data => {
                         subscribe.unsubscribe();

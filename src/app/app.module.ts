@@ -1,4 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { AngularFireModule } from 'angularfire2';
@@ -7,6 +8,7 @@ import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { AngularFontAwesomeModule } from 'angular-font-awesome';
 import { MonacoEditorModule } from 'ngx-monaco-editor';
 import { FroalaEditorModule, FroalaViewModule } from 'angular-froala-wysiwyg';
+import { ToastrModule } from 'ngx-toastr';
 
 import { environment } from '../environments/environment';
 import { AppRoutingModule } from './app-routing.module';
@@ -20,12 +22,14 @@ import { HeaderComponent } from './shared';
     CommonModule,
     AppRoutingModule,
     BrowserModule,
+    BrowserAnimationsModule,
     AuthModule,
     NgProgressModule,
     BsDropdownModule.forRoot(),
     MonacoEditorModule.forRoot(),
     FroalaEditorModule.forRoot(), 
     FroalaViewModule.forRoot(),
+    ToastrModule.forRoot(),
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule,
     AngularFontAwesomeModule

@@ -1,4 +1,4 @@
-<form class="ipt" [formGroup]="form" (ngSubmit)="create()">
+<form class="ipt" [formGroup]="form" (ngSubmit)="action()">
   <aw-wizard>
     <aw-wizard-step stepTitle="Paso 1">
       <input type="text" placeholder="Nombre lección" [formControl]="form.controls.nombre">
@@ -15,7 +15,7 @@
 
   	  <div id="problema" [froalaEditor]="froalaOptions" [(froalaModel)]="new_lesson.problema"></div>
       <button type="button" awPreviousStep>Atrás</button>
-      <button type="submit" [disabled]="form.invalid">Crear</button>
+      <button type="submit" [disabled]="form.invalid">{{(lessonId != 'new')? 'Actualizar': 'Crear'}}</button>
     </aw-wizard-step>
   </aw-wizard>
 </form>

@@ -24,7 +24,7 @@ export class CourseService {
     		let courses_complete = [];
 	    	this.firestore.collection('cursos', ref => ref.orderBy('fecha_registro', 'asc')).snapshotChanges()
 	    	.subscribe((courses: any) => {
-	    		courses.map(async (course: any) => {
+    			courses.map(async (course: any) => {
 			        let item = course.payload.doc.data();
 			        let course_structure = { id: course.payload.doc.id, ...item, lecciones: [] };
 			        item.lecciones.map(async (lec: any) => {
