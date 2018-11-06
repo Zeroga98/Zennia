@@ -7,6 +7,7 @@ import { combineLatest, defer, Observable, Observer } from 'rxjs';
 import { map, switchMap, take } from 'rxjs/operators';
 
 import { ApiService } from './api.service';
+import { UserService } from './user.service';
 
 @Injectable()
 export class CourseService {
@@ -16,7 +17,8 @@ export class CourseService {
 
     constructor(
         private api: ApiService,
-        private firestore: AngularFirestore
+        private firestore: AngularFirestore,
+        private userService: UserService
     ) { }
 
     public getCourses(): Observable<any>{
@@ -29,7 +31,9 @@ export class CourseService {
 			        let course_structure = { id: course.payload.doc.id, ...item, lecciones: [] };
 			        item.lecciones.map(async (lec: any) => {
 			          	let res = await lec.get();
-			          	course_structure.lecciones.push({ id: res.id, ...res.data() });
+			          	let user_id = this.userService.getUserId();
+			          	let user_results = await this.firestore.doc(`resultado_lecciones/${ user_id }-${ res.id }`).ref.get();
+			          	course_structure.lecciones.push({ id: res.id, ...res.data(), results: user_results.data() });
 			        });
 			        courses_complete.push(course_structure);
 			    });

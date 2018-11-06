@@ -13,7 +13,10 @@
                 <h5 class="card-title text-center">{{course.nombre}}</h5>
               </div>
               <ul class="list-group list-group-flush">
-                <li (click)="redirectLesson(course, lesson)" class="list-group-item hand" *ngFor="let lesson of course.lecciones">{{lesson.nombre}}</li>
+                <li (click)="redirectLesson(course, lesson)" class="list-group-item hand" *ngFor="let lesson of course.lecciones">
+                  {{lesson.nombre}} 
+                  <span *ngIf="user?.rol != 'ADMIN'">{{(lesson.results?.estado)? 'YES': 'NO'}}</span>
+                </li>
                 <li *ngIf="user?.rol == 'ADMIN'" (click)="redirectLesson(course, lesson, 'new')" class="list-group-item hand">Crear nueva</li>
                 <!-- EJEMPLO DE ITEM SELECCIONADO
                   <li [routerLink]="['/curso']" class="list-group-item check">Entradas</li>

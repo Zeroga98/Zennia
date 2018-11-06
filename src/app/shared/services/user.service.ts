@@ -31,4 +31,8 @@ export class UserService {
     }
 
     public setUserCurrent = (user: any) => this.userCurrent.next(user);
+
+    public getUserId(){
+        return localStorage.getItem('token');
+    }
 }
