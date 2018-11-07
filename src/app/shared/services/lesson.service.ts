@@ -20,25 +20,19 @@ export class LessonService {
     ) { }
 
     public createLesson(data: any, course_id: string){ 
-        let state = true;
         return new Observable((observer) => {
             data.fecha_registro = new Date();
             this.firestore.collection(`lecciones`).add(data)
-            .then(new_lesson => {
-                let subscribe = this.firestore.doc(`cursos/${ course_id }`).snapshotChanges()
-                .subscribe((course: any) => {
-                    if(state){
-                        state = false;
-                        this.firestore.doc(`cursos/${ course_id }`)
-                        .set({
-                            lecciones: [ ...course.payload.data().lecciones, new_lesson ]
-                        }, { merge: true })
-                        .then(data => {
-                            subscribe.unsubscribe();
-                            observer.next(new_lesson.id);
-                            observer.complete();
-                        });
-                    }
+            .then(async new_lesson => {
+                let course = await this.firestore.doc(`cursos/${ course_id }`).ref.get();
+
+                this.firestore.doc(`cursos/${ course_id }`)
+                .set({
+                    lecciones: [ ...course.data().lecciones, new_lesson ]
+                }, { merge: true })
+                .then(data => {
+                    observer.next(new_lesson.id);
+                    observer.complete();
                 });
             });
         });
@@ -88,6 +82,10 @@ export class LessonService {
                 //observer.next(data_parse);
             });
         });
+    }
+
+    public hideLesson(lesson_id: string, hide: boolean){
+        return this.firestore.doc(`lecciones/${ lesson_id }`).set({ oculta: hide }, { merge: true });
     }
 
     public setLessonCurrent(lesson: any){

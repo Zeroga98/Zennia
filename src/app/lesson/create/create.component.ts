@@ -45,6 +45,7 @@ export class CreateComponent implements OnInit {
       'descripcion': this.formBuilder.control('', [Validators.required]),
       'problema': this.formBuilder.control('', [Validators.required]),
       'contenido': this.formBuilder.control('', [Validators.required]),
+      'oculta': this.formBuilder.control(false, [Validators.required]),
       'submission': this.formBuilder.group({
         'cpu_time_limit': this.formBuilder.control('', [Validators.required]),
         'stdin_real': this.formBuilder.control('', [Validators.required]),
@@ -61,8 +62,8 @@ export class CreateComponent implements OnInit {
         if(this.lessonId != 'new'){
           this.lessonService.getLessonById(this.lessonId)
           .subscribe(data => {
-             this.new_lesson.problema = data.problema;
-             this.new_lesson.contenido = data.contenido;
+            this.new_lesson.problema = data.problema;
+            this.new_lesson.contenido = data.contenido;
             this.form.patchValue(data);
           });
         }
@@ -101,5 +102,12 @@ export class CreateComponent implements OnInit {
       else
         this.create();
     }
+  }
+
+  public hideLesson(){
+    this.lessonService.hideLesson(this.lessonId, !this.form.controls.oculta.value)
+    .then(data => {
+      this.form.controls.oculta.setValue(!this.form.controls.oculta.value);
+    });
   }
 }

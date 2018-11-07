@@ -46,9 +46,9 @@ export class CourseService {
     public getCourseById(id: string){
     	return new Observable((observer) => {
     		let data_parse: any;
-	    	this.firestore.doc(`cursos/${ id }`).snapshotChanges()
-	    	.subscribe((course: any) => {
-	    		data_parse = { id: course.payload.id, ...course.payload.data() }
+	    	this.firestore.doc(`cursos/${ id }`).ref.get()
+	    	.then(course => {
+	    		data_parse = { id: course.id, ...course.data() };
 			    observer.next(data_parse);
 			    observer.complete();
 	    	});

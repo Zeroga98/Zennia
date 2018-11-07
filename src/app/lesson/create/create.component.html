@@ -1,4 +1,5 @@
 <form class="ipt" [formGroup]="form" (ngSubmit)="action()">
+  <span>Oculto: {{form.controls.oculta.value}}</span>
   <aw-wizard>
     <aw-wizard-step stepTitle="Paso 1">
       <input type="text" placeholder="Nombre lección" [formControl]="form.controls.nombre">
@@ -18,4 +19,5 @@
       <button type="submit" [disabled]="form.invalid">{{(lessonId != 'new')? 'Actualizar': 'Crear'}}</button>
     </aw-wizard-step>
   </aw-wizard>
+  <button type="button" (click)="hideLesson()">{{(!form.controls.oculta.value? 'Ocultar': 'Difundir')}} lección</button>
 </form>
