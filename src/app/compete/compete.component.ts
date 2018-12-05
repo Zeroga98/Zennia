@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NgProgress } from 'ngx-progressbar';
 import { ActivatedRoute, Router } from '@angular/router';
+import * as moment from 'moment';
 
 import { MarathonService, UserService } from '../shared/services';
 
@@ -36,6 +37,14 @@ export class CompeteComponent implements OnInit {
     this.marathonService.getMarathon()
     .subscribe(data => {
       console.log(data);
+      data.map(item => {
+        if(moment() <= moment(item.fecha_final.toDate()) && moment() >= moment(item.fecha_inicio.toDate()))
+          item.estado = 'proceso';
+        else if(moment() >= moment(item.fecha_final.toDate()))
+          item.estado = 'finalizado';
+        else
+          item.estado = 'programado';
+      });
       this.marathons = data;
     });
   }

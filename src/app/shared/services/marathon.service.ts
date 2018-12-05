@@ -13,6 +13,9 @@ import { UserService } from './user.service';
 @Injectable()
 export class MarathonService {
 
+    private marathonCurrent: Subject<any> = new BehaviorSubject<any>(null);
+    public $marathonCurrent = this.marathonCurrent.asObservable();
+
     constructor(
         private api: ApiService,
         private firestore: AngularFirestore,
@@ -27,7 +30,12 @@ export class MarathonService {
                 let user_rol = await this.userService.getUserRol().toPromise();
 	    		marathons.docs.map(item => {
                     if(!item.data().oculta || user_rol == 'ADMIN')
-                        data_parser.push({ id: item.id, ...item.data(), fecha_inicio_parse: item.data().fecha_inicio.toDate() })
+                        data_parser.push({ 
+                            id: item.id, 
+                            ...item.data(), 
+                            fecha_inicio_parse: item.data().fecha_inicio.toDate(), 
+                            fecha_final_parse: item.data().fecha_final.toDate() 
+                        });
                 });
 			    observer.next(data_parser);
 			    observer.complete();
@@ -85,5 +93,9 @@ export class MarathonService {
 
     public hideMarathon(id: string, hide: boolean){
         return this.firestore.doc(`maratones/${ id }`).set({ oculta: hide }, { merge: true });
+    }
+
+    public setMarathonCurrent(marathon: any){
+        this.marathonCurrent.next(marathon);
     }
 }

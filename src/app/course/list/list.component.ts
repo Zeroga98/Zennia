@@ -47,7 +47,7 @@ export class ListComponent implements OnInit {
       if(this.user.rol == 'ADMIN' || type)
         this.router.navigate(['/cursos', course.id, 'leccion', (type == 'new'? 'new': lesson.id), 'admin']);
       else
-        this.router.navigate(['/curso', course.id, 'leccion', lesson.id, 'evaluar']);
+        this.router.navigate(['/cursos', course.id, 'leccion', lesson.id, 'evaluar']);
     }
   }
 

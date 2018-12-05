@@ -19,7 +19,15 @@
 
             <div class="col-10">
               <h5 class="card-title">{{marathon.nombre}}</h5>
-              <span class="card-subtitle">{{marathon.fecha_inicio_parse | date: 'd'}} de {{marathon.fecha_inicio_parse | date: 'MMMM y'}}</span>
+              <span class="card-subtitle">
+                Inicia: A las {{marathon.fecha_inicio_parse | date: 'hh:mm'}} del 
+                {{marathon.fecha_inicio_parse | date: 'd'}} de {{marathon.fecha_inicio_parse | date: 'MMMM'}}
+              </span>
+              <br>
+              <span class="card-subtitle">
+                Termina: A las {{marathon.fecha_final_parse | date: 'hh:mm'}} del 
+                {{marathon.fecha_final_parse | date: 'd'}} de {{marathon.fecha_final_parse | date: 'MMMM'}}
+              </span>
 
               <section *ngIf="user.rol != 'ADMIN'">
                 <a *ngIf="marathon.estado == 'programado'" [routerLink]="['/competir/maraton', marathon.id]" class="card-btn" >Inscribirse</a>
