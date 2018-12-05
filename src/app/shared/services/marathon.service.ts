@@ -6,6 +6,7 @@ import { AngularFirestore } from 'angularfire2/firestore';
 import { combineLatest, defer, Observable, Observer } from 'rxjs';
 import { map, switchMap, take } from 'rxjs/operators';
 import * as moment from 'moment';
+
 import { ApiService } from './api.service';
 
 @Injectable()
@@ -45,11 +46,37 @@ export class MarathonService {
                     id: marathon.payload.id, 
                     ...marathon.payload.data(), 
                     fecha_inicio: moment(marathon.payload.data().fecha_inicio.toDate()).format('YYYY-MM-DD'), 
+                    hora_inicio: moment(marathon.payload.data().fecha_inicio.toDate()).format('kk:mm'), 
+                    fecha_final: moment(marathon.payload.data().fecha_final.toDate()).format('YYYY-MM-DD'), 
+                    hora_final: moment(marathon.payload.data().fecha_final.toDate()).format('kk:mm'), 
                     lecciones: lessons 
                 });
                 observer.complete();
             });
         }); 
+    }
+
+    public createMarathon(data: any){ 
+        return new Observable((observer) => {
+            data.fecha_registro = new Date();
+            data.lecciones = [];
+            this.firestore.collection(`maratones`).add(data)
+            .then(async new_marathon => {
+                observer.next(new_marathon.id);
+                observer.complete();
+            });
+        });
+    }
+
+    public updateMarathon(data: any, id: string){
+        return new Observable((observer) => {
+            this.firestore.doc(`maratones/${ id }`)
+            .set(data, { merge: true })
+            .then(data => {
+                observer.next();
+                observer.complete();
+            });
+        });
     }
 
     public hideMarathon(id: string, hide: boolean){

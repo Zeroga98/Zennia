@@ -1,14 +1,37 @@
 <form class="ipt" [formGroup]="form" (ngSubmit)="action()">
-  <span>Oculto: {{form.controls.oculta.value}}</span>
-  <input type="text" placeholder="Nombre maratón" [formControl]="form.controls.nombre">
-  <input type="text" placeholder="Descripción" [formControl]="form.controls.descripcion">
-  <input type="date" placeholder="Fecha de inicio" [formControl]="form.controls.fecha_inicio">
-  
-  <button type="button" (click)="hideLesson()">{{(!form.controls.oculta.value? 'Ocultar': 'Difundir')}} lección</button>
+  <div>
+    <span>Nombre</span>
+    <input type="text" placeholder="Nombre maratón" [formControl]="form.controls.nombre">
+  </div>
+  <div>
+    <span>Descripción</span>
+    <input type="text" placeholder="Descripción" [formControl]="form.controls.descripcion">
+  </div>
   <br>
-  <button type="button" [routerLink]="['/maratones', marathonId, 'leccion', 'new', 'admin']">Agregar lección</button>
+  <div>
+    <span>Fecha y hora de inicio</span>
+    <input type="date" placeholder="Fecha de inicio" [formControl]="form.controls.fecha_inicio">
+    <input type="time" placeholder="Hora de inicio" [formControl]="form.controls.hora_inicio">
+  </div>
+  
+  <div>
+    <span>Fecha y hora de finalización</span>
+    <input type="date" placeholder="Fecha de finalización" [formControl]="form.controls.fecha_final">
+    <input type="time" placeholder="Hora final" [formControl]="form.controls.hora_final">
+  </div>
+
+  <button *ngIf="marathonId != 'new'" type="button" (click)="hideLesson()">
+    {{(!form.controls.oculta.value? 'Ocultar': 'Difundir')}} lección
+  </button>
+
+  <br>
+  <button *ngIf="marathonId != 'new'" type="button" (click)="addLesson()">
+    Agregar lección
+  </button>
+
   <div *ngFor="let lesson of marathon?.lecciones">
       <a [routerLink]="['/maratones', marathonId, 'leccion', lesson.id, 'admin']">{{lesson.nombre}}</a>
       <span>Oculta: {{lesson.oculta}}</span>
   </div>
+  <button type="submit" [disabled]="form.invalid">{{(marathonId != 'new')? 'Actualizar': 'Crear'}}</button>
 </form>
