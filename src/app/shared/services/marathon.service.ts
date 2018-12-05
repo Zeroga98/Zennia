@@ -8,21 +8,27 @@ import { map, switchMap, take } from 'rxjs/operators';
 import * as moment from 'moment';
 
 import { ApiService } from './api.service';
+import { UserService } from './user.service';
 
 @Injectable()
 export class MarathonService {
 
     constructor(
         private api: ApiService,
-        private firestore: AngularFirestore
+        private firestore: AngularFirestore,
+        private userService: UserService
     ) { }
 
     public getMarathon(): Observable<any>{
     	return new Observable((observer) => {
 	    	this.firestore.collection(`maratones`).ref.get()
-	    	.then((marathons: any) => {
+	    	.then(async (marathons: any) => {
 	    		let data_parser = [];
-	    		marathons.docs.map(item => data_parser.push({ id: item.id, ...item.data(), fecha_inicio_parse: item.data().fecha_inicio.toDate() }));
+                let user_rol = await this.userService.getUserRol().toPromise();
+	    		marathons.docs.map(item => {
+                    if(!item.data().oculta || user_rol == 'ADMIN')
+                        data_parser.push({ id: item.id, ...item.data(), fecha_inicio_parse: item.data().fecha_inicio.toDate() })
+                });
 			    observer.next(data_parser);
 			    observer.complete();
 	    	});
@@ -36,11 +42,9 @@ export class MarathonService {
                 let lessons = [];
                 marathon.payload.data().lecciones.map(async (lec: any) => {
                       let res = await lec.get();
-                      if(!res.data().oculta){
-                          //let user_id = this.userService.getUserId();
-                          //let user_results = await this.firestore.doc(`resultado_lecciones/${ user_id }-${ res.id }`).ref.get();
-                          lessons.push({ id: res.id, ...res.data()/*, results: user_results.data()*/ });
-                      }
+                      //let user_id = this.userService.getUserId();
+                      //let user_results = await this.firestore.doc(`resultado_lecciones/${ user_id }-${ res.id }`).ref.get();
+                      lessons.push({ id: res.id, ...res.data()/*, results: user_results.data()*/ });
                 });
                 observer.next({ 
                     id: marathon.payload.id, 

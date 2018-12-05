@@ -25,13 +25,15 @@ export class CourseService {
     	return new Observable((observer) => {
     		let courses_complete = [];
 	    	this.firestore.collection('cursos', ref => ref.orderBy('fecha_registro', 'asc')).snapshotChanges()
-	    	.subscribe((courses: any) => {
+	    	.subscribe(async (courses: any) => {
+	    		let user_rol = await this.userService.getUserRol().toPromise();
+
     			courses.map(async (course: any) => {
 			        let item = course.payload.doc.data();
 			        let course_structure = { id: course.payload.doc.id, ...item, lecciones: [] };
 			        item.lecciones.map(async (lec: any) => {
 			          	let res = await lec.get();
-			          	if(!res.data().oculta){
+			          	if(!res.data().oculta || user_rol == 'ADMIN'){
 			          		let user_id = this.userService.getUserId();
 				          	let user_results = await this.firestore.doc(`resultado_lecciones/${ user_id }-${ res.id }`).ref.get();
 				          	course_structure.lecciones.push({ id: res.id, ...res.data(), results: user_results.data() });

@@ -30,6 +30,17 @@ export class UserService {
     	});
     }
 
+    public getUserRol(): Observable<any>{
+        return new Observable((observer) => {
+            this.firestore.doc(`usuarios/${ this.getUserId() }`)
+            .snapshotChanges()
+            .subscribe((user: any) => {
+                observer.next(user.payload.data().rol);
+                observer.complete();
+            });
+        });
+    }
+
     public setUserCurrent = (user: any) => this.userCurrent.next(user);
 
     public getUserId(){
