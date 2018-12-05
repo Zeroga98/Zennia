@@ -11,7 +11,11 @@ const routes: Routes = [
     loadChildren: './course/course.module#CourseModule'
   },
   {
-    path: 'curso/:course_id/leccion',
+    path: 'cursos/:reference_id/leccion',
+    loadChildren: './lesson/lesson.module#LessonModule'
+  },
+  {
+    path: 'maratones/:reference_id/leccion',
     loadChildren: './lesson/lesson.module#LessonModule'
   }
 ];

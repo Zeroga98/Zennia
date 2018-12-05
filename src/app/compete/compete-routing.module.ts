@@ -4,6 +4,7 @@ import { CompeteComponent } from './compete.component';
 import { CompetitionComponent } from './competition/competition.component';
 import { LeaderboardComponent } from './leaderboard/leaderboard.component';
 import { ProblemComponent } from './problem/problem.component';
+import { AdminComponent } from './admin/admin.component';
 
 const routes: Routes = [
   {
@@ -11,16 +12,20 @@ const routes: Routes = [
     component: CompeteComponent,
   },
   {
-    path: 'competenciaSebas',
+    path: 'maraton/:marathon_id',
     component: CompetitionComponent,
   },
   {
-    path: 'leadboard',
+    path: 'leadboard/:marathon_id',
     component: LeaderboardComponent
   },
   {
-    path: 'problem',
+    path: ':maraton/problem/:problem_id',
     component: ProblemComponent
+  },
+  {
+    path: 'maraton/admin/:marathon_id',
+    component: AdminComponent
   }
 ];
 

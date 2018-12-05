@@ -45,7 +45,7 @@ export class ListComponent implements OnInit {
   public redirectLesson(course: any, lesson: any, type: string){
     if(this.user){
       if(this.user.rol == 'ADMIN' || type)
-        this.router.navigate(['/curso', course.id, 'leccion', (type == 'new'? 'new': lesson.id), 'admin']);
+        this.router.navigate(['/cursos', course.id, 'leccion', (type == 'new'? 'new': lesson.id), 'admin']);
       else
         this.router.navigate(['/curso', course.id, 'leccion', lesson.id, 'evaluar']);
     }

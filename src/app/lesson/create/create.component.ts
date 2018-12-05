@@ -28,8 +28,9 @@ export class CreateComponent implements OnInit {
 
   public new_lesson: any = { submission: {} };
   public lessonId: string;
-	public course: any;
 	public user: any;
+  public type: string;
+  public referenceId: string;
 
   constructor(
     private activateRouter: ActivatedRoute,
@@ -55,10 +56,12 @@ export class CreateComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.subscribeCourse = this.courseService.$courseCurrent.subscribe(course => this.course = course);
     this.subscribeUser = this.userService.$userCurrent.subscribe(user => this.user = user);
     this.activateRouter.parent.params.subscribe(params => {
+        this.type = (this.router.url.indexOf("curso") != -1)? 'cursos' : 'maratones';
         this.lessonId = params['lesson_id'];
+        this.referenceId = params['reference_id'];
+
         if(this.lessonId != 'new'){
           this.lessonService.getLessonById(this.lessonId)
           .subscribe(data => {
@@ -71,14 +74,16 @@ export class CreateComponent implements OnInit {
   }
 
   ngOnDestroy(){
-    this.subscribeCourse.unsubscribe();
     this.subscribeUser.unsubscribe();
   }
 
   public create(){
-    this.lessonService.createLesson(this.form.value, this.course.id)
+    this.lessonService.createLesson(this.form.value, this.referenceId, this.type)
     .subscribe(new_lesson_id => {
-      this.router.navigate(['/curso', this.course.id, 'leccion', new_lesson_id, 'admin']);
+      if(this.type == 'cursos')
+        this.router.navigate([this.type, this.referenceId, 'leccion', new_lesson_id, 'admin']);
+      else
+        this.router.navigate(['/competir/maraton/admin', this.referenceId]);
       this.isSubmiting = false;
     });
   }

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-problem',
@@ -7,9 +8,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ProblemComponent implements OnInit {
 
-  constructor() { }
+	public marathon_id: string;
 
-  ngOnInit() {
-  }
+  	constructor(
+  		private activateRouter: ActivatedRoute
+  	) {
+  		this.activateRouter.parent.params.subscribe(params => {
+        	this.marathon_id = params['marathon_id'];
+    	});
+  	}
+
+  	ngOnInit() {
+  	}
 
 }

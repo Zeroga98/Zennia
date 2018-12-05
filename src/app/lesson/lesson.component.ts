@@ -11,8 +11,7 @@ import { CourseService, LessonService } from '../shared/services';
 export class LessonComponent implements OnInit {
 
 	public lessonId: string;
-	public courseId: string;
-	public course: any;
+	public referenceId: string;
 	public lesson: any;
 
   	constructor(
@@ -24,20 +23,20 @@ export class LessonComponent implements OnInit {
   	ngOnInit() {
   		this.activateRouter.params.subscribe(params => {
       		this.lessonId = params['lesson_id'];
-      		this.courseId = params['course_id'];
-      		this.getCourseById();
+      		this.referenceId = params['reference_id'];
+      		//this.getCourseById();
           if(this.lessonId != 'new')
       		  this.getLessonById();
     	});
   	}
 
-  	private getCourseById(){
-  		this.courseService.getCourseById(this.courseId)
+  	/*private getCourseById(){
+  		this.courseService.getCourseById(this.referenceId)
   		.subscribe((course: any) => {
   			this.course = course;
   			this.courseService.setCourseCurrent(this.course);
   		});
-  	}
+  	}*/
 
   	private getLessonById(){
   		this.lessonService.getLessonById(this.lessonId)

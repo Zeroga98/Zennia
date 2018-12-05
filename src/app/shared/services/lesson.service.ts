@@ -19,16 +19,15 @@ export class LessonService {
         private firestore: AngularFirestore
     ) { }
 
-    public createLesson(data: any, course_id: string){ 
+    public createLesson(data: any, reference_id: string, type: string){ 
         return new Observable((observer) => {
             data.fecha_registro = new Date();
             this.firestore.collection(`lecciones`).add(data)
             .then(async new_lesson => {
-                let course = await this.firestore.doc(`cursos/${ course_id }`).ref.get();
-
-                this.firestore.doc(`cursos/${ course_id }`)
+                let reference = await this.firestore.doc(`${ type }/${ reference_id }`).ref.get();
+                this.firestore.doc(`${ type }/${ reference_id }`)
                 .set({
-                    lecciones: [ ...course.data().lecciones, new_lesson ]
+                    lecciones: [ ...reference.data().lecciones, new_lesson ]
                 }, { merge: true })
                 .then(data => {
                     observer.next(new_lesson.id);
