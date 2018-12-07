@@ -12,10 +12,6 @@ import { MarathonService, UserService } from '../shared/services';
 })
 export class CompeteComponent implements OnInit {
 
-  public subscribeUser;
-  public user: any;
-  public marathons: any;
-
   constructor(
     public ngProgress: NgProgress,
     private marathonService: MarathonService,
@@ -24,28 +20,5 @@ export class CompeteComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.subscribeUser = this.userService.$userCurrent.subscribe(user => this.user = user);
-    this.getListMarathons();
-    /*this.ngProgress.start();
-
-    setTimeout(() => {
-         this.ngProgress.done();
-     }, 1000); */
-  }
-
-  public getListMarathons(){
-    this.marathonService.getMarathon()
-    .subscribe(data => {
-      console.log(data);
-      data.map(item => {
-        if(moment() <= moment(item.fecha_final.toDate()) && moment() >= moment(item.fecha_inicio.toDate()))
-          item.estado = 'proceso';
-        else if(moment() >= moment(item.fecha_final.toDate()))
-          item.estado = 'finalizado';
-        else
-          item.estado = 'programado';
-      });
-      this.marathons = data;
-    });
   }
 }

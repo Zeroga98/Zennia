@@ -46,7 +46,8 @@ export class EvaluateComponent implements OnInit {
   public sendProblem(event){
     let submission = {
       status: event.status.description,
-      time: event.time
+      time: event.time,
+      fecha_registro: new Date()
     };
     this.lessonService.saveResult(this.user.id, this.lesson.id, submission)
     .subscribe(data => {

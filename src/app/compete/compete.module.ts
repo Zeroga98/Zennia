@@ -4,9 +4,9 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { CompeteRoutingModule } from './compete-routing.module';
 import { CompeteComponent } from './compete.component';
-import { CompetitionComponent } from './competition/competition.component';
+import { MarathonProfileComponent } from './marathon-profile/marathon-profile.component';
 import { LeaderboardComponent } from './leaderboard/leaderboard.component';
-import { ProblemComponent } from './problem/problem.component';
+import { ListMarathonComponent } from './list/list.component';
 import { AdminComponent } from './admin/admin.component';
 
 @NgModule({
@@ -18,10 +18,10 @@ import { AdminComponent } from './admin/admin.component';
   ],
   declarations: [
   	CompeteComponent, 
-  	CompetitionComponent, 
+  	MarathonProfileComponent, 
   	LeaderboardComponent, 
-  	ProblemComponent,
-  	AdminComponent
-  	]
+  	AdminComponent,
+    ListMarathonComponent
+  ]
 })
 export class CompeteModule { }

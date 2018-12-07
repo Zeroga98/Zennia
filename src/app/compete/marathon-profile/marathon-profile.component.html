@@ -1,0 +1,54 @@
+<div class="page-home ">
+  <div class="jumbotron">
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb" style="margin: 0px;background-color: white; padding: 0">
+        <li style="font-size: 1.5rem; " class="breadcrumb-item"><a style="color: #333;" [routerLink]="['/competir', 'list']">Tablero de competencias </a></li>
+        <li style="font-size: 1.3rem; padding: 3px" class="breadcrumb-item active" aria-current="page">{{marathon?.nombre}} - Termina: {{marathon?.fecha_final}} {{marathon?.hora_final}}</li>
+      </ol>
+    </nav>
+  </div>
+  <div class="container-fluid" *ngIf="marathon">
+    <div class="row">
+      <div class=" col-sm-12 col-md-12 col-lg-12 col-xl-7 line-ver">
+        <div class="line">
+          <span class="filter">Todos los desafios</span>
+        </div>
+        <div class="card card--ejr mb-3" *ngFor="let lesson of marathon.lecciones">
+          <div class="row card-body">
+            <div class=" col-12">
+              <h5 class="card-title card-title--ejr">{{lesson.nombre}}</h5>
+              <!--<a class="card-btn">Descargar pdf</a>-->
+              <span class="card-subtitle">Dificultad: <span> Medio</span></span>
+              <!--<span class="card-subtitle">Tasa de exito: <span> 10%</span></span>-->
+              <span class="card-subtitle">Puntaje: <span> 20pts</span></span>
+              <button [routerLink]="['/maratones', marathon.id, 'leccion', lesson.id, 'evaluar']" type="button" class="btn btn-primary" style="position: absolute;right: 19px;bottom: -5px;background-color: #666;border-color: #666;">
+                Resolver
+              </button>
+              <span class="process">• <span>Proceso</span></span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-5 d-none d-lg-block">
+        <div class="col-8 offset-3" style="margin-top: 10px;margin-bottom: 30px;">
+          <a  [routerLink]="['/competir/leadboard', marathon.id]" class="leaderboard" style="color: #AAB6BE; cursor: pointer;">Ver Leaderboard</a>
+        </div>
+        <div class="card card--filter col-6 offset-3">
+          <div class="card-body text-center">
+            <h5 class="card-title">Filtrar</h5>
+          </div>
+        </div>
+        <div class="col-4 offset-4">
+          <input type="checkbox" class="form-check-input">
+          <div class="animated-background animated--title" style="width: 100%; height: 20px; margin: 18px auto;"></div>
+          <input type="checkbox" class="form-check-input">
+          <div class="animated-background animated--title" style="width: 100%; height: 20px; margin: 18px auto;"></div>
+          <input type="checkbox" class="form-check-input">
+          <div class="animated-background animated--title" style="width: 100%; height: 20px; margin: 18px auto;"></div>
+          <input type="checkbox" class="form-check-input">
+          <div class="animated-background animated--title" style="width: 100%; height: 20px; margin: 18px auto;"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

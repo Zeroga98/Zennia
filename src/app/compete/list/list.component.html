@@ -1,0 +1,81 @@
+<div class="page-home ">
+  <div class="jumbotron">
+    <h1 class="title">Tablero de competencias</h1>
+  </div>
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-sm-12 col-md-12 col-lg-7 line-ver">
+        <div class="line">
+          <span class="filter">Todas las categorias</span>
+        </div>
+        <div class="card mb-3">
+
+          <button *ngIf="user?.rol == 'ADMIN'" [routerLink]="['/competir/maraton/admin', 'new']">Crear</button>
+
+          <div class="row card-body" *ngFor="let marathon of marathons">
+            <div class="col-2">
+              <div class="animated-background animated--title" style="width: 113px; height: 104px; margin: 8px auto;"></div>
+            </div>
+
+            <div class="col-10">
+              <h5 class="card-title">{{marathon.nombre}}</h5>
+              <span class="card-subtitle">
+                Inicia: A las {{marathon.fecha_inicio_parse | date: 'hh:mm'}} del 
+                {{marathon.fecha_inicio_parse | date: 'd'}} de {{marathon.fecha_inicio_parse | date: 'MMMM'}}
+              </span>
+              <br>
+              <span class="card-subtitle">
+                Termina: A las {{marathon.fecha_final_parse | date: 'hh:mm'}} del 
+                {{marathon.fecha_final_parse | date: 'd'}} de {{marathon.fecha_final_parse | date: 'MMMM'}}
+              </span>
+
+              <section *ngIf="user.rol != 'ADMIN'">
+                <a *ngIf="marathon.estado == 'programado'" [routerLink]="['/competir/maraton', marathon.id]" class="card-btn" >Inscribirse</a>
+                <a *ngIf="marathon.estado == 'proceso'" class="card-btn">Ya empezo</a>
+                <a *ngIf="marathon.estado == 'finalizado'" class="card-btn">Terminado</a>
+              </section>
+
+              <section *ngIf="user.rol == 'ADMIN'">
+                  <a class="card-btn" [routerLink]="['/competir/maraton/admin', marathon.id]">Administrar</a>
+              </section>
+
+              <div class="col-12">
+                <p>{{marathon.descripcion}}</p>
+              </div>
+            </div>
+          </div>
+          <div class="row card-body" *ngIf="!marathons">
+            <div class="col-2">
+              <div class="animated-background animated--title" style="width: 113px; height: 104px; margin: 8px auto;"></div>
+            </div>
+            <div class="col-10">
+              <div class="col-12" style="background-color: #F6F6F6; padding: 10px">
+                <div class="animated-background animated--title" style="width: 100%; height: 10px; margin: 4px auto;"></div>
+                <div class="animated-background animated--title" style="width: 100%; height: 10px; margin: 4px auto;"></div>
+                <div class="animated-background animated--title" style="width: 100%; height: 10px; margin: 4px auto;"></div>
+                <div class="animated-background animated--title" style="width: 100%; height: 10px; margin: 4px auto;"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-5 d-none d-lg-block">
+        <div class="card card--filter col-6 offset-3">
+          <div class="card-body text-center">
+            <h5 class="card-title">Filtrar</h5>
+          </div>
+        </div>
+        <div class="col-4 offset-4">
+          <input type="checkbox" class="form-check-input">
+          <div class="animated-background animated--title" style="width: 100%; height: 20px; margin: 18px auto;"></div>
+          <input type="checkbox" class="form-check-input">
+          <div class="animated-background animated--title" style="width: 100%; height: 20px; margin: 18px auto;"></div>
+          <input type="checkbox" class="form-check-input">
+          <div class="animated-background animated--title" style="width: 100%; height: 20px; margin: 18px auto;"></div>
+          <input type="checkbox" class="form-check-input">
+          <div class="animated-background animated--title" style="width: 100%; height: 20px; margin: 18px auto;"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

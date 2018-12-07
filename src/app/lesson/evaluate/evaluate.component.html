@@ -2,8 +2,12 @@
   <div class="jumbotron">
     <nav aria-label="breadcrumb">
       <ol class="breadcrumb" style="margin: 0px;background-color: white; padding: 0">
-        <li *ngIf="course" style="font-size: 1.5rem; " class="breadcrumb-item"><a style="color: #333;" [routerLink]="['/curso/home']">{{course.nombre}}</a></li>
-        <li *ngIf="marathon" style="font-size: 1.5rem; " class="breadcrumb-item"><a style="color: #333;" [routerLink]="['/curso/home']">{{marathon.nombre}}</a></li>
+        <li *ngIf="course" style="font-size: 1.5rem; " class="breadcrumb-item">
+          <a style="color: #333;" [routerLink]="['/curso/home']">
+            {{course.nombre}}
+          </a>
+        </li>
+        <li *ngIf="marathon" style="font-size: 1.5rem; " class="breadcrumb-item"><a style="color: #333;" [routerLink]="['/competir/maraton', marathon.id]">{{marathon.nombre}}</a></li>
         <li *ngIf="lesson" style="font-size: 1.3rem; padding: 3px" class="breadcrumb-item active" aria-current="page">{{lesson.nombre}}</li>
       </ol>
     </nav>

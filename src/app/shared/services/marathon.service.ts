@@ -50,9 +50,9 @@ export class MarathonService {
                 let lessons = [];
                 marathon.payload.data().lecciones.map(async (lec: any) => {
                       let res = await lec.get();
-                      //let user_id = this.userService.getUserId();
-                      //let user_results = await this.firestore.doc(`resultado_lecciones/${ user_id }-${ res.id }`).ref.get();
-                      lessons.push({ id: res.id, ...res.data()/*, results: user_results.data()*/ });
+                      let user_id = this.userService.getUserId();
+                      let user_results = await this.firestore.doc(`resultado_lecciones/${ user_id }-${ res.id }`).ref.get();
+                      lessons.push({ id: res.id, ...res.data(), results: user_results.data() });
                 });
                 observer.next({ 
                     id: marathon.payload.id, 
