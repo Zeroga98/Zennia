@@ -16,6 +16,7 @@ export class ListMarathonComponent implements OnInit {
   public user: any;
   public marathons: any;
   public timeNow = this.timeService.getMomentDate();
+  public difficultys: any = { facil: "Fácil", medio: "Medio", dificil: "Difícil" };
 
   constructor(
     public ngProgress: NgProgress,

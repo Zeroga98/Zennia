@@ -14,11 +14,16 @@ import { MarathonService, TimeService } from '../../shared/services';
 export class AdminComponent implements OnInit {
 
 	public lessons_minime: number = 3;
+	public timeNow = this.timeService.getMomentDate();
 	public form: FormGroup;
 	public isSubmiting: boolean = false;
 	public marathonId: string;
 	public marathon: any = { };
-	public timeNow = this.timeService.getMomentDate();
+	public difficultys: any = [
+		{ key: "facil", value: "Fácil"}, 
+		{ key: "medio", value: "Medio"},
+		{ key: "dificil", value: "Difícil"}
+	];
 
   	constructor(
 	  	private formBuilder: FormBuilder,
@@ -31,6 +36,7 @@ export class AdminComponent implements OnInit {
 		  	this.form = this.formBuilder.group({
 		  		'nombre': this.formBuilder.control('', [Validators.required]),
 		  		'descripcion': this.formBuilder.control('', [Validators.required]),
+		  		'dificultad': this.formBuilder.control('medio', [Validators.required]),
 		  		'fecha_inicio': this.formBuilder.control(this.timeNow.format('YYYY-MM-DD'), [Validators.required]),
 		  		'hora_inicio': this.formBuilder.control(this.timeNow.format('kk:mm'), [Validators.required]),
 		  		'fecha_final': this.formBuilder.control(this.timeNow.format('YYYY-MM-DD'), [Validators.required]),

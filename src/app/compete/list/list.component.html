@@ -28,6 +28,10 @@
                 Termina: A las {{marathon.fecha_final_parse | date: 'hh:mm'}} del 
                 {{marathon.fecha_final_parse | date: 'd'}} de {{marathon.fecha_final_parse | date: 'MMMM'}}
               </span>
+              <br>
+              <span class="card-subtitle">
+                Dificulta: {{difficultys[marathon.dificultad]}}
+              </span>
 
               <section *ngIf="user.rol != 'ADMIN'">
                 <a *ngIf="marathon.estado == 'programado'" [routerLink]="['/competir/maraton', marathon.id]" class="card-btn" >Inscribirse</a>

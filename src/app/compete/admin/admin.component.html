@@ -7,6 +7,13 @@
     <span>Descripción</span>
     <input type="text" placeholder="Descripción" [formControl]="form.controls.descripcion">
   </div>
+
+  <div>
+    <span>Dificultad</span>
+    <select [formControl]="form.controls.dificultad">
+      <option *ngFor="let difficulty of difficultys" [value]="difficulty.key" [label]="difficulty.value"></option>
+    </select>
+  </div>
   <br>
   <div>
     <span>Fecha y hora de inicio</span>
