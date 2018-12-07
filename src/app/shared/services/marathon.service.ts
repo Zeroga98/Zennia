@@ -9,6 +9,7 @@ import * as moment from 'moment';
 
 import { ApiService } from './api.service';
 import { UserService } from './user.service';
+import { TimeService } from './time.service';
 
 @Injectable()
 export class MarathonService {
@@ -19,7 +20,8 @@ export class MarathonService {
     constructor(
         private api: ApiService,
         private firestore: AngularFirestore,
-        private userService: UserService
+        private userService: UserService,
+        private timeService: TimeService
     ) { }
 
     public getMarathon(): Observable<any>{
@@ -70,7 +72,7 @@ export class MarathonService {
 
     public createMarathon(data: any){ 
         return new Observable((observer) => {
-            data.fecha_registro = new Date();
+            data.fecha_registro = this.timeService.getDate();
             data.lecciones = [];
             this.firestore.collection(`maratones`).add(data)
             .then(async new_marathon => {

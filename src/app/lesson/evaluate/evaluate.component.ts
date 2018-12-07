@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import * as snippets from '../../../snippets';
 import { Languages } from '../../shared/constanst';
 import { Submission, responseSubmission } from '../../shared/models';
-import { CourseService, LessonService, ApiJudgeService, UserService, MarathonService } from '../../shared/services';
+import { CourseService, LessonService, ApiJudgeService, UserService, MarathonService, TimeService } from '../../shared/services';
 
 @Component({
   selector: 'app-evaluate',
@@ -26,7 +26,8 @@ export class EvaluateComponent implements OnInit {
     private marathonService: MarathonService,
     private courseService: CourseService,
     private lessonService: LessonService,
-    private userService: UserService) { 
+    private userService: UserService,
+    private timeService: TimeService) { 
   }
 
   ngOnInit() {
@@ -41,13 +42,15 @@ export class EvaluateComponent implements OnInit {
     this.subscribeLesson.unsubscribe(); 
     this.subscribeUser.unsubscribe();
     this.subscribeMarathon.unsubscribe();
+    this.courseService.setCourseCurrent(undefined);
+    this.marathonService.setMarathonCurrent(undefined);
   }
 
   public sendProblem(event){
     let submission = {
       status: event.status.description,
       time: event.time,
-      fecha_registro: new Date()
+      fecha_registro: this.timeService.getDate()
     };
     this.lessonService.saveResult(this.user.id, this.lesson.id, submission)
     .subscribe(data => {

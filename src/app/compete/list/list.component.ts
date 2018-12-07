@@ -3,7 +3,7 @@ import { NgProgress } from 'ngx-progressbar';
 import { ActivatedRoute, Router } from '@angular/router';
 import * as moment from 'moment';
 
-import { MarathonService, UserService } from '../../shared/services';
+import { MarathonService, UserService, TimeService } from '../../shared/services';
 
 @Component({
   selector: 'app-list-marathon',
@@ -15,11 +15,13 @@ export class ListMarathonComponent implements OnInit {
   public subscribeUser;
   public user: any;
   public marathons: any;
+  public timeNow = this.timeService.getMomentDate();
 
   constructor(
     public ngProgress: NgProgress,
     private marathonService: MarathonService,
     private userService: UserService,
+    private timeService: TimeService,
     private router: Router
   ) { }
 
@@ -32,9 +34,9 @@ export class ListMarathonComponent implements OnInit {
     this.marathonService.getMarathon()
     .subscribe(data => {
       data.map(item => {
-        if(moment() <= moment(item.fecha_final.toDate()) && moment() >= moment(item.fecha_inicio.toDate()))
+        if(this.timeNow <= moment(item.fecha_final.toDate()) && this.timeNow >= moment(item.fecha_inicio.toDate()))
           item.estado = 'proceso';
-        else if(moment() >= moment(item.fecha_final.toDate()))
+        else if(this.timeNow >= moment(item.fecha_final.toDate()))
           item.estado = 'finalizado';
         else
           item.estado = 'programado';

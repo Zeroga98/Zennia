@@ -10,7 +10,8 @@ import {
   LessonService, 
   ApiJudgeService, 
   UserService, 
-  MarathonService 
+  MarathonService,
+  TimeService
 } from './services';
 import { ReversePipe } from './pipes';
 
@@ -26,6 +27,7 @@ import { ReversePipe } from './pipes';
   providers: [ 
   	AuthService, 
   	ApiService, 
+    TimeService,
   	CourseService, 
   	LessonService, 
   	ApiJudgeService,

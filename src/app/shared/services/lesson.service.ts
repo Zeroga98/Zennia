@@ -7,6 +7,7 @@ import { combineLatest, defer, Observable, Observer } from 'rxjs';
 import { map, switchMap, take } from 'rxjs/operators';
 
 import { ApiService } from './api.service';
+import { TimeService } from './time.service';
 
 @Injectable()
 export class LessonService {
@@ -16,12 +17,13 @@ export class LessonService {
 
     constructor(
         private api: ApiService,
+        private timeService: TimeService,
         private firestore: AngularFirestore
     ) { }
 
     public createLesson(data: any, reference_id: string, type: string){ 
         return new Observable((observer) => {
-            data.fecha_registro = new Date();
+            data.fecha_registro = this.timeService.getDate();
             this.firestore.collection(`lecciones`).add(data)
             .then(async new_lesson => {
                 let reference = await this.firestore.doc(`${ type }/${ reference_id }`).ref.get();

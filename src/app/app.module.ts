@@ -4,6 +4,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { AngularFireModule } from 'angularfire2';
 import { AngularFirestoreModule } from 'angularfire2/firestore';
+import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { AngularFontAwesomeModule } from 'angular-font-awesome';
 import { MonacoEditorModule } from 'ngx-monaco-editor';
@@ -32,6 +33,7 @@ import { HeaderComponent } from './shared';
     ToastrModule.forRoot(),
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule,
+    AngularFireDatabaseModule,
     AngularFontAwesomeModule
   ],
   declarations: [

@@ -4,7 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import * as moment from 'moment';
 
-import { MarathonService } from '../../shared/services';
+import { MarathonService, TimeService } from '../../shared/services';
 
 @Component({
   selector: 'app-admin',
@@ -18,20 +18,23 @@ export class AdminComponent implements OnInit {
 	public isSubmiting: boolean = false;
 	public marathonId: string;
 	public marathon: any = { };
+	public timeNow = this.timeService.getMomentDate();
 
   	constructor(
 	  	private formBuilder: FormBuilder,
 	  	private router: Router,
 	  	private activateRouter: ActivatedRoute,
 	  	private toast: ToastrService,
-	  	private marathonService: MarathonService) { 
+	  	private marathonService: MarathonService,
+	  	private timeService: TimeService) { 
+
 		  	this.form = this.formBuilder.group({
 		  		'nombre': this.formBuilder.control('', [Validators.required]),
 		  		'descripcion': this.formBuilder.control('', [Validators.required]),
-		  		'fecha_inicio': this.formBuilder.control(moment().format('YYYY-MM-DD'), [Validators.required]),
-		  		'hora_inicio': this.formBuilder.control(moment().format('kk:mm'), [Validators.required]),
-		  		'fecha_final': this.formBuilder.control(moment().format('YYYY-MM-DD'), [Validators.required]),
-		  		'hora_final': this.formBuilder.control(moment().format('kk:mm'), [Validators.required]),
+		  		'fecha_inicio': this.formBuilder.control(this.timeNow.format('YYYY-MM-DD'), [Validators.required]),
+		  		'hora_inicio': this.formBuilder.control(this.timeNow.format('kk:mm'), [Validators.required]),
+		  		'fecha_final': this.formBuilder.control(this.timeNow.format('YYYY-MM-DD'), [Validators.required]),
+		  		'hora_final': this.formBuilder.control(this.timeNow.format('kk:mm'), [Validators.required]),
 		  		'oculta': this.formBuilder.control(true, [Validators.required]),
 		    });
   	}
@@ -70,7 +73,7 @@ export class AdminComponent implements OnInit {
 	public update(){
 		let hora_inicio = moment(this.form.value.fecha_inicio + ' ' + this.form.value.hora_inicio);
 		let hora_final = moment(this.form.value.fecha_final + ' ' + this.form.value.hora_final);
-		if(moment() < hora_inicio && hora_inicio < hora_final){
+		if(this.timeNow < hora_inicio && hora_inicio < hora_final){
 			this.marathonService.updateMarathon(this.parserDataSend(this.form.value), this.marathonId)
 			.subscribe(data => {
 			  this.toast.success('Actualización exitosa!', 'Bien!', {
@@ -79,7 +82,7 @@ export class AdminComponent implements OnInit {
 			  });
 			  this.isSubmiting = false;
 			});
-		} else if(moment() >= hora_inicio){
+		} else if(this.timeNow >= hora_inicio){
 			this.toast.error(`La competencia ya empezo, no puedes actualizar los campos ahora.`, 'No es posible actualizar', {
 			    timeOut: 3000,
 			    positionClass:'toast-bottom-right'
@@ -121,7 +124,7 @@ export class AdminComponent implements OnInit {
 	public addLesson(){
 		let hora_inicio = moment(this.form.value.fecha_inicio + ' ' + this.form.value.hora_inicio);
 		//if(1 + 2 == 3){
-		if(moment() < hora_inicio){
+		if(this.timeNow < hora_inicio){
 			this.router.navigate(['/maratones', this.marathonId, 'leccion', 'new', 'admin']);
 		} else {
 			this.toast.error(`La competencia ya empezo, no puedes actualizar los campos ahora.`, 'No es posible actualizar', {
