@@ -36,18 +36,7 @@ export class ListMarathonComponent implements OnInit {
   public getListMarathons(){
     this.marathonService.getMarathon()
     .subscribe(data => {
-      data.map(item => {
-        let register_exist = item.inscritos.find(item => { return item.user_id == this.user_id });
-
-        if(this.timeService.getMomentDate() <= moment(item.fecha_final.toDate()) && this.timeService.getMomentDate() >= moment(item.fecha_inicio.toDate()))
-          item.estado = 'proceso';
-        else if(this.timeService.getMomentDate() >= moment(item.fecha_final.toDate()))
-          item.estado = 'finalizado';
-        else if(register_exist)
-          item.estado = 'inscrito';
-        else
-          item.estado = 'programado';
-      });
+      data.map(item => item.estado = this.marathonService.stateMarathon(item));
       this.marathons = data;
     });
   }

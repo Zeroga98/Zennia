@@ -1,6 +1,5 @@
 <div class="page-evaluate ">
   <div class="jumbotron">
-    <h1>Comentario Yeison: Falta sacar de la vista cuando la maraton se haya acabado</h1>
     <nav aria-label="breadcrumb">
       <ol class="breadcrumb" style="margin: 0px;background-color: white; padding: 0">
         <li *ngIf="course" style="font-size: 1.5rem; " class="breadcrumb-item">
@@ -14,5 +13,5 @@
     </nav>
   </div>
 
-  <app-workspace *ngIf="lesson" [submission]="lesson.submission" [content-problem]="lesson.problema" (send-problem)="sendProblem($event)"></app-workspace>
+  <app-workspace *ngIf="lesson" [submission]="lesson.submission" [content-problem]="lesson.problema" (send-problem)="sendProblem($event)" [hide-code]="!register_marathon || marathon.estado == 'finalizado'"></app-workspace>
 </div>

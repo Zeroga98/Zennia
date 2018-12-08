@@ -38,17 +38,13 @@ export class LessonComponent implements OnInit {
   	}
 
     private getMarathonById(){
-      this.marathonService.getMarathonById(this.referenceId)
-      .subscribe((marathon: any) => {
-        this.marathonService.setMarathonCurrent(marathon);
-      });
+      this.marathonService.getMarathonById(this.referenceId, false)
+      .subscribe((marathon: any) => this.marathonService.setMarathonCurrent(marathon));
     }
 
   	private getCourseById(){
   		this.courseService.getCourseById(this.referenceId)
-  		.subscribe((course: any) => {
-  			this.courseService.setCourseCurrent(course);
-  		});
+  		.subscribe((course: any) => this.courseService.setCourseCurrent(course));
   	}
 
   	private getLessonById(){

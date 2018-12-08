@@ -21,6 +21,7 @@ export class EvaluateComponent implements OnInit {
   public course: any;
   public lesson: any;
   public user: any;
+  public register_marathon: boolean;
 
   constructor(
     private marathonService: MarathonService,
@@ -32,7 +33,13 @@ export class EvaluateComponent implements OnInit {
 
   ngOnInit() {
     this.subscribeCourse = this.courseService.$courseCurrent.subscribe(course => this.course = course);
-    this.subscribeMarathon = this.marathonService.$marathonCurrent.subscribe(marathon => this.marathon = marathon);
+    this.subscribeMarathon = this.marathonService.$marathonCurrent.subscribe(marathon => {
+      this.marathon = marathon;
+      if(this.marathon){
+        this.register_marathon = this.marathon.inscritos.find(item => { return item.user_id == this.userService.getUserId() }) != undefined;
+        this.marathon.estado = this.marathonService.stateMarathon(marathon);
+      }
+    });
     this.subscribeLesson = this.lessonService.$lessonCurrent.subscribe((lesson: any) => this.lesson = lesson);
     this.subscribeUser = this.userService.$userCurrent.subscribe(user => this.user = user);
   }

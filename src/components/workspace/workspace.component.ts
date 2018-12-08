@@ -15,6 +15,7 @@ export class WorkspaceComponent implements OnInit {
 
 	@Input('submission') submissionExtra: any;
 	@Input('content-problem') contentProblem: any;
+	@Input('hide-code') hideCode: any;
 	@Output('send-problem') sendProblem = new EventEmitter();
 	public isSubmiting: boolean = false;
 	public languages = Languages.languages;

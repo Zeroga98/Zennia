@@ -45,7 +45,7 @@ export class MarathonService {
     	});
     }
 
-    public getMarathonById(id: string): Observable<any>{
+    public getMarathonById(id: string, format_timestamp_separated: boolean): Observable<any>{
         return new Observable((observer) => {
             this.firestore.doc(`maratones/${ id }`).snapshotChanges()
             .subscribe((marathon: any) => {
@@ -56,15 +56,24 @@ export class MarathonService {
                       let user_results = await this.firestore.doc(`resultado_lecciones/${ user_id }-${ res.id }`).ref.get();
                       lessons.push({ id: res.id, ...res.data(), results: user_results.data() });
                 });
-                observer.next({ 
-                    id: marathon.payload.id, 
-                    ...marathon.payload.data(), 
-                    fecha_inicio: moment(marathon.payload.data().fecha_inicio.toDate()).format('YYYY-MM-DD'), 
-                    hora_inicio: moment(marathon.payload.data().fecha_inicio.toDate()).format('kk:mm'), 
-                    fecha_final: moment(marathon.payload.data().fecha_final.toDate()).format('YYYY-MM-DD'), 
-                    hora_final: moment(marathon.payload.data().fecha_final.toDate()).format('kk:mm'), 
-                    lecciones: lessons 
-                });
+                if(format_timestamp_separated)
+                    observer.next({ 
+                        id: marathon.payload.id, 
+                        ...marathon.payload.data(), 
+                        fecha_inicio: moment(marathon.payload.data().fecha_inicio.toDate()).format('YYYY-MM-DD'), 
+                        hora_inicio: moment(marathon.payload.data().fecha_inicio.toDate()).format('kk:mm'), 
+                        fecha_final: moment(marathon.payload.data().fecha_final.toDate()).format('YYYY-MM-DD'), 
+                        hora_final: moment(marathon.payload.data().fecha_final.toDate()).format('kk:mm'), 
+                        lecciones: lessons 
+                    });
+                else
+                    observer.next({ 
+                        id: marathon.payload.id, 
+                        ...marathon.payload.data(), 
+                        fecha_inicio_format: moment(marathon.payload.data().fecha_inicio.toDate()).format('YYYY-MM-DD kk:mm'), 
+                        fecha_final_format: moment(marathon.payload.data().fecha_final.toDate()).format('YYYY-MM-DD kk:mm'), 
+                        lecciones: lessons 
+                    });
                 observer.complete();
             });
         }); 
@@ -96,6 +105,19 @@ export class MarathonService {
 
     public hideMarathon(id: string, hide: boolean){
         return this.firestore.doc(`maratones/${ id }`).set({ oculta: hide }, { merge: true });
+    }
+
+    public stateMarathon(marathon){
+        let register_exist = marathon.inscritos.find(item => { return item.user_id == this.userService.getUserId() });
+
+        if(this.timeService.getMomentDate() <= moment(marathon.fecha_final.toDate()) && this.timeService.getMomentDate() >= moment(marathon.fecha_inicio.toDate()))
+          return 'proceso';
+        else if(this.timeService.getMomentDate() >= moment(marathon.fecha_final.toDate()))
+          return 'finalizado';
+        else if(register_exist)
+          return 'inscrito';
+        else
+          return 'programado';
     }
 
     public setMarathonCurrent(marathon: any){

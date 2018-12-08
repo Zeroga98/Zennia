@@ -3,8 +3,7 @@
     <div class="col-6">
       <div [froalaEditor]="froalaOptions" [(froalaModel)]="contentProblem"></div>
     </div>
-
-    <div class="col-6">
+    <div class="col-6" *ngIf="!hideCode">
       <input type="text" [(ngModel)]="submission.test_stdin">
       <select (change)="changeLanguage($event.target.value)">
         <option [value]="language.id" *ngFor="let language of languages">{{language.name}}</option>

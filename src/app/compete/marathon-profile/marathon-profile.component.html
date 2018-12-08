@@ -3,10 +3,11 @@
     <nav aria-label="breadcrumb">
       <ol class="breadcrumb" style="margin: 0px;background-color: white; padding: 0">
         <li style="font-size: 1.5rem; " class="breadcrumb-item"><a style="color: #333;" [routerLink]="['/competir', 'list']">Tablero de competencias </a></li>
-        <li style="font-size: 1.3rem; padding: 3px" class="breadcrumb-item active" aria-current="page">{{marathon?.nombre}} - Termina: {{marathon?.fecha_final}} {{marathon?.hora_final}}</li>
+        <li style="font-size: 1.3rem; padding: 3px" class="breadcrumb-item active" aria-current="page">{{marathon?.nombre}} - Termina: {{marathon?.fecha_final_format}}</li>
       </ol>
     </nav>
   </div>
+  <h4 *ngIf="register_marathon == false">No eres participante</h4>
   <div class="container-fluid" *ngIf="marathon">
     <div class="row">
       <div class=" col-sm-12 col-md-12 col-lg-12 col-xl-7 line-ver">
@@ -22,7 +23,7 @@
               <!--<span class="card-subtitle">Tasa de exito: <span> 10%</span></span>-->
               <span class="card-subtitle">Puntaje: <span> 20pts</span></span>
               <button [routerLink]="['/maratones', marathon.id, 'leccion', lesson.id, 'evaluar']" type="button" class="btn btn-primary" style="position: absolute;right: 19px;bottom: -5px;background-color: #666;border-color: #666;">
-                Resolver
+                {{ (register_marathon == true && marathon.estado != 'finalizado')? 'Resolver': 'Ver' }}
               </button>
               <span class="process">• <span>Proceso</span></span>
             </div>

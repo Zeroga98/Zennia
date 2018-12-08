@@ -49,7 +49,7 @@ export class AdminComponent implements OnInit {
 	  	this.activateRouter.params.subscribe(params => {
 	        this.marathonId = params['marathon_id'];
 	        if(this.marathonId != 'new'){
-	          this.marathonService.getMarathonById(this.marathonId)
+	          this.marathonService.getMarathonById(this.marathonId, true)
 	          .subscribe(data => {
 	          	this.marathon = data;
 	            this.form.patchValue(data);
