@@ -4,7 +4,7 @@
     <aw-wizard-step stepTitle="Paso 1">
       <input type="text" placeholder="Nombre lección" [formControl]="form.controls.nombre">
       <input type="text" placeholder="Descripción lección" [formControl]="form.controls.descripcion">
-      <div id="contenido" [froalaEditor]="froalaOptions" [(froalaModel)]="new_lesson.contenido"></div>
+      <div *ngIf="type != 'maratones'" id="contenido" [froalaEditor]="froalaOptions" [(froalaModel)]="new_lesson.contenido"></div>
       <button type="button" awNextStep>Siguiente</button>
     </aw-wizard-step>
     <aw-wizard-step stepTitle="Paso 2" awOptionalStep>
@@ -19,5 +19,5 @@
       <button type="submit" [disabled]="form.invalid">{{(lessonId != 'new')? 'Actualizar': 'Crear'}}</button>
     </aw-wizard-step>
   </aw-wizard>
-  <button type="button" (click)="hideLesson()">{{(!form.controls.oculta.value? 'Ocultar': 'Difundir')}} lección</button>
+  <button *ngIf="lessonId != 'new'" type="button" (click)="hideLesson()">{{(!form.controls.oculta.value? 'Ocultar': 'Difundir')}} lección</button>
 </form>

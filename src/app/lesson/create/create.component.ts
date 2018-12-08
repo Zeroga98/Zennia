@@ -45,7 +45,7 @@ export class CreateComponent implements OnInit {
       'nombre': this.formBuilder.control('', [Validators.required]),
       'descripcion': this.formBuilder.control('', [Validators.required]),
       'problema': this.formBuilder.control('', [Validators.required]),
-      'contenido': this.formBuilder.control('', [Validators.required]),
+      'contenido': this.formBuilder.control('', (this.type == 'cursos')? [Validators.required]: []),
       'oculta': this.formBuilder.control(false, [Validators.required]),
       'submission': this.formBuilder.group({
         'cpu_time_limit': this.formBuilder.control('', [Validators.required]),

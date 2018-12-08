@@ -18,14 +18,15 @@
           <div class="row card-body">
             <div class=" col-12">
               <h5 class="card-title card-title--ejr">{{lesson.nombre}}</h5>
-              <!--<a class="card-btn">Descargar pdf</a>-->
-              <span class="card-subtitle">Dificultad: <span> Medio</span></span>
-              <!--<span class="card-subtitle">Tasa de exito: <span> 10%</span></span>-->
-              <span class="card-subtitle">Puntaje: <span> 20pts</span></span>
               <button [routerLink]="['/maratones', marathon.id, 'leccion', lesson.id, 'evaluar']" type="button" class="btn btn-primary" style="position: absolute;right: 19px;bottom: -5px;background-color: #666;border-color: #666;">
-                {{ (register_marathon == true && marathon.estado != 'finalizado')? 'Resolver': 'Ver' }}
+                {{ (register_marathon == true && marathon.estado != 'finalizado')? 
+                    ((lesson.results?.estado)? 'Resuelto' : 'Resolver'): 
+                    'Ver' 
+                }}
               </button>
-              <span class="process">• <span>Proceso</span></span>
+              <span class="process" *ngFor="let result of lesson.results?.responses">
+                • <span>Estado: {{result.status}} - Tiempo: {{result.time}} - Envío: {{result.fecha_registro.toDate() | date: 'HH:mm'}}</span>
+              </span>
             </div>
           </div>
         </div>
