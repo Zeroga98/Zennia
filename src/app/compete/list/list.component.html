@@ -34,9 +34,10 @@
               </span>
 
               <section *ngIf="user.rol != 'ADMIN'">
-                <a *ngIf="marathon.estado == 'programado'" [routerLink]="['/competir/maraton', marathon.id]" class="card-btn" >Inscribirse</a>
-                <a *ngIf="marathon.estado == 'proceso'" class="card-btn">Ya empezo</a>
-                <a *ngIf="marathon.estado == 'finalizado'" class="card-btn">Terminado</a>
+                <a *ngIf="marathon.estado == 'inscrito'" class="card-btn">Ya estas inscrito</a>
+                <a *ngIf="marathon.estado == 'programado'" (click)="registerMarathon(marathon)" class="card-btn">Inscribirse</a>
+                <a *ngIf="marathon.estado == 'proceso'" [routerLink]="['/competir/maraton', marathon.id]"  class="card-btn">Ya empezo</a>
+                <a *ngIf="marathon.estado == 'finalizado'" [routerLink]="['/competir/maraton', marathon.id]" class="card-btn">Terminado</a>
               </section>
 
               <section *ngIf="user.rol == 'ADMIN'">

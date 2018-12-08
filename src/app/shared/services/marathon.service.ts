@@ -74,6 +74,7 @@ export class MarathonService {
         return new Observable((observer) => {
             data.fecha_registro = this.timeService.getDate();
             data.lecciones = [];
+            data.inscritos = [];
             this.firestore.collection(`maratones`).add(data)
             .then(async new_marathon => {
                 observer.next(new_marathon.id);
