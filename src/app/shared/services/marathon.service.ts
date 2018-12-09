@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Subject } from 'rxjs/Subject';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
-import { AngularFirestore } from 'angularfire2/firestore';
+import { AngularFirestore, QueryFn } from 'angularfire2/firestore';
 import { combineLatest, defer, Observable, Observer } from 'rxjs';
 import { map, switchMap, take } from 'rxjs/operators';
 import * as moment from 'moment';
@@ -22,15 +22,21 @@ export class MarathonService {
         private firestore: AngularFirestore,
         private userService: UserService,
         private timeService: TimeService
-    ) { }
+    ) { 
+    }
 
     public getMarathon(): Observable<any>{
     	return new Observable((observer) => {
-	    	this.firestore.collection(`maratones`).ref.get()
-	    	.then(async (marathons: any) => {
+	    	this.firestore.collection("maratones", ref => { 
+                ref.orderBy('fecha_registro', 'desc');
+                return ref;
+            })
+            .snapshotChanges()
+	    	.subscribe(async (marathons: any) => {
 	    		let data_parser = [];
                 let user_rol = await this.userService.getUserRol().toPromise();
-	    		marathons.docs.map(item => {
+	    		marathons.map(item => {
+                    item = item.payload.doc;
                     if(!item.data().oculta || user_rol == 'ADMIN')
                         data_parser.push({ 
                             id: item.id, 
@@ -74,6 +80,42 @@ export class MarathonService {
                         fecha_final_format: moment(marathon.payload.data().fecha_final.toDate()).format('YYYY-MM-DD kk:mm'), 
                         lecciones: lessons 
                     });
+                observer.complete();
+            });
+        }); 
+    }
+
+    public getLeaderboard(id: string): Observable<any>{
+        return new Observable((observer) => {
+            this.firestore.doc(`maratones/${ id }`).snapshotChanges()
+            .subscribe(async(marathon: any) => {
+                let users = [];
+                let user_rol = await this.userService.getUserRol().toPromise();
+
+                marathon.payload.data().inscritos.map(async (item: any) => {
+                    let user = await this.firestore.doc(`usuarios/${ item.user_id }`).ref.get()
+                    let user_parse = { id: user.id, ...user.data() };
+                    delete user_parse['contrasena'];
+                    users.push(user_parse);
+                });
+
+                await marathon.payload.data().lecciones.map(async (item: any) => {
+                    let lesson = await item.get();
+                    if(!lesson.data().oculta || user_rol == 'ADMIN'){
+                        users.map(async (user) => {
+                            if(!user.lecciones)
+                                user.lecciones = [];
+                            let user_results = await this.firestore.doc(`resultado_lecciones/${ user.id}-${ lesson.id }`).ref.get();
+                            user.lecciones.push({ id: lesson.id, ...lesson.data(), results: user_results.data() });
+                        });
+                    }
+                });
+
+                observer.next({ 
+                    id: marathon.payload.id, 
+                    ...marathon.payload.data(), 
+                    users: users
+                });
                 observer.complete();
             });
         }); 
