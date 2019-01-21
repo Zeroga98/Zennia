@@ -40,7 +40,9 @@ export class EvaluateComponent implements OnInit {
         this.marathon.estado = this.marathonService.stateMarathon(marathon);
       }
     });
-    this.subscribeLesson = this.lessonService.$lessonCurrent.subscribe((lesson: any) => this.lesson = lesson);
+    this.subscribeLesson = this.lessonService.$lessonCurrent.subscribe((lesson: any) => {
+      this.lesson = lesson
+    });
     this.subscribeUser = this.userService.$userCurrent.subscribe(user => this.user = user);
   }
 

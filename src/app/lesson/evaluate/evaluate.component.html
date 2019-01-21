@@ -13,5 +13,5 @@
     </nav>
   </div>
 
-  <app-workspace *ngIf="lesson" [submission]="lesson.submission" [content-problem]="lesson.problema" (send-problem)="sendProblem($event)" [hide-code]="!register_marathon || marathon.estado == 'finalizado'"></app-workspace>
+  <app-workspace *ngIf="lesson" [submission]="lesson.submission" [content-problem]="lesson.problema" (send-problem)="sendProblem($event)" [hide-code]="register_marathon == false || (marathon && marathon.estado == 'finalizado')"></app-workspace>
 </div>

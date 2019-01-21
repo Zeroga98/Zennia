@@ -98,27 +98,3 @@ export class WorkspaceComponent implements OnInit {
 		return clear;
 	}
 }
-
-/*
-import java.util.Scanner;
-public class Main {
-    public static void main(String[] args) {
-        Scanner tec = new Scanner(System.in);
-        int cases = tec.nextInt();
-        for(int i = 0; i < cases; i++){
-            int x = tec.nextInt();
-            int total = 0;
-            for(int j = 0; j < x; j++){
-                total += (j + 1);
-                if(total == x){
-                    System.out.println(x + " eh perfeito");
-                    break;
-                } else if(total > x){
-                    System.out.println(x + " nao eh perfeito");
-                    break;
-                }
-            }
-        }
-    }
-}
-*/
