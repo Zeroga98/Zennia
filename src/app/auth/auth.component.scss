@@ -1,52 +1,129 @@
-.background{
-  background: #D9D9D9;
+.background {
+  background: #F8F8F8;
 }
-.login-container{
+
+.login-container {
   background: #FFFFFF;
-  border-radius: 15px;
-}
-.login-left img{
-    width: 50%;
-    margin: 60px auto 6px;
+  border: 1px solid #E2E2E2;
+  box-shadow: 0px 10px 25px rgba(221, 221, 221, 0.25);
+  border-radius: 10px;
+  max-width: 500px;
+  width: 100%;
+  padding: 30px;
+  &__title {
+    font-family: 'Montserrat', sans-serif;
+    font-style: normal;
+    font-weight: bold;
+    line-height: normal;
+    font-size: 24px;
+    color: #1D1C1D;
     display: block;
+  }
 }
-.login-left{
-  background: #9C9C9C;
+
+.login-left img {
+  width: 50%;
+  margin: 60px auto 6px;
+  display: block;
+}
+
+.login-left {
+  /* background: #9C9C9C; */
   border-radius: 15px;
   display: inline-block;
   text-align: center;
   color: white;
   width: 40%;
 }
-.login-left span{
+
+.login-left span {
   font-size: 3rem;
 }
-.login-left p{
+
+.login-left p {
   font-weight: 100;
   padding: 73px 25px 33px;
   font-size: 1rem;
   font-family: sans-serif;
 }
-.login-btn{
-  width: 35%;
+
+.login-btn {
   background: #FFFFFF;
   border: 1px solid #A6A6A6;
-  box-sizing: border-box;
-  border-radius: 100px;
-  margin-left: calc(15% - 20px);
-  padding: 5px 10px;
-  display: inline-block;
   text-decoration: none;
+  padding: .75rem;
+  border-radius: 5px;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: bold;
+  font-size: 16px;
+  text-align: center;
+  color: #1D1C1D;
 }
-.login-btn img{
+
+.login-btn img {
   width: 8%;
   display: inline-block;
   vertical-align: middle;
   margin: 0 7px;
 }
-.login-btn span{
+
+.login-btn span {
   display: inline-block;
   vertical-align: middle;
   color: #666;
   text-decaration: none;
+}
+
+.header-login {
+  background: #FFFFFF;
+  border-bottom: 1px solid #DDDDDD;
+  box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.1);
+  height: 60px;
+}
+
+.login {
+  height: calc(100% - 60px);
+}
+
+.logo {
+  img{
+    width: 40px;
+  }
+  span {
+    font-family: 'Mukta', sans-serif;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 26px;
+    color: #4D454D;
+    margin-left: 5px;
+    vertical-align: middle;
+    line-height: 1;
+  }
+}
+
+.form-login {
+  input {
+    border: 1px solid #868686;
+    border-radius: .25rem;
+    padding: .75rem;
+    -webkit-appearance: none;
+  }
+  label {
+    font-family: 'Montserrat', sans-serif;
+    color: #666;
+    font-size: 16px
+  }
+}
+
+.ipt {
+  max-width: 300px !important;
+  margin: 0 auto;
+  width: 100%;
+}
+.eslogan{
+  font-size: 13px;
+  text-align: center;
+  color: #CCCCCC;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 200;
 }

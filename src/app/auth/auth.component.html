@@ -1,35 +1,31 @@
-  <div class="h-100  background" >
-    <div class="container  h-100">
-      <div class="row align-items-center h-100">
-          <div class="col-sm-8 col-lg-8 mx-auto">
-              <div class=" login-container ">
-                <div class="login-left">
-                  <img src="./assets/logo.png" alt="">
-                  <span >Zennia</span>
-                  <p class="lead">Fomentando el crecimiento y fortalecimiento de la programación competitiva</p>
-                </div>
-                <form class="ipt" [formGroup]="form" (ngSubmit)="login()">
-                  <div class="form-login__user" [ngClass]="{'credential-error': showError }">
-                    <label >Correo</label>
-                    <input name="email" type="email" placeholder="example@email.com" [formControl]="form.controls.email">
-                  </div>
-                  <div class="form-login__password" [ngClass]="{'credential-error': showError }">
-                    <label >Contraseña</label>
-                    <input name="password" type="password" placeholder="Contraseña" [formControl]="form.controls.password">
-                  </div>
-            
-                  <span class="mesage-error" *ngIf="showError">{{showError}}</span>
-                
-                  <div class="login-btn hand">
-                    <button type="submit">Iniciar sesión</button>
-                  </div>
-                </form>
-                <!--<a href="{{urlLoginChaira}}" class="login-btn hand">
+<div class="h-100  background">
+  <div class="header-login d-flex align-items-center px-4">
+    <div class="logo d-flex align-items-center">
+      <img src="./assets/logo-1.svg" alt="">
+      <span>zennia</span>
+    </div>
+  </div>
+  <div class="container d-flex login justify-content-center align-items-center">
+    <div class=" login-container d-flex flex-column  ">
+      <span class="login-container__title text-center mt-2 mb-4">Iniciar sesión</span>
+      <form class="ipt d-flex flex-column" [formGroup]="form" (ngSubmit)="login()">
+        <div class="form-login mb-4 d-flex flex-column" [ngClass]="{'credential-error': showError }">
+          <label>Correo</label>
+          <input name="email" type="email" placeholder="example@email.com" [formControl]="form.controls.email">
+        </div>
+        <div class="form-login d-flex mb-4 flex-column" [ngClass]="{'credential-error': showError }">
+          <label>Contraseña</label>
+          <input name="password" type="password" placeholder="Contraseña" [formControl]="form.controls.password">
+        </div>
+
+        <span class="mesage-error" *ngIf="showError">{{showError}}</span>
+        <button class="login-btn hand mb-4" type="submit">Iniciar sesión</button>
+        <span class="eslogan">Fomentando el crecimiento y fortalecimiento de la programacion competitiva</span>
+      </form>
+      <!--<a href="{{urlLoginChaira}}" class="login-btn hand">
                   <img class="" src="./assets/image.png" alt="">
                  <span> Inicia sesión con Chairá</span>
                 </a>-->
-              </div>
-          </div>
-      </div>
     </div>
   </div>
+</div>

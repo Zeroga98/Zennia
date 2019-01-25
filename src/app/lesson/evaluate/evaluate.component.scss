@@ -5,14 +5,14 @@
 }
 
 .page-evaluate{
-  background-color: #F3F7F7;
-  height: calc(100% - 50px - .3rem);
-.jumbotron .title{
-  font-size: 2rem;
-  font-weight: 300;
-  line-height: 1.2;
-  color: #666;
-}
+  background-color: #f3f7f73d;
+  min-height: calc(100% - 51px - .3rem);
+  .jumbotron .title {
+    font-size: 1.5rem;
+    font-weight: 300;
+    line-height: 1.2;
+    color: #666;
+  }
 .jumbotron .description{
   color: #9EACB4;
   font-family: sans-serif;
@@ -23,6 +23,10 @@
   padding: 1rem 2rem;
   background-color: #ffff;
   box-shadow: 0px 2px 1px rgba(0, 0, 0, 0.07);
+  li, a{
+    text-decoration: none;
+    vertical-align: middle;
+  }
 }
 
 .container-fluid{

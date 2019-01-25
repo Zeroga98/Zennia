@@ -15,7 +15,13 @@
               <ul class="list-group list-group-flush">
                 <li (click)="redirectLesson(course, lesson)" class="list-group-item hand" *ngFor="let lesson of course.lecciones">
                   {{lesson.nombre}} 
-                  <span *ngIf="user?.rol != 'ADMIN'">{{(lesson.results?.estado)? 'YES': 'NO'}}</span>
+                  <div *ngIf="user?.rol != 'ADMIN'  &&  lesson.results?.estado" class="check-trans item-dashboard " style="float:right">
+                    <span>Completado</span>
+                      <svg  class="checkmark "   xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52">
+                          <circle class="checkmark__circle" cx="26" cy="26" r="25" fill="none" />
+                          <path   class="checkmark__check  " fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8" />
+                      </svg>
+                   </div> 
                 </li>
                 <li *ngIf="user?.rol == 'ADMIN'" (click)="redirectLesson(course, lesson, 'new')" class="list-group-item hand">Crear nueva</li>
                 <!-- EJEMPLO DE ITEM SELECCIONADO
