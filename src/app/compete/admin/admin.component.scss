@@ -1,0 +1,73 @@
+.form-leccion {
+  margin: .5rem 1rem .5rem 0rem;
+  input {
+    display: block;
+    border-radius: 5px;
+    border: solid #ebebeb 1px;
+    padding: 5px;
+  }
+  select {
+    display: block;
+    border-radius: 5px;
+    border: solid #ebebeb 1px;
+    padding: 5px;
+    width: 180px;
+  }
+}
+
+.line {
+  position: relative;
+  margin-bottom: 20px;
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    border-bottom: 1px solid #C4C4C4;
+  }
+}
+
+.line-ver {
+  position: relative;
+  &::after {
+    content: '';
+    position: absolute;
+    right: -10px;
+    width: 3px;
+    height: 89%;
+    border-right: 1px solid #c4c4c466;
+  }
+}
+
+.btn-work {
+  background: #FFFFFF;
+  border: 1px solid #A6A6A6;
+  text-decoration: none;
+  padding: .75rem;
+  border-radius: 5px;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: bold;
+  font-size: 16px;
+  text-align: center;
+  color: #1D1C1D;
+  cursor: pointer;
+}
+
+.info {
+  color: #3e9be7;
+  text-align: center;
+  margin: 2rem auto;
+  display: block;
+  font-weight: 100;
+}
+.btn-outline{
+  border: none;
+  color: #3e9be7;
+  font-weight: 400;
+  cursor: pointer;
+  padding: .75rem;
+  font-size: 16px;
+  text-decoration: none;
+}

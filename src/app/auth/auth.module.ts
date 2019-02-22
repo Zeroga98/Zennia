@@ -6,6 +6,7 @@ import { AuthRoutingModule } from './auth-routing.module';
 import { AuthComponent } from './auth.component';
 import { NgProgressModule } from 'ngx-progressbar';
 import { SharedModule } from '../shared';
+import { NgxLoadingModule } from 'ngx-loading';
 
 @NgModule({
   imports: [
@@ -14,7 +15,8 @@ import { SharedModule } from '../shared';
     NgProgressModule,
     SharedModule,
     FormsModule, 
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    NgxLoadingModule.forRoot({})
   ],
   declarations: [
     AuthComponent

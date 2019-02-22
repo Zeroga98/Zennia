@@ -5,7 +5,7 @@
   </div>
   <div class="container-fluid">
     <div class="row">
-      <div class="col-xs-12 col-md-12 col-lg-7">
+      <div class="col-xs-12 col-md-12 col-lg-12">
         <div class="card-columns">
           <section *ngFor="let course of courses">
             <div class="card">
@@ -15,7 +15,13 @@
               <ul class="list-group list-group-flush">
                 <li (click)="redirectLesson(course, lesson)" class="list-group-item hand" *ngFor="let lesson of course.lecciones">
                   {{lesson.nombre}} 
-                  <span *ngIf="user?.rol != 'ADMIN'">{{(lesson.results?.estado)? 'YES': 'NO'}}</span>
+                  <div *ngIf="user?.rol != 'ADMIN'  &&  lesson.results?.estado" class="check-trans item-dashboard " style="float:right">
+                    <span>Completado</span>
+                      <svg  class="checkmark "   xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52">
+                          <circle class="checkmark__circle" cx="26" cy="26" r="25" fill="none" />
+                          <path   class="checkmark__check  " fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8" />
+                      </svg>
+                   </div> 
                 </li>
                 <li *ngIf="user?.rol == 'ADMIN'" (click)="redirectLesson(course, lesson, 'new')" class="list-group-item hand">Crear nueva</li>
                 <!-- EJEMPLO DE ITEM SELECCIONADO
@@ -25,20 +31,6 @@
             </div>
           </section>
         </div>
-      </div>
-      <div class="col-sm-12 col-md-12 col-lg-5">
-          <div class="card col-8 offset-2">
-              <div class="card-body text-center">
-                <h5 class="card-title">Tu Progreso</h5>
-                <img src="./assets/bici.png" width="160" alt="">
-                <p class="card-text">Rueditas de bici</p>
-                <div class="animated-background animated--title" style="width: auto; height: 15px; margin: 8px auto;"></div>
-                <div class="animated-background animated--title" style="width: auto; height: 15px; margin: 8px auto;"></div>
-                <div class="animated-background animated--title" style="width: auto; height: 15px; margin: 8px auto;"></div>
-                <div class="animated-background animated--title" style="width: auto; height: 15px; margin: 8px auto;"></div>
-                <div class="animated-background animated--title" style="width: auto; height: 15px; margin: 18px auto;"></div>
-              </div>
-            </div>
       </div>
     </div>
     <!--   <div class="course-list-view"   >

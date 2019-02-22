@@ -1,16 +1,16 @@
 @import "../../../../node_modules/bootstrap/scss/bootstrap-grid.scss";
-
-.page-list{
-    background-color: #F3F7F7;
-    min-height: calc(100% - 50px - .3rem);
-  .jumbotron .title{
+.page-list {
+  $course--1: #59cdfb;
+  background-color: #f3f7f73d;
+  min-height: calc(100% - 51px - .3rem);
+  .jumbotron .title {
     font-size: 1.5rem;
     font-weight: 300;
     line-height: 1.2;
     color: #666;
   }
-  .jumbotron .description{
-    color: #9EACB4;
+  .jumbotron .description {
+    color: #6f6f6f;
     font-family: sans-serif;
     font-size: 1rem;
     font-weight: 100;
@@ -19,7 +19,9 @@
   .jumbotron {
     padding: 1rem 2rem;
     background-color: #ffff;
-    box-shadow: 0px 2px 1px rgba(0, 0, 0, 0.07);
+    -webkit-box-shadow: 0px 2px 1px rgba(0, 0, 0, 0.07);
+    box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.1);
+    border-radius: 0;
   }
   .card-columns {
     @include media-breakpoint-only(sm) {
@@ -29,27 +31,31 @@
       column-count: 2;
     }
     @include media-breakpoint-only(lg) {
-      column-count: 2;
+      column-count: 3;
     }
     @include media-breakpoint-only(xl) {
-      column-count: 2;
+      column-count: 3;
     }
-  } 
-  .container-fluid{
+  }
+  .container-fluid {
     padding-left: 50px;
     padding-right: 50px;
   }
-  .card{
-    box-shadow: 1px 3px 2px rgba(0, 0, 0, 0.1);
+  .card {
+    box-shadow: 0px 1px 15px rgba(221, 221, 221, 0.25);
   }
-  .card-title{
+  .card-title {
     color: #666;
     margin: 0px;
+    font-size: 1.2rem;
+    font-weight: 500;
+    line-height: 1.2;
+    font-family: Lato, sans-serif;
   }
-  .list-group-item{
+  .list-group-item {
     color: #686868;
   }
-  .card-text{
+  .card-text {
     color: #9EACB4;
     font-family: sans-serif;
     font-weight: 100;
@@ -103,7 +109,7 @@
           padding-top: .5em;
           padding-left: .5em;
           overflow: hidden;
-          color:#666;
+          color: #666;
         }
       }
       a {
@@ -115,8 +121,7 @@
         padding: .6em 1em;
         z-index: 1;
       }
-      &::before{
-       
+      &::before {
         border-radius: 4px;
         content: " " !important;
         height: 100%;
@@ -131,7 +136,6 @@
         z-index: 0;
       }
       &:hover {
-     
         a:last-child {
           background: #e0560a;
           color: white;
@@ -139,7 +143,7 @@
           text-decoration: none;
           border-radius: 1em;
         }
-        &::before{
+        &::before {
           background: white;
           -webkit-animation: tapAnimation 0.25s cubic-bezier(0.31, 1, 0.34, 1) forwards;
           animation: tapAnimation 0.25s cubic-bezier(0.31, 1, 0.34, 1) forwards;
@@ -149,38 +153,40 @@
         0% {
           opacity: 1;
           -webkit-transform: scale(0.96);
-                  transform: scale(0.96); }
+          transform: scale(0.96);
+        }
         100% {
           opacity: 1;
           -webkit-transform: scale(1);
-                  transform: scale(1); } }
-      
+          transform: scale(1);
+        }
+      }
     }
   }
-  .round-preloader{
-    border-radius: 100%!important;
+  .round-preloader {
+    border-radius: 100% !important;
     width: 50px;
     height: 50px;
-}
-.animated--title{
+  }
+  .animated--title {
     height: 10px;
     width: 250px;
-}
-.animated--short-title{
+  }
+  .animated--short-title {
     height: 10px;
     width: 80px;
-}
-.animated--description{
+  }
+  .animated--description {
     height: 10px;
-}
-.animated--checkbox{
+  }
+  .animated--checkbox {
     height: 17px;
     width: 41px;
-    border-radius: 34px!important;
+    border-radius: 34px !important;
     display: inline-block;
     vertical-align: middle;
     margin-left: 10px;
-}
+  }
   .animated-background {
     -webkit-animation-duration: 1s;
     animation-duration: 1s;
@@ -210,7 +216,6 @@
       background-position: 468px 0
     }
   }
-  
   @keyframes placeHolderShimmer {
     0% {
       background-position: -468px 0
@@ -222,8 +227,68 @@
   .list-group-item:hover {
     background-color: #F6F6F6;
   }
-  .list-group .check{
+  .list-group .check {
     background-color: #F6F6F6;
   }
-  
+  .check-trans {
+    text-align-last: center;
+    text-align: center;
+    display: inline-block;
+    padding: 2px;
+    span {
+      font-size: 15px;
+      font-weight: 100;
+    }
+  }
+  .checkmark__circle {
+    stroke-dasharray: 166;
+    stroke-dashoffset: 166;
+    stroke-width: 2;
+    stroke-miterlimit: 10;
+    fill: none;
+    animation: stroke .6s cubic-bezier(0.650, 0.000, 0.450, 1.000) forwards;
+  }
+  .checkmark {
+    width: 26px;
+    height: 26px;
+    border-radius: 50% !important;
+    vertical-align: middle;
+    stroke-width: 2;
+    stroke: #686868;
+    stroke-miterlimit: 10;
+    margin: 0 auto;
+    padding: 2px;
+    /* animation: fill .4s ease-in-out .4s forwards, scale .3s ease-in-out .9s both; */
+  }
+  .checkmark--1 {
+    animation: course--1 .4s ease-in-out .4s forwards, scale .3s ease-in-out .9s both;
+    box-shadow: inset 0px 0px 0px course--1;
+    .checkmark__circle {
+      stroke: course--1;
+    }
+  }
+  @keyframes stroke {
+    100% {
+      stroke-dashoffset: 0;
+    }
+  }
+  @keyframes scale {
+    0%,
+    100% {
+      transform: none;
+    }
+    50% {
+      transform: scale3d(1.1, 1.1, 1);
+    }
+  }
+  @keyframes fill {
+    100% {
+      box-shadow: inset 0px 0px 0px 30px #ccc;
+    }
+  }
+  @keyframes course--1 {
+    100% {
+      box-shadow: inset 0px 0px 0px 30px $course--1;
+    }
+  }
 }

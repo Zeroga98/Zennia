@@ -1,13 +1,16 @@
 @import "../../../../node_modules/bootstrap/scss/bootstrap-grid.scss";
 
 .page-home{
-    background-color: #F3F7F7;
+    background-color: #f3f7f73d;;
     min-height: calc(100% - 50px - .3rem);
   .jumbotron .title{
-    font-size: 2rem;
+    font-size: 1.5rem;
     font-weight: 300;
     line-height: 1.2;
     color: #666;
+    a{
+      text-decoration: none;
+    }
   }
   .jumbotron .description{
     color: #9EACB4;
@@ -151,4 +154,14 @@
      border-right: 1px solid #C4C4C4;
     }
   }
+  .btn-outline {
+    border: none;
+   color: #3e9be7;
+   font-weight: 400;
+   cursor: pointer;
+   padding: .75rem;
+   font-size: 16px;
+   text-decoration: none;
+   background: transparent;
+   }
 }

@@ -11,7 +11,8 @@ import {
   ApiJudgeService, 
   UserService, 
   MarathonService,
-  TimeService
+  TimeService,
+  TokenService
 } from './services';
 import { ReversePipe } from './pipes';
 
@@ -32,7 +33,8 @@ import { ReversePipe } from './pipes';
   	LessonService, 
   	ApiJudgeService,
     UserService,
-    MarathonService
+    MarathonService,
+    TokenService
   ]
 })
 export class SharedModule { }

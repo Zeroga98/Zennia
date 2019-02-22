@@ -9,7 +9,7 @@ import { MarathonService, TimeService } from '../../shared/services';
 @Component({
   selector: 'app-admin',
   templateUrl: './admin.component.html',
-  //styleUrls: ['./create.component.scss']
+  styleUrls: ['./admin.component.scss']
 })
 export class AdminComponent implements OnInit {
 

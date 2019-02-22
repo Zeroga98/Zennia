@@ -7,7 +7,21 @@
         </ol>
       </nav>
     </div>
-    <div class="imagen">
-      
+    <div class="container">
+      <table  style="width:100%;border-spacing: 0px 6px;    border-collapse: separate; ">
+        <tr>
+          <th>Paticipantes</th>
+          <th  *ngFor="let leccion of marathon?.lecciones; let i=index">{{i+1}}</th> 
+        </tr>
+        <tr  *ngFor="let user of marathon?.users; let i=index" class="inv-table">
+          <td >{{i+1}}-{{user.nombres}}</td>
+          <td style="width:50px; height: 50px;" *ngFor="let leccion of user.lecciones; let i=index" >
+            <div style="width:50px; height: 50px">
+              <img *ngIf="leccion.results != undefined" width="50px" src="http://zanzo.us/wp-content/uploads/2018/06/dibujo-de-globos-para-colorear-ultra-coloring-pages-globo.png" alt="">
+            </div>
+          </td> 
+         
+        </tr>
+      </table>
     </div>
   </div>
