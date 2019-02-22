@@ -21,13 +21,11 @@
               <div class="sk-circle12 sk-child"></div>
             </div>
       </button>
-      <div style="display: inline-block;vertical-align: middle;">
-        <span class="warning">⚠ 
-          <span style="font-size:16px;vertical-align: middle; font-weight: 100">Sompilation error</span>
+      <div *ngIf="!loading && submission.response" style="display: inline-block;vertical-align: middle;">
+        <span [hidden]="submission.response.status.id == 3 || submission.response.status.id == 4" class="warning">⚠ 
+          <span style="font-size:16px;vertical-align: middle; font-weight: 100">{{submission.response.status.description}}</span>
         </span>  
-        <span class="check">✓ 
-          <span style="font-size:16px; vertical-align: middle;font-weight: 100">Accepted</span>
-        </span>  
+        <span [hidden]="submission.response.status.id != 3 && submission.response.status.id != 4" class="check">✓ </span>  
       </div>
 
       <select style="margin-left: auto;margin-bottom: 10px;background: #fff;float: right;"

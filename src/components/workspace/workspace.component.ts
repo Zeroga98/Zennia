@@ -69,12 +69,13 @@ export class WorkspaceComponent implements OnInit {
 			this.apiJudgeService.submission(this.clearSubmission())
 				.subscribe((data: responseSubmission) => {
 					this.submission.response = data;
+					
 					this.submission.response.typeSend = type;
 					if (!this.submission.response.stdout || this.submission.response.compile_output) {
 						this.submission.response.messageErrorFinal = 
 							(this.submission.response.stderr) ? this.submission.response.stderr :
 							(this.submission.response.message) ? this.submission.response.message : this.submission.response.compile_output;
-							this.loading= false;
+							this.loading = false;
 					}
 					if (type == 'send')
 						this.sendProblem.emit(this.submission.response);
