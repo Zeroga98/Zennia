@@ -42,13 +42,16 @@ export class EvaluateComponent implements OnInit {
       }
     });
     this.subscribeLesson = this.lessonService.$lessonCurrent.subscribe((lesson: any) => {
-      if(lesson && lesson.contenido != "") this.content_tematic = true;
-      this.lesson = lesson
+      //ALIENS
+      this.content_tematic = (lesson && lesson.contenido && lesson.contenido != "")? true: false;
+      this.lesson = lesson;
     });
     this.subscribeUser = this.userService.$userCurrent.subscribe(user => this.user = user);
   }
 
   ngOnDestroy(){
+    this.content_tematic = undefined;
+    this.lessonService.setLessonCurrent(undefined);
     this.subscribeCourse.unsubscribe();
     this.subscribeLesson.unsubscribe(); 
     this.subscribeUser.unsubscribe();

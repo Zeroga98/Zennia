@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { ModalModule } from 'ngx-bootstrap/modal';
 
 import { SharedRoutingModule } from './shared-routing.module';
 import { ShowAuthedDirective } from './show-authed.directive';
@@ -21,7 +22,8 @@ import { ReversePipe } from './pipes';
   imports: [
     CommonModule,
     SharedRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    ModalModule.forRoot()
   ],
   declarations: [
     ReversePipe,
