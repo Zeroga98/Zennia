@@ -3,8 +3,7 @@ import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
 @Component({
 	selector: 'app-content-tematic',
 	templateUrl: './content-tematic.component.html',
-	styleUrls: ['./content-tematic.component.scss'],
-	styles: [],
+	styleUrls: ['./content-tematic.component.scss']
 })
 export class ContentTematicComponent implements OnInit {
 
