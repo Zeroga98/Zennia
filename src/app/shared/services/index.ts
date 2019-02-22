@@ -6,3 +6,5 @@ export * from './course.service';
 export * from './lesson.service';
 export * from './user.service';
 export * from './marathon.service';
+export * from './token.service';
+export * from './auth-guard.service';

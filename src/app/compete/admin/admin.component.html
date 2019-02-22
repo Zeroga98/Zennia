@@ -1,44 +1,61 @@
-<form class="ipt" [formGroup]="form" (ngSubmit)="action()">
-  <div>
-    <span>Nombre</span>
-    <input type="text" placeholder="Nombre maratón" [formControl]="form.controls.nombre">
-  </div>
-  <div>
-    <span>Descripción</span>
-    <input type="text" placeholder="Descripción" [formControl]="form.controls.descripcion">
-  </div>
-
-  <div>
-    <span>Dificultad</span>
-    <select [formControl]="form.controls.dificultad">
-      <option *ngFor="let difficulty of difficultys" [value]="difficulty.key" [label]="difficulty.value"></option>
-    </select>
-  </div>
-  <br>
-  <div>
-    <span>Fecha y hora de inicio</span>
-    <input type="date" placeholder="Fecha de inicio" [formControl]="form.controls.fecha_inicio">
-    <input type="time" placeholder="Hora de inicio" [formControl]="form.controls.hora_inicio">
-  </div>
-  
-  <div>
-    <span>Fecha y hora de finalización</span>
-    <input type="date" placeholder="Fecha de finalización" [formControl]="form.controls.fecha_final">
-    <input type="time" placeholder="Hora final" [formControl]="form.controls.hora_final">
-  </div>
-
-  <button *ngIf="marathonId != 'new'" type="button" (click)="hideLesson()">
-    {{(!form.controls.oculta.value? 'Ocultar': 'Difundir')}} lección
-  </button>
-
-  <br>
-  <button *ngIf="marathonId != 'new'" type="button" (click)="addLesson()">
-    Agregar lección
-  </button>
-
-  <div *ngFor="let lesson of marathon?.lecciones">
-      <a [routerLink]="['/maratones', marathonId, 'leccion', lesson.id, 'admin']">{{lesson.nombre}}</a>
-      <span>Oculta: {{lesson.oculta}}</span>
-  </div>
-  <button type="submit" [disabled]="form.invalid">{{(marathonId != 'new')? 'Actualizar': 'Crear'}}</button>
-</form>
+<div class="container">
+  <form class="ipt" [formGroup]="form" (ngSubmit)="action()">
+    <div class="row mt-4">
+      <div class="col-6">
+        <div class="line d-flex align-items-center">
+          <span class="filter">Apoyo teorico a la lección</span>
+          <button class="btn-outline ml-auto" *ngIf="marathonId != 'new'" type="button" (click)="hideLesson()">
+              {{(!form.controls.oculta.value? 'Ocultar': 'Difundir')}} Competencia
+            </button>
+        </div>
+        <div class="d-flex justify-content-center flex-column px-4 line-ver ">
+          <div class="form-leccion">
+            <label>Nombre Competencia</label>
+            <input type="text" placeholder="Nombre maratón" [formControl]="form.controls.nombre">
+          </div>
+          <div class="form-leccion">
+            <label>descripción</label>
+            <input type="text" placeholder="Descripción" [formControl]="form.controls.descripcion">
+          </div>
+          <div class="form-leccion">
+            <label>Dificultad</label>
+            <select [formControl]="form.controls.dificultad">
+              <option *ngFor="let difficulty of difficultys" [value]="difficulty.key" [label]="difficulty.value">
+              </option>
+            </select>
+          </div>
+          <div class="form-leccion">
+            <label>Fecha y hora de inicio</label>
+            <input type="date" placeholder="Fecha de inicio" [formControl]="form.controls.fecha_inicio">
+            <input type="time" placeholder="Hora de inicio" [formControl]="form.controls.hora_inicio">
+          </div>
+          <div class="form-leccion">
+            <label>Fecha y hora de finalización</label>
+            <input type="date" placeholder="Fecha de finalización" [formControl]="form.controls.fecha_final">
+            <input type="time" placeholder="Hora final" [formControl]="form.controls.hora_final">
+          </div>
+        </div>
+      </div>
+      <div class="col-6">
+        <div class="line d-flex align-items-center">
+          <span class="filter">Ejercicios</span>
+          <button class="btn-outline ml-auto" *ngIf="marathonId != 'new'" type="button" (click)="addLesson()">
+              Agregar Ejercicio
+          </button>
+        </div>
+        <span class="info"  *ngIf="marathonId == 'new'">Crea la competencia para poder añadir ejercicios</span>
+        <div *ngFor="let lesson of marathon?.lecciones">
+          <div class="card my-2 flex-row align-items-center" style="padding: 5px 20px;">
+            <div class="d-flex flex-column">
+              <span>{{lesson.nombre}}</span>
+              <span>Estado {{lesson.oculta? 'Oculta' : 'Visible'}}</span>
+            </div>
+            <a class="ml-auto" [routerLink]="['/maratones', marathonId, 'leccion', lesson.id, 'admin']">ver</a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <button class="btn-work my-3" type="submit"
+      [disabled]="form.invalid">{{(marathonId != 'new')? 'Actualizar': 'Crear'}}</button>
+  </form>
+</div>

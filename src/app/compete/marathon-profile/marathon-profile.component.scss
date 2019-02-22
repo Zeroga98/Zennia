@@ -1,7 +1,7 @@
 
 
 .page-home{
-    background-color: #F3F7F7;
+    background-color: #f3f7f73d;;
     min-height: calc(100% - 50px - .3rem);
   .jumbotron .title{
     font-size: 2rem;
@@ -147,6 +147,7 @@
   .line{
     position: relative;
     margin-bottom: 20px;
+    padding: 8px 5px;
     &::after {
       content: '';
       position: absolute;

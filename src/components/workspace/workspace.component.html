@@ -1,28 +1,29 @@
 <div class="container-fluid">
   <div class="row">
-    <div class="col-6">
+    <div class="col-md-12 col-lg-6">
       <div [froalaEditor]="froalaOptions" [(froalaModel)]="contentProblem"></div>
     </div>
-    <div class="col-6" *ngIf="!hideCode">
-      <select style="display: block;margin-left: auto;margin-bottom: 10px;background: #fff;" (change)="changeLanguage($event.target.value)">
+    <div class="col-md-12 col-lg-6" *ngIf="!hideCode">
+      <select style="display: block;margin-left: auto;margin-bottom: 10px;background: #fff;"
+        (change)="changeLanguage($event.target.value)">
         <option [value]="language.id" *ngFor="let language of languages">{{language.name}}</option>
       </select>
-      <ngx-monaco-editor style="height:500px!important" class="my-code-editor" [options]="monacoOptions" [(ngModel)]="submission.source_code"
-        (onInit)="ngEditInit($event)"></ngx-monaco-editor>
-        <div class="result">
-          <span> Input</span>
-          <textarea cols="30" rows="10" class="input mb-3" [(ngModel)]="submission.test_stdin"></textarea>
-        </div>
-        <div class="result">
-          <span>Output</span>
-          <div >
-            <textarea cols="30" rows="10" class="input" readonly>
+      <ngx-monaco-editor style="height:500px!important" class="my-code-editor" [options]="monacoOptions"
+        [(ngModel)]="submission.source_code" (onInit)="ngEditInit($event)"></ngx-monaco-editor>
+      <div class="result">
+        <span> Input</span>
+        <textarea cols="30" rows="10" class="input mb-3" [(ngModel)]="submission.test_stdin"></textarea>
+      </div>
+      <div class="result">
+        <span>Output</span>
+        <div>
+          <textarea cols="30" rows="10" class="input" readonly>
                 {{(submission.response && submission.response.typeSend == 'send')? submission.response.status.description+'/\n/g': ""}}
                 {{(submission.response && submission.response.typeSend == 'run' && !submission.response.messageErrorFinal )? submission.response.stdout+'\n': "" }}
                 {{(submission.response && submission.response.typeSend == 'run' && submission.response.messageErrorFinal )?  submission.response.messageErrorFinal+'\n': "" }}
             </textarea>
-              <!-- <h3 *ngIf="submission.response.typeSend == 'send'">{{submission.response.status.description}}</h3> -->
-       <!--        <div *ngIf="submission.response.typeSend == 'run'">
+          <!-- <h3 *ngIf="submission.response.typeSend == 'send'">{{submission.response.status.description}}</h3> -->
+          <!--        <div *ngIf="submission.response.typeSend == 'run'">
                 <h4 *ngIf="!submission.response.messageErrorFinal">
                   {{submission.response.stdout}}
                 </h4>
@@ -31,8 +32,8 @@
                   {{submission.response.messageErrorFinal}}
                 </h4>
               </div> -->
-            </div>
         </div>
+      </div>
       <button class="btn-work" [disabled]="isSubmiting" (click)="sendSubmission('run')">Ejecutar</button>
       <button class="btn-work" [disabled]="isSubmiting" (click)="sendSubmission('send')">Enviar</button>
     </div>

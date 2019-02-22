@@ -1,31 +1,46 @@
-<div class="h-100  background">
-  <div class="header-login d-flex align-items-center px-4">
+<div class="d-flex flex-column  background">
+  <div class="header-login d-flex align-items-center justify-content-center">
     <div class="logo d-flex align-items-center">
       <img src="./assets/logo-1.svg" alt="">
       <span>zennia</span>
     </div>
   </div>
-  <div class="container d-flex login justify-content-center align-items-center">
-    <div class=" login-container d-flex flex-column  ">
-      <span class="login-container__title text-center mt-2 mb-4">Iniciar sesión</span>
-      <form class="ipt d-flex flex-column" [formGroup]="form" (ngSubmit)="login()">
-        <div class="form-login mb-4 d-flex flex-column" [ngClass]="{'credential-error': showError }">
+  <div class="my-sm-4 my-xs-0 mx-3 d-flex login justify-content-center align-items-center">
+    <div class=" login-container d-flex flex-column justify-content-center  " style="height:500px">
+      <span class="login-container__title text-center mt-2 mb-5">Iniciar sesión</span>
+      <form class="ipt d-flex flex-column mt-3" [formGroup]="form" (ngSubmit)="login()">
+       <div class="form-login  mb-4 d-flex flex-column" [ngClass]="{'form-login--error': showError }">
           <label>Correo</label>
           <input name="email" type="email" placeholder="example@email.com" [formControl]="form.controls.email">
         </div>
-        <div class="form-login d-flex mb-4 flex-column" [ngClass]="{'credential-error': showError }">
+        <div class="form-login d-flex mb-4 flex-column" [ngClass]="{'': showError }">
           <label>Contraseña</label>
           <input name="password" type="password" placeholder="Contraseña" [formControl]="form.controls.password">
-        </div>
+        </div> 
 
-        <span class="mesage-error" *ngIf="showError">{{showError}}</span>
-        <button class="login-btn hand mb-4" type="submit">Iniciar sesión</button>
+        <span class="mesage-error" *ngIf="showError">{{showError}}</span> 
+         <button class="login-btn hand mb-4" type="submit">Iniciar sesión</button> 
+     <!--    <a href="{{urlLoginChaira}}" class="login-btn hand">
+          <img class="" src="./assets/image.png" alt="">
+         <span> Inicia sesión con Chairá</span>
+        </a> -->
         <span class="eslogan">Fomentando el crecimiento y fortalecimiento de la programacion competitiva</span>
       </form>
-      <!--<a href="{{urlLoginChaira}}" class="login-btn hand">
-                  <img class="" src="./assets/image.png" alt="">
-                 <span> Inicia sesión con Chairá</span>
-                </a>-->
     </div>
   </div>
+</div>
+<div class="my-container">
+  <ng-template #customLoadingTemplate>
+      <div class="custom-class">
+          <h3>
+              Loading...
+          </h3>
+          <button (click)="showAlert()">
+              Click me!
+          </button>
+      </div>
+  </ng-template>
+
+  <ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '3px' }" [template]="customLoadingTemplate"></ngx-loading>
+  //...
 </div>

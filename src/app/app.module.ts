@@ -16,7 +16,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { AuthModule } from './auth/auth.module';
 import { NgProgressModule } from 'ngx-progressbar';
-import { HeaderComponent } from './shared';
+import { HeaderComponent, SharedModule } from './shared';
 
 @NgModule({
   imports: [
@@ -34,7 +34,8 @@ import { HeaderComponent } from './shared';
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule,
     AngularFireDatabaseModule,
-    AngularFontAwesomeModule
+    AngularFontAwesomeModule,
+    SharedModule
   ],
   declarations: [
     AppComponent,

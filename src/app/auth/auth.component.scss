@@ -1,5 +1,6 @@
 .background {
   background: #F8F8F8;
+  min-height: 100%;
 }
 
 .login-container {
@@ -82,11 +83,11 @@
 }
 
 .login {
-  height: calc(100% - 60px);
+  min-height: calc(100vh - 80px - 3rem);
 }
 
 .logo {
-  img{
+  img {
     width: 40px;
   }
   span {
@@ -108,6 +109,36 @@
     padding: .75rem;
     -webkit-appearance: none;
   }
+  &--error {
+    input {
+      border-color: #e86b6b;
+      animation: shake 0.82s cubic-bezier(.36, .07, .19, .97) both;
+      transform: translate3d(0, 0, 0);
+    }
+    label {
+      color: #e86b6b;
+      display: block;
+    }
+    @keyframes shake {
+      10%,
+      90% {
+        transform: translate3d(-1px, 0, 0);
+      }
+      20%,
+      80% {
+        transform: translate3d(2px, 0, 0);
+      }
+      30%,
+      50%,
+      70% {
+        transform: translate3d(-4px, 0, 0);
+      }
+      40%,
+      60% {
+        transform: translate3d(4px, 0, 0);
+      }
+    }
+  }
   label {
     font-family: 'Montserrat', sans-serif;
     color: #666;
@@ -120,7 +151,8 @@
   margin: 0 auto;
   width: 100%;
 }
-.eslogan{
+
+.eslogan {
   font-size: 13px;
   text-align: center;
   color: #CCCCCC;

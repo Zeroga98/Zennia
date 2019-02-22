@@ -7,12 +7,13 @@
       </ol>
     </nav>
   </div>
-  <h4 *ngIf="register_marathon == false">No eres participante</h4>
+  <h4 class="text-center" *ngIf="register_marathon == false">No eres participante</h4>
   <div class="container-fluid" *ngIf="marathon">
-    <div class="row">
-      <div class=" col-sm-12 col-md-12 col-lg-12 col-xl-7 line-ver">
+    <div class="row justify-content-center">
+      <div class=" col-sm-12 col-md-12 col-lg-12 col-xl-7 "> <!-- line-ver -->
         <div class="line">
           <span class="filter">Todos los desafios</span>
+          <a  [routerLink]="['/competir/leadboard', marathon.id]" class="leaderboard float-right" style="color: #AAB6BE; cursor: pointer;">Ver Leaderboard</a>
         </div>
         <div class="card card--ejr mb-3" *ngFor="let lesson of marathon.lecciones">
           <div class="row card-body">
@@ -31,11 +32,11 @@
           </div>
         </div>
       </div>
-      <div class="col-5 d-none d-lg-block">
+  <!--     <div class="col-5 d-none d-lg-block">
         <div class="col-8 offset-3" style="margin-top: 10px;margin-bottom: 30px;">
           <a  [routerLink]="['/competir/leadboard', marathon.id]" class="leaderboard" style="color: #AAB6BE; cursor: pointer;">Ver Leaderboard</a>
         </div>
-        <div class="card card--filter col-6 offset-3">
+         <div class="card card--filter col-6 offset-3">
           <div class="card-body text-center">
             <h5 class="card-title">Filtrar</h5>
           </div>
@@ -49,8 +50,8 @@
           <div class="animated-background animated--title" style="width: 100%; height: 20px; margin: 18px auto;"></div>
           <input type="checkbox" class="form-check-input">
           <div class="animated-background animated--title" style="width: 100%; height: 20px; margin: 18px auto;"></div>
-        </div>
-      </div>
+        </div> 
+      </div> -->
     </div>
   </div>
 </div>

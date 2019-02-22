@@ -11,8 +11,7 @@ import { CourseService, LessonService, ApiJudgeService, UserService } from '../.
 @Component({
   selector: 'app-create',
   templateUrl: './create.component.html',
-  styleUrls: ['./create.component.scss'],
-  styles: ['monaco-editor { height: 500px!important; }']
+  styleUrls: ['./create.component.scss']
 })
 export class CreateComponent implements OnInit {
 
