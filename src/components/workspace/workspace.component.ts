@@ -21,6 +21,7 @@ export class WorkspaceComponent implements OnInit {
 	public editInit: boolean = false;
 	public monacoOptions;
 	public submission: Submission;
+	public loading: boolean = false;
 	public froalaOptions: any = { 
 		pluginsEnabled: [], 
 		toolbarButtons: [], 
@@ -60,6 +61,7 @@ export class WorkspaceComponent implements OnInit {
 	}
 
 	public sendSubmission(type: string) {
+		this.loading= true;
 		if (!this.isSubmiting) {
 			this.isSubmiting = true;
 			this.submission = { ...this.submission, ...this.submissionExtra};
@@ -72,11 +74,13 @@ export class WorkspaceComponent implements OnInit {
 						this.submission.response.messageErrorFinal = 
 							(this.submission.response.stderr) ? this.submission.response.stderr :
 							(this.submission.response.message) ? this.submission.response.message : this.submission.response.compile_output;
+							this.loading= false;
 					}
 					if (type == 'send')
 						this.sendProblem.emit(this.submission.response);
 
 					this.isSubmiting = false;
+					this.loading= false;
 				});
 		}
 	}
