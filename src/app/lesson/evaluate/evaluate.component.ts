@@ -22,6 +22,7 @@ export class EvaluateComponent implements OnInit {
   public lesson: any;
   public user: any;
   public register_marathon: boolean;
+  public content_tematic: boolean;
 
   constructor(
     private marathonService: MarathonService,
@@ -41,6 +42,7 @@ export class EvaluateComponent implements OnInit {
       }
     });
     this.subscribeLesson = this.lessonService.$lessonCurrent.subscribe((lesson: any) => {
+      if(lesson && lesson.contenido != "") this.content_tematic = true;
       this.lesson = lesson
     });
     this.subscribeUser = this.userService.$userCurrent.subscribe(user => this.user = user);
@@ -65,5 +67,9 @@ export class EvaluateComponent implements OnInit {
     .subscribe(data => {
       console.log(data);
     });
+  }
+
+  public setContentTematic(){
+    this.content_tematic = false;
   }
 }

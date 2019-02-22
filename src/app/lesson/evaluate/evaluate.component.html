@@ -13,5 +13,6 @@
     </nav>
   </div>
 
-  <app-workspace *ngIf="lesson" [submission]="lesson.submission" [content-problem]="lesson.problema" (send-problem)="sendProblem($event)" [hide-code]="register_marathon == false || (marathon && marathon.estado == 'finalizado')"></app-workspace>
+  <app-workspace *ngIf="lesson && !content_tematic" [submission]="lesson.submission" [content-problem]="lesson.problema" (send-problem)="sendProblem($event)" [hide-code]="register_marathon == false || (marathon && marathon.estado == 'finalizado')"></app-workspace>
+  <app-content-tematic *ngIf="lesson && content_tematic" [content]="lesson.contenido" (next)="setContentTematic($event)"></app-content-tematic>
 </div>

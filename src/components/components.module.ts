@@ -5,6 +5,7 @@ import { MonacoEditorModule } from 'ngx-monaco-editor';
 import { FroalaEditorModule, FroalaViewModule } from 'angular-froala-wysiwyg';
 
 import { WorkspaceComponent } from "./workspace/workspace.component";
+import { ContentTematicComponent } from "./content-tematic/content-tematic.component";
 
 @NgModule({
   imports: [
@@ -16,13 +17,16 @@ import { WorkspaceComponent } from "./workspace/workspace.component";
     FroalaViewModule.forRoot()
   ],
   declarations: [
-  	WorkspaceComponent,
+    WorkspaceComponent,
+    ContentTematicComponent
   ],
   exports: [
-  	WorkspaceComponent,
+    WorkspaceComponent,
+    ContentTematicComponent
   ],
   entryComponents: [
-  	WorkspaceComponent,
+    WorkspaceComponent,
+    ContentTematicComponent
   ]
 })
 export class ComponentsModule { }
