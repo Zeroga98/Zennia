@@ -15,5 +15,5 @@
   <app-workspace *ngIf="lesson && content_tematic != undefined && content_tematic == false" [submission]="lesson.submission" [content-problem]="lesson.problema" (send-problem)="sendProblem($event)" [hide-code]="register_marathon == false || (marathon && marathon.estado == 'finalizado')"></app-workspace>
   <app-content-tematic *ngIf="lesson && content_tematic != undefined && content_tematic == true" [content]="lesson.contenido" (next)="setContentTematic($event)"></app-content-tematic>
 
-  <h1 *ngIf="content_tematic == undefined">Cargando...</h1>
+  <h1 *ngIf="!lesson || content_tematic == undefined">Cargando...</h1>
 </div>
