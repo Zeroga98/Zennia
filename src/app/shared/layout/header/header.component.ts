@@ -34,6 +34,7 @@ export class HeaderComponent implements OnInit {
   }
 
   public logout(){
+    this.userService.purgeAuth();
     this.authService.logout();
   }
  

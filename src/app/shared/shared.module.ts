@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 import { SharedRoutingModule } from './shared-routing.module';
+import { ShowAuthedDirective } from './show-authed.directive';
 import { 
   AuthService, 
   ApiService, 
@@ -23,7 +24,8 @@ import { ReversePipe } from './pipes';
     HttpClientModule
   ],
   declarations: [
-  	ReversePipe
+    ReversePipe,
+    ShowAuthedDirective
   ],
   providers: [ 
   	AuthService, 
@@ -35,6 +37,9 @@ import { ReversePipe } from './pipes';
     UserService,
     MarathonService,
     TokenService
+  ],
+  exports:[
+    ShowAuthedDirective
   ]
 })
 export class SharedModule { }
