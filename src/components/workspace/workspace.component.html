@@ -4,7 +4,33 @@
       <div [froalaEditor]="froalaOptions" [(froalaModel)]="contentProblem"></div>
     </div>
     <div class="col-md-12 col-lg-6" *ngIf="!hideCode">
-      <select style="display: block;margin-left: auto;margin-bottom: 10px;background: #fff;"
+      <button class="btn-work btn-run" [disabled]="isSubmiting" (click)="sendSubmission('run')">
+          <span *ngIf="!loading">▶</span>
+          <div *ngIf="loading" class="sk-circle">
+              <div class="sk-circle1 sk-child"></div>
+              <div class="sk-circle2 sk-child"></div>
+              <div class="sk-circle3 sk-child"></div>
+              <div class="sk-circle4 sk-child"></div>
+              <div class="sk-circle5 sk-child"></div>
+              <div class="sk-circle6 sk-child"></div>
+              <div class="sk-circle7 sk-child"></div>
+              <div class="sk-circle8 sk-child"></div>
+              <div class="sk-circle9 sk-child"></div>
+              <div class="sk-circle10 sk-child"></div>
+              <div class="sk-circle11 sk-child"></div>
+              <div class="sk-circle12 sk-child"></div>
+            </div>
+      </button>
+      <div style="display: inline-block;vertical-align: middle;">
+        <span class="warning">⚠ 
+          <span style="font-size:16px;vertical-align: middle; font-weight: 100">Sompilation error</span>
+        </span>  
+        <span class="check">✓ 
+          <span style="font-size:16px; vertical-align: middle;font-weight: 100">Accepted</span>
+        </span>  
+      </div>
+
+      <select style="margin-left: auto;margin-bottom: 10px;background: #fff;float: right;"
         (change)="changeLanguage($event.target.value)">
         <option [value]="language.id" *ngFor="let language of languages">{{language.name}}</option>
       </select>
@@ -34,7 +60,6 @@
               </div> -->
         </div>
       </div>
-      <button class="btn-work" [disabled]="isSubmiting" (click)="sendSubmission('run')">Ejecutar</button>
       <button class="btn-work" [disabled]="isSubmiting" (click)="sendSubmission('send')">Enviar</button>
     </div>
   </div>
