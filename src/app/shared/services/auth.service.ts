@@ -57,13 +57,18 @@ export class AuthService {
     }
 
     public signup(user: any){
-      this.firestore.collection('usuarios')
-      .add({ 
-        correo: user.CORREO,
-        foto: user.FOTO,
-        genero: user.GENERO,
-        nombres: user.NOMBRES,
-        rol: user.ROL
+      return new Observable((observer) =>{
+        this.firestore.collection('usuarios')
+        .add({ 
+          correo: user.correo,
+          nombres: user.nombres,
+          contrasena: user.contrasena,
+          rol: "ESTUDIANTE"
+        })
+        .then(data => {
+          observer.next("se guardo con exito");
+          observer.complete();
+        })
       });
     }
 

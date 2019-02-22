@@ -28,7 +28,8 @@ export class UserService {
 
     populate() {
         if (this.tokenService.getToken()) {
-            this.setAuth(this.tokenService.getPayload());
+            this.setAuth(window.localStorage['name']);
+            console.log( this.setAuth(window.localStorage['name']));
         } else {
             this.purgeAuth();
         }
