@@ -3,7 +3,7 @@
     <nav aria-label="breadcrumb">
       <ol class="breadcrumb" style="margin: 0px;background-color: white; padding: 0">
         <li *ngIf="course" style="font-size: 1.2rem; " class="breadcrumb-item">
-          <a style="color: #333;" [routerLink]="['/curso/home']">
+          <a style="color: #333;" [routerLink]="['/']">
             {{course.nombre}}
           </a>
         </li>
@@ -15,5 +15,5 @@
   <app-workspace *ngIf="lesson && content_tematic != undefined && content_tematic == false" [submission]="lesson.submission" [content-problem]="lesson.problema" (send-problem)="sendProblem($event)" [hide-code]="register_marathon == false || (marathon && marathon.estado == 'finalizado')"></app-workspace>
   <app-content-tematic *ngIf="lesson && content_tematic != undefined && content_tematic == true" [content]="lesson.contenido" (next)="setContentTematic($event)"></app-content-tematic>
 
-  <h1 *ngIf="!lesson || content_tematic == undefined">Cargando...</h1>
+  <h3 style="margin:0 auto; text-align: center; color: #999" class="mt-5" *ngIf="!lesson || content_tematic == undefined">Cargando...</h3>
 </div>

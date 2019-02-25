@@ -68,7 +68,7 @@ export class AuthComponent implements OnInit {
             this.authService.saveDataLocalStorage(data.user);
             console.log(data.user);
             this.userService.setAuth(data.user)
-            this.router.navigate(['/curso/home']);
+            this.router.navigate(['/']);
           } else {
             console.log(data.type);
           }
@@ -88,7 +88,7 @@ export class AuthComponent implements OnInit {
               this.authService.saveDataLocalStorage(data.user);
               console.log(data.user);
               this.userService.setAuth(data.user)
-              this.router.navigate(['/curso/home']);
+              this.router.navigate(['/']);
             } else {
               console.log(data.type);
             }

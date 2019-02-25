@@ -4,7 +4,7 @@
       <div [froalaEditor]="froalaOptions" [(froalaModel)]="contentProblem"></div>
     </div>
     <div class="col-md-12 col-lg-6" *ngIf="!hideCode">
-      <button class="btn-work btn-run" [disabled]="isSubmiting" (click)="sendSubmission('run')">
+      <button class="btn-work btn-run mb-2" [disabled]="isSubmiting" (click)="sendSubmission('run')">
           <span *ngIf="!loading">▶</span>
           <div *ngIf="loading" class="sk-circle">
               <div class="sk-circle1 sk-child"></div>

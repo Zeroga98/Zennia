@@ -17,7 +17,7 @@ import { AppComponent } from './app.component';
 import { AuthModule } from './auth/auth.module';
 import { NgProgressModule } from 'ngx-progressbar';
 import { HeaderComponent, SharedModule } from './shared';
-
+import { CourseModule } from './course/course.module';
 @NgModule({
   imports: [
     CommonModule,
@@ -35,7 +35,8 @@ import { HeaderComponent, SharedModule } from './shared';
     AngularFirestoreModule,
     AngularFireDatabaseModule,
     AngularFontAwesomeModule,
-    SharedModule
+    SharedModule,
+    CourseModule
   ],
   declarations: [
     AppComponent,

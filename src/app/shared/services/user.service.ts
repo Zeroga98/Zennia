@@ -29,7 +29,7 @@ export class UserService {
     populate() {
         if (this.tokenService.getToken()) {
             this.setAuth(window.localStorage['name']);
-            console.log( this.setAuth(window.localStorage['name']));
+            console.log( window.localStorage['name']);
         } else {
             this.purgeAuth();
         }

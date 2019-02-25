@@ -14,7 +14,8 @@ import {
   UserService, 
   MarathonService,
   TimeService,
-  TokenService
+  TokenService,
+  AuthGuard,
 } from './services';
 import { ReversePipe } from './pipes';
 
@@ -38,7 +39,8 @@ import { ReversePipe } from './pipes';
   	ApiJudgeService,
     UserService,
     MarathonService,
-    TokenService
+    TokenService,
+    AuthGuard,
   ],
   exports:[
     ShowAuthedDirective

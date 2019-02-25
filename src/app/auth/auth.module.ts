@@ -7,6 +7,7 @@ import { AuthComponent } from './auth.component';
 import { NgProgressModule } from 'ngx-progressbar';
 import { SharedModule } from '../shared';
 import { NgxLoadingModule } from 'ngx-loading';
+import { NoAuthGuard } from './no-auth-guard.service';
 
 @NgModule({
   imports: [
@@ -14,12 +15,15 @@ import { NgxLoadingModule } from 'ngx-loading';
     AuthRoutingModule,
     NgProgressModule,
     SharedModule,
-    FormsModule, 
+    FormsModule,
     ReactiveFormsModule,
     NgxLoadingModule.forRoot({})
   ],
   declarations: [
     AuthComponent
+  ],
+  providers: [
+    NoAuthGuard
   ]
 })
 export class AuthModule { }
