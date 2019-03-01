@@ -1,9 +1,11 @@
-import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
-
+import { Component, OnInit, Input, EventEmitter, Output, TemplateRef } from '@angular/core';
+import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 import * as snippets from '../../snippets';
 import { Languages } from '../../app/shared/constanst';
 import { Submission, responseSubmission } from '../../app/shared/models';
 import { CourseService, LessonService, ApiJudgeService } from '../../app/shared/services';
+import { ModalAdviseResultComponent } from '../modal-advise-result/modal-advise-result.component';
+import { Router, NavigationStart } from '@angular/router';
 
 @Component({
 	selector: 'app-workspace',
@@ -22,23 +24,30 @@ export class WorkspaceComponent implements OnInit {
 	public monacoOptions;
 	public submission: Submission;
 	public loading: boolean = false;
-	public froalaOptions: any = { 
-		pluginsEnabled: [], 
-		toolbarButtons: [], 
-		events : { 'froalaEditor.initialized' : function(e, editor) { editor.edit.off(); } }
+	public froalaOptions: any = {
+		pluginsEnabled: [],
+		toolbarButtons: [],
+		events: { 'froalaEditor.initialized': function (e, editor) { editor.edit.off(); } }
 	};
+	bsModalRef: BsModalRef;
 
-	constructor(private apiJudgeService: ApiJudgeService, private lessonService: LessonService) {
+	constructor(
+		private apiJudgeService: ApiJudgeService,
+		private lessonService: LessonService,
+		private modalService: BsModalService,
+		private router:Router) {
 		this.submission = new Submission();
 		this.submission.source_code = this.languages[0].code_init;
 		this.submission.language_id = this.languages[0].id;
 		this.monacoOptions = { theme: 'vs-dark', language: this.languages[0].resume }
+	
 	}
 
 	ngOnInit() {
+
 	}
 
-	ngOnDestroy() {}
+	ngOnDestroy() { }
 
 	ngEditInit(edit) {
 		const monaco = window['monaco'];
@@ -61,27 +70,38 @@ export class WorkspaceComponent implements OnInit {
 	}
 
 	public sendSubmission(type: string) {
-		this.loading= true;
+		this.loading = type == 'run' ? true : false;
+		console.log(type);
 		if (!this.isSubmiting) {
 			this.isSubmiting = true;
-			this.submission = { ...this.submission, ...this.submissionExtra};
+			this.submission = { ...this.submission, ...this.submissionExtra };
 			this.submission.stdin = (type == 'run') ? this.submission.test_stdin : this.submission.stdin_real;
 			this.apiJudgeService.submission(this.clearSubmission())
 				.subscribe((data: responseSubmission) => {
 					this.submission.response = data;
-					
+
 					this.submission.response.typeSend = type;
 					if (!this.submission.response.stdout || this.submission.response.compile_output) {
-						this.submission.response.messageErrorFinal = 
+						this.submission.response.messageErrorFinal =
 							(this.submission.response.stderr) ? this.submission.response.stderr :
-							(this.submission.response.message) ? this.submission.response.message : this.submission.response.compile_output;
-							this.loading = false;
+								(this.submission.response.message) ? this.submission.response.message : this.submission.response.compile_output;
+						this.loading = false;
 					}
-					if (type == 'send')
+					if (type == 'send'){
 						this.sendProblem.emit(this.submission.response);
+						console.log(this.submission.response)
+						const initialState = {
+							list: [
+								this.submission.response.status,
+							],
+							title: 'Modal with component'
+						};
+						this.bsModalRef = this.modalService.show(ModalAdviseResultComponent, { initialState });
+						this.bsModalRef.content.closeBtnName = 'Close';
+					}
 
 					this.isSubmiting = false;
-					this.loading= false;
+					this.loading = false;
 				});
 		}
 	}
@@ -94,11 +114,12 @@ export class WorkspaceComponent implements OnInit {
 		this.monacoOptions = Object.assign({}, this.monacoOptions, { language: language.resume });
 	}
 
-	private clearSubmission(){
-		let clear = Object.assign({}, this.submission);	
+	private clearSubmission() {
+		let clear = Object.assign({}, this.submission);
 		delete clear["test_stdin"];
 		delete clear["stdin_real"];
 		delete clear["response"];
 		return clear;
 	}
+
 }
