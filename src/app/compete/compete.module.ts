@@ -8,13 +8,15 @@ import { MarathonProfileComponent } from './marathon-profile/marathon-profile.co
 import { LeaderboardComponent } from './leaderboard/leaderboard.component';
 import { ListMarathonComponent } from './list/list.component';
 import { AdminComponent } from './admin/admin.component';
+import { AccordionModule } from 'ngx-bootstrap/accordion';
 
 @NgModule({
   imports: [
     FormsModule, 
     ReactiveFormsModule,
     CommonModule,
-    CompeteRoutingModule
+    CompeteRoutingModule,
+    AccordionModule.forRoot()
   ],
   declarations: [
   	CompeteComponent, 

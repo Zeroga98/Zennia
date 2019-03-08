@@ -4,67 +4,75 @@
   </div>
   <div class="container-fluid">
     <div class="row justify-content-md-center">
-      <div class="col-sm-12 col-md-12 col-lg-10 col-xl-7">  <!-- line-ver -->
+      <div class="col-sm-12 col-md-12 col-lg-10 col-xl-7">
+        <!-- line-ver -->
         <div class="line d-flex align-items-center">
           <span class="filter">Todas las categorias</span>
-          <button class="btn-outline ml-auto" *ngIf="user?.rol == 'ADMIN'" [routerLink]="['/competir/maraton/admin', 'new']">Nueva competencia</button>
+          <button class="btn-outline ml-auto" *ngIf="user?.rol == 'ADMIN'"
+            [routerLink]="['/competir/maraton/admin', 'new']">Nueva competencia</button>
 
         </div>
-        <div class="card mb-3">
 
-          <div class="row card-body" *ngFor="let marathon of marathons">
-            <div class="col-sm-12 col-lg-2">
-              <div class="animated-background animated--title" style="width: 113px; height: 104px; margin: 8px auto;"></div>
-            </div>
+        <accordion>
+          <accordion-group *ngFor="let marathon of marathons" [panelClass]="card">
+            <button class="btn btn-link btn-block clearfix" accordion-heading style="text-decoration:none">
+              <div class="card-body d-flex justify-content-between align-items-center">
 
-            <div class="col-sm-12 col-lg-10">
-              <h5 class="card-title">{{marathon.nombre}}</h5>
-              <span class="card-subtitle">
-                Inicia: A las {{marathon.fecha_inicio_parse | date: 'hh:mm'}} del 
-                {{marathon.fecha_inicio_parse | date: 'd'}} de {{marathon.fecha_inicio_parse | date: 'MMMM'}}
-              </span>
-              <br>
-              <span class="card-subtitle">
-                Termina: A las {{marathon.fecha_final_parse | date: 'hh:mm'}} del 
-                {{marathon.fecha_final_parse | date: 'd'}} de {{marathon.fecha_final_parse | date: 'MMMM'}}
-              </span>
-              <br>
-              <span class="card-subtitle">
-                Dificultad: {{difficultys[marathon.dificultad]}}
-              </span>
 
-              <section *ngIf="user.rol != 'ADMIN'">
-                <a *ngIf="marathon.estado == 'inscrito'" class="card-btn">Ya estas inscrito</a>
-                <a *ngIf="marathon.estado == 'programado'" (click)="registerMarathon(marathon)" class="card-btn">Inscribirse</a>
-                <a *ngIf="marathon.estado == 'proceso'" [routerLink]="['/competir/maraton', marathon.id]"  class="card-btn">Ya empezo</a>
-                <a *ngIf="marathon.estado == 'finalizado'" [routerLink]="['/competir/maraton', marathon.id]" class="card-btn">Terminado</a>
-              </section>
-
+                <h5 class="card-title">{{marathon.nombre}}</h5>
+                <span class="card-subtitle"> {{marathon.fecha_inicio_parse | date: 'MMMM'}}
+                  {{marathon.fecha_inicio_parse | date: 'd'}}, {{marathon.fecha_inicio_parse | date: 'hh:mm'}} -
+                  {{marathon.fecha_inicio_parse - marathon.fecha_final_parse | date:'hh' }}
+                </span>
+                <div class="">
+                  <span class="card-subtitle" style="color: #58abef">
+                    Ver detalle
+                  </span>
+                </div>
+                <section *ngIf="user.rol != 'ADMIN'">
+                  <a *ngIf="marathon.estado == 'inscrito'" class="card-btn">Ya estas inscrito</a>
+                  <a *ngIf="marathon.estado == 'programado'" (click)="registerMarathon(marathon)"
+                    class="card-btn">Inscribirse</a>
+                  <a *ngIf="marathon.estado == 'proceso'" [routerLink]="['/competir/maraton', marathon.id]"
+                    class="card-btn">Ya empezo</a>
+                  <a *ngIf="marathon.estado == 'finalizado'" [routerLink]="['/competir/maraton', marathon.id]"
+                    class="card-btn">Terminado</a>
+                </section>
+              </div>
               <section *ngIf="user.rol == 'ADMIN'">
-                  <a class="card-btn" [routerLink]="['/competir/maraton/admin', marathon.id]">Administrar</a>
+                <a class="card-btn" [routerLink]="['/competir/maraton/admin', marathon.id]">Administrar</a>
               </section>
+              <div class="row card-body" *ngIf="!marathons">
+                <div class="col-2">
+                  <div class="animated-background animated--title"
+                    style="width: 113px; height: 104px; margin: 8px auto;">
+                  </div>
+                </div>
+                <div class="col-10">
+                  <div class="col-12" style="background-color: #F6F6F6; padding: 10px">
+                    <div class="animated-background animated--title"
+                      style="width: 100%; height: 10px; margin: 4px auto;">
+                    </div>
+                    <div class="animated-background animated--title"
+                      style="width: 100%; height: 10px; margin: 4px auto;">
+                    </div>
+                    <div class="animated-background animated--title"
+                      style="width: 100%; height: 10px; margin: 4px auto;">
+                    </div>
+                    <div class="animated-background animated--title"
+                      style="width: 100%; height: 10px; margin: 4px auto;">
+                    </div>
+                  </div>
+                </div>
+              </div>
 
-              <div class="col-12">
-                <p>{{marathon.descripcion}}</p>
-              </div>
-            </div>
-          </div>
-          <div class="row card-body" *ngIf="!marathons">
-            <div class="col-2">
-              <div class="animated-background animated--title" style="width: 113px; height: 104px; margin: 8px auto;"></div>
-            </div>
-            <div class="col-10">
-              <div class="col-12" style="background-color: #F6F6F6; padding: 10px">
-                <div class="animated-background animated--title" style="width: 100%; height: 10px; margin: 4px auto;"></div>
-                <div class="animated-background animated--title" style="width: 100%; height: 10px; margin: 4px auto;"></div>
-                <div class="animated-background animated--title" style="width: 100%; height: 10px; margin: 4px auto;"></div>
-                <div class="animated-background animated--title" style="width: 100%; height: 10px; margin: 4px auto;"></div>
-              </div>
-            </div>
-          </div>
-        </div>
+            </button>
+            Dificultad: {{difficultys[marathon.dificultad]}}
+            <p style="margin-bottom: 0px; font-size: 14px; font-weight: 100">{{marathon.descripcion}}</p>
+          </accordion-group>
+        </accordion>
       </div>
-   <!--    <div class="col-5 d-none d-lg-block">
+      <!--    <div class="col-5 d-none d-lg-block">
         <div class="card card--filter col-6 offset-3">
           <div class="card-body text-center">
             <h5 class="card-title">Filtrar</h5>
