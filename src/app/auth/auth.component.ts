@@ -21,6 +21,7 @@ export class AuthComponent implements OnInit {
   public authType: String = '';
   title: String = '';
   authTitle: String = 'Registrate';
+
   constructor(
     public ngProgress: NgProgress,
     private formBuilder: FormBuilder,
@@ -66,7 +67,6 @@ export class AuthComponent implements OnInit {
           if (data.state == 'OK') {
             this.loading = false;
             this.authService.saveDataLocalStorage(data.user);
-            console.log(data.user);
             this.userService.setAuth(data.user)
             this.router.navigate(['/curso/home']);
           } else {
@@ -80,7 +80,6 @@ export class AuthComponent implements OnInit {
         contrasena: this.form.controls.password.value
       }
       this.authService.signup(user).subscribe(data => {
-        console.log(data);
         this.authService.login(this.form.controls.email.value, this.form.controls.password.value)
           .subscribe((data: any) => {
             if (data.state == 'OK') {
