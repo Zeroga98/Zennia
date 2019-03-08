@@ -16,13 +16,11 @@ export class ModalAdviseResultComponent implements OnInit {
   constructor(private router: Router,public bsModalRef: BsModalRef) {}
 
   ngOnInit() {
-    this.isMarathon = this.router.url.includes('maraton');
-    console.log(this.states);
-    
+    this.isMarathon = this.router.url.includes('maraton'); 
   }
 
   public getHome(){
-    if(this.states[0].id !=4){
+    if(this.states[0].id == 3){
       this.bsModalRef.hide();
       let route = (this.isMarathon)?'/competir/list': '/';
       this.router.navigate([route]);

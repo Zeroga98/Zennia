@@ -24,6 +24,7 @@ export class WorkspaceComponent implements OnInit {
 	public monacoOptions;
 	public submission: Submission;
 	public loading: boolean = false;
+	public loadingSend: boolean = false;
 	public froalaOptions: any = {
 		pluginsEnabled: [],
 		toolbarButtons: [],
@@ -69,6 +70,8 @@ export class WorkspaceComponent implements OnInit {
 
 	public sendSubmission(type: string) {
 		this.loading = type == 'run' ? true : false;
+		this.loadingSend = type == 'send' ? true : false;
+		
 		if (!this.isSubmiting) {
 			this.isSubmiting = true;
 			this.submission = { ...this.submission, ...this.submissionExtra };
@@ -97,7 +100,7 @@ export class WorkspaceComponent implements OnInit {
 						this.bsModalRef = this.modalService.show(ModalAdviseResultComponent, { initialState });
 						this.bsModalRef.content.closeBtnName = 'Close';
 					}
-
+					this.loadingSend = false;
 					this.isSubmiting = false;
 					this.loading = false;
 				});

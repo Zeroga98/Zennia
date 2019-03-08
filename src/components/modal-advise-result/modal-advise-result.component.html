@@ -1,12 +1,11 @@
 <div class="modal-body d-flex justify-content-center flex-column text-center">
-    <svg *ngIf="states[0].id != 4" class="checkmark checkmark--1"   xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52">
+    <svg *ngIf="states[0].id == 3" class="checkmark checkmark--1"   xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52">
         <circle class="checkmark__circle" cx="26" cy="26" r="25" fill="none" />
         <path   class="checkmark__check  " fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8" />
     </svg>
-    <img style="width: 90px;margin: 17px auto;" *ngIf="states[0].id == 4" src="https://cdn0.iconfinder.com/data/icons/shift-free/32/Error-512.png" alt="">
+    <img style="width: 90px;margin: 17px auto;" *ngIf="states[0].id != 3" src="https://cdn0.iconfinder.com/data/icons/shift-free/32/Error-512.png" alt="">
     <h3 >{{ states[0].description }}</h3>
-    <span [hidden]="states[0].id == 4">Lección completa</span>
     <button type="button" class="btn btn-primary" (click)="getHome()">
-            {{(states[0].id != 4)? 'Volver a cursos': 'Volver a intentar' }}
-      </button>
+        {{(states[0].id == 3)? 'Volver a cursos': 'Volver a intentar' }}
+    </button>
 </div>
