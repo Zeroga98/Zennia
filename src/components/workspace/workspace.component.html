@@ -38,25 +38,14 @@
         <span> Input</span>
         <textarea cols="30" rows="10" class="input mb-3" [(ngModel)]="submission.test_stdin"></textarea>
       </div>
+      <br>
       <div class="result">
         <span>Output</span>
         <div>
-          <textarea cols="30" rows="10" class="input" readonly>
-            {{(submission.response && submission.response.typeSend == 'run' && !submission.response.messageErrorFinal )? submission.response.stdout+'\n': "" }}
-            {{(submission.response && submission.response.typeSend == 'run' && submission.response.messageErrorFinal )?  submission.response.messageErrorFinal+'\n': "" }}
-          </textarea>
-          <!-- <h3 *ngIf="submission.response.typeSend == 'send'">{{submission.response.status.description}}</h3> -->
-          <!--        <div *ngIf="submission.response.typeSend == 'run'">
-                <h4 *ngIf="!submission.response.messageErrorFinal">
-                  {{submission.response.stdout}}
-                </h4>
-                <h4 *ngIf="submission.response.messageErrorFinal">
-                  Error de compilación:
-                  {{submission.response.messageErrorFinal}}
-                </h4>
-              </div> -->
+          <textarea id="output" cols="30" rows="10" class="input"></textarea>
         </div>
       </div>
+      <br><br>
       <button class="btn-work" [disabled]="isSubmiting" (click)="sendSubmission('send')">Enviar</button>
     </div>
   </div>

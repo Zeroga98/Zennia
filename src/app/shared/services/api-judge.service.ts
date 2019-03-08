@@ -18,6 +18,6 @@ export class ApiJudgeService {
     ) { }
 
     public submission(data){
-		return this.api.post('api_judge', '/submissions/?base64_encoded=false&wait=true', data);
+		  return this.api.post('api_judge', '/submissions/?base64_encoded=false&wait=true', data);
     }
 }

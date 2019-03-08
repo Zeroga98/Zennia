@@ -78,17 +78,23 @@ export class WorkspaceComponent implements OnInit {
 			this.apiJudgeService.submission(this.clearSubmission())
 				.subscribe((data: responseSubmission) => {
 					this.submission.response = data;
-
 					this.submission.response.typeSend = type;
+
 					if (!this.submission.response.stdout || this.submission.response.compile_output) {
 						this.submission.response.messageErrorFinal =
 							(this.submission.response.stderr) ? this.submission.response.stderr :
 								(this.submission.response.message) ? this.submission.response.message : this.submission.response.compile_output;
-						this.loading = false;
+						if(type == 'run'){
+							let outputTextArea: any = document.getElementById("output");
+							outputTextArea.value = this.submission.response.messageErrorFinal;
+						}
+					} else if(type == 'run'){
+						let outputTextArea: any = document.getElementById("output");
+						outputTextArea.value = this.submission.response.stderr || this.submission.response.stdout;
 					}
+
 					if (type == 'send'){
 						this.sendProblem.emit(this.submission.response);
-						
 						const initialState = { states: [ this.submission.response.status ] };
 						this.bsModalRef = this.modalService.show(ModalAdviseResultComponent, { initialState });
 						this.bsModalRef.content.closeBtnName = 'Close';
