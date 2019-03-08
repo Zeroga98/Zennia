@@ -59,9 +59,7 @@ export class WorkspaceComponent implements OnInit {
 					languageRegister.push(item.resume);
 					if (snippets[item.resume]) {
 						monaco.languages.registerCompletionItemProvider(item.resume, {
-							provideCompletionItems: (model, position) => {
-								return snippets[item.resume];
-							}
+							provideCompletionItems: (model, position) => snippets[item.resume]
 						});
 					}
 				}

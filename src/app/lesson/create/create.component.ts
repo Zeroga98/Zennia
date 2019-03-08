@@ -25,7 +25,7 @@ export class CreateComponent implements OnInit {
     events : { 'froalaEditor.contentChanged' : (e, editor) => this.form.controls[e.target.id].setValue(editor.html.get()) }
   };
 
-  public new_lesson: any = { submission: {} };
+  public new_lesson: any = { submission: {}, problema: `<h1>Titulo del problema</h1><p>Descripción del problema.</p><p>Otra descripción.</p><h2>Input</h2><p>Descripción de la entrada.</p><h2>Output</h2><p>Descripción de la salida</p><table style="margin-right: calc(16%); width: 84%;"><thead><tr><td style="width: 43.5701%;">Input Sample</td><td style="width: 56.238%;">Output Sample</td></tr></thead><tbody><tr><td style="width: 43.5701%;"><p>Variable 1<br>Variable 2<br>Variable 3</p></td><td style="width: 56.238%;"><p>Output 1<br>Output 2<br>Output 3</p></td></tr></tbody></table>`};
   public lessonId: string;
 	public user: any;
   public type: string;
