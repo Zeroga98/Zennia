@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { NgModule } from '@angular/core';
+import { LOCALE_ID ,NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { AngularFireModule } from 'angularfire2';
 import { AngularFirestoreModule } from 'angularfire2/firestore';
@@ -19,6 +19,20 @@ import { NgProgressModule } from 'ngx-progressbar';
 import { HeaderComponent, SharedModule } from './shared';
 import { CourseModule } from './course/course.module';
 import { NotFoundComponent } from './not-found/not-found.component';
+
+import { registerLocaleData } from '@angular/common';
+
+// importar locales
+import localePy from '@angular/common/locales/es-PY';
+import localePt from '@angular/common/locales/pt';
+import localeEn from '@angular/common/locales/en';
+import localeEsAr from '@angular/common/locales/es-AR';
+
+// registrar los locales con el nombre que quieras utilizar a la hora de proveer
+registerLocaleData(localePy, 'es');
+registerLocaleData(localePt, 'pt');
+registerLocaleData(localeEn, 'en')
+
 @NgModule({
   imports: [
     CommonModule,
@@ -46,7 +60,8 @@ import { NotFoundComponent } from './not-found/not-found.component';
   ],
   bootstrap: [
     AppComponent
-  ]
+  ],
+  providers: [ { provide: LOCALE_ID, useValue: 'es-Ar' } ]
 })
 export class AppModule { }
 
