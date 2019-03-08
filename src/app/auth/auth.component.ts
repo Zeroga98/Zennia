@@ -70,6 +70,8 @@ export class AuthComponent implements OnInit {
             this.userService.setAuth(data.user)
             this.router.navigate(['/']);
           } else {
+            this.loading = false;
+            this.showError = "Reintenta de nuevo"
             console.log(data.type);
           }
         });
