@@ -17,7 +17,8 @@ import { AppComponent } from './app.component';
 import { AuthModule } from './auth/auth.module';
 import { NgProgressModule } from 'ngx-progressbar';
 import { HeaderComponent, SharedModule } from './shared';
-
+import { CourseModule } from './course/course.module';
+import { NotFoundComponent } from './not-found/not-found.component';
 @NgModule({
   imports: [
     CommonModule,
@@ -35,11 +36,13 @@ import { HeaderComponent, SharedModule } from './shared';
     AngularFirestoreModule,
     AngularFireDatabaseModule,
     AngularFontAwesomeModule,
-    SharedModule
+    SharedModule,
+    CourseModule
   ],
   declarations: [
     AppComponent,
-    HeaderComponent
+    HeaderComponent,
+    NotFoundComponent
   ],
   bootstrap: [
     AppComponent

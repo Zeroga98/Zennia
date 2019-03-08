@@ -1,0 +1,51 @@
+.checkmark__circle {
+  stroke-dasharray: 166;
+  stroke-dashoffset: 166;
+  stroke-width: 2;
+  stroke-miterlimit: 10;
+  fill: none;
+  animation: stroke 1s cubic-bezier(0.650, 0.000, 0.450, 1.000) forwards;
+}
+.checkmark {
+  width: 100px;
+  height: 100px;
+  border-radius: 50% !important;
+  vertical-align: middle;
+  stroke-width: 2;
+  stroke: #90af2e;
+  stroke-miterlimit: 10;
+  margin: 0 auto;
+  padding: 2px;
+   animation: fill .4s ease-in-out .4s forwards, scale .3s ease-in-out .9s both; 
+}
+.checkmark--1 {
+  animation: course--1 .4s ease-in-out .4s forwards, scale .3s ease-in-out .9s both;
+  box-shadow: inset 0px 0px 0px course--1;
+  .checkmark__circle {
+    stroke: course--1;
+  }
+}
+@keyframes course--1 {
+  100% {
+    box-shadow: inset 0px 0px 0px 30px transparent;
+  }
+}
+@keyframes stroke {
+  100% {
+    stroke-dashoffset: 0;
+  }
+}
+@keyframes scale {
+  0%,
+  100% {
+    transform: none;
+  }
+  50% {
+    transform: scale3d(1.1, 1.1, 1);
+  }
+}
+@keyframes fill {
+  100% {
+    box-shadow: inset 0px 0px 0px 30px transparent;
+  }
+}

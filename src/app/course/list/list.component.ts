@@ -37,7 +37,6 @@ export class ListComponent implements OnInit {
   private getCourses(){
     this.courseService.getCourses()
     .subscribe(data => {
-      console.log(data);
       this.courses = data;
     });
   }

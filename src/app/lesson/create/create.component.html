@@ -13,7 +13,7 @@
           <input class="ipt" type="text" placeholder="Descripción lección" [formControl]="form.controls.descripcion">
         </div>
       </div>
-      <div class="d-flex line">
+      <div *ngIf="type != 'maratones'" class="d-flex line">
         <span class="filter">Apoyo teorico a la lección</span>
       </div>
       <div *ngIf="type != 'maratones'" id="contenido" [froalaEditor]="froalaOptions"
@@ -39,8 +39,7 @@
         <span class="filter">Problema</span>
       </div>
 
-             <ngx-monaco-editor [options]="monacoOptions" [formControl]="form.controls.submission.controls.expected_output">
-      </ngx-monaco-editor> 
+      <ngx-monaco-editor [options]="monacoOptions" [formControl]="form.controls.submission.controls.expected_output"></ngx-monaco-editor> 
 
       <div id="problema" [froalaEditor]="froalaOptions" [(froalaModel)]="new_lesson.problema"></div>
       <div class="d-flex justify-content-center">

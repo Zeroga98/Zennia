@@ -1,4 +1,5 @@
-import { Component, OnInit, TemplateRef } from '@angular/core';
+import { Component, OnInit,  } from '@angular/core';
+import { Router } from '@angular/router';
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 
 @Component({
@@ -8,12 +9,24 @@ import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 })
 export class ModalAdviseResultComponent implements OnInit {
 
-  title: string;
   closeBtnName: string;
-  list: any[] = [];
-  
-  constructor(public bsModalRef: BsModalRef) {}
+  states: any[] = [];
+  isMarathon: boolean;
+
+  constructor(private router: Router,public bsModalRef: BsModalRef) {}
 
   ngOnInit() {
+    this.isMarathon = this.router.url.includes('maraton');
+    console.log(this.states);
+    
+  }
+
+  public getHome(){
+    if(this.states[0].id !=4){
+      this.bsModalRef.hide();
+      let route = (this.isMarathon)?'/competir/list': '/';
+      this.router.navigate([route]);
+    }
+    this.bsModalRef.hide();
   }
 }

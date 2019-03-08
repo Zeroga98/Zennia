@@ -4,7 +4,7 @@
       <div [froalaEditor]="froalaOptions" [(froalaModel)]="contentProblem"></div>
     </div>
     <div class="col-md-12 col-lg-6" *ngIf="!hideCode">
-      <button class="btn-work btn-run" [disabled]="isSubmiting" (click)="sendSubmission('run')">
+      <button class="btn-work btn-run mb-2" [disabled]="isSubmiting" (click)="sendSubmission('run')">
           <span *ngIf="!loading">▶</span>
           <div *ngIf="loading" class="sk-circle">
               <div class="sk-circle1 sk-child"></div>
@@ -21,7 +21,7 @@
               <div class="sk-circle12 sk-child"></div>
             </div>
       </button>
-      <div *ngIf="!loading && submission.response" style="display: inline-block;vertical-align: middle;">
+      <div *ngIf="!loading && submission.response" style="display: inline-block;vertical-align: middle;margin-bottom: .5rem">
         <span [hidden]="submission.response.status.id == 3 || submission.response.status.id == 4" class="warning">⚠ 
           <span style="font-size:16px;vertical-align: middle; font-weight: 100">{{submission.response.status.description}}</span>
         </span>  
@@ -42,10 +42,9 @@
         <span>Output</span>
         <div>
           <textarea cols="30" rows="10" class="input" readonly>
-                {{(submission.response && submission.response.typeSend == 'send')? submission.response.status.description+'/\n/g': ""}}
-                {{(submission.response && submission.response.typeSend == 'run' && !submission.response.messageErrorFinal )? submission.response.stdout+'\n': "" }}
-                {{(submission.response && submission.response.typeSend == 'run' && submission.response.messageErrorFinal )?  submission.response.messageErrorFinal+'\n': "" }}
-            </textarea>
+            {{(submission.response && submission.response.typeSend == 'run' && !submission.response.messageErrorFinal )? submission.response.stdout+'\n': "" }}
+            {{(submission.response && submission.response.typeSend == 'run' && submission.response.messageErrorFinal )?  submission.response.messageErrorFinal+'\n': "" }}
+          </textarea>
           <!-- <h3 *ngIf="submission.response.typeSend == 'send'">{{submission.response.status.description}}</h3> -->
           <!--        <div *ngIf="submission.response.typeSend == 'run'">
                 <h4 *ngIf="!submission.response.messageErrorFinal">

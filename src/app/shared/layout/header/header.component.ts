@@ -17,7 +17,7 @@ export class HeaderComponent implements OnInit {
 
   constructor(
     location: Location,
-    router: Router,
+    private router: Router,
     private userService: UserService,
     private authService: AuthService
 
@@ -36,6 +36,8 @@ export class HeaderComponent implements OnInit {
   public logout(){
     this.userService.purgeAuth();
     this.authService.logout();
+    this.userService.purgeAuth();
+    this.router.navigateByUrl('/login');
   }
  
   onHidden(): void {

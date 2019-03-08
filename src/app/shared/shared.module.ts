@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
-import { ModalModule } from 'ngx-bootstrap/modal';
 
 import { SharedRoutingModule } from './shared-routing.module';
 import { ShowAuthedDirective } from './show-authed.directive';
@@ -14,7 +13,8 @@ import {
   UserService, 
   MarathonService,
   TimeService,
-  TokenService
+  TokenService,
+  AuthGuard,
 } from './services';
 import { ReversePipe } from './pipes';
 
@@ -23,7 +23,6 @@ import { ReversePipe } from './pipes';
     CommonModule,
     SharedRoutingModule,
     HttpClientModule,
-    ModalModule.forRoot()
   ],
   declarations: [
     ReversePipe,
@@ -38,7 +37,8 @@ import { ReversePipe } from './pipes';
   	ApiJudgeService,
     UserService,
     MarathonService,
-    TokenService
+    TokenService,
+    AuthGuard,
   ],
   exports:[
     ShowAuthedDirective

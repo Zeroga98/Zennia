@@ -9,8 +9,12 @@
         <div class="card-columns">
           <section *ngFor="let course of courses">
             <div class="card">
-              <div class="card-body">
-                <h5 class="card-title text-center">{{course.nombre}}</h5>
+              <div class="card-body card-body--course"    [ngStyle]="{'background': course.Color, 'background-image': 'url(' + course.img + ')'}">
+                <img class="card-img" src="{{course.img}}" alt="">
+                <div class="w-100">
+                    <h5 class="card-title">{{course.nombre}}</h5>
+                    <span class="card-detail">{{course?.lecciones.length}} Lecciones disponibles</span>
+                </div>
               </div>
               <ul class="list-group list-group-flush">
                 <li (click)="redirectLesson(course, lesson)" class="list-group-item hand" *ngFor="let lesson of course.lecciones">

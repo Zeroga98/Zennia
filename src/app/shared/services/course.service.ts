@@ -32,7 +32,7 @@ export class CourseService {
 			        let item = course.payload.doc.data();
 			        let course_structure = { id: course.payload.doc.id, ...item, lecciones: [] };
 			        item.lecciones.map(async (lec: any) => {
-			          	let res = await lec.get();
+						  let res = await lec.get();
 			          	if(!res.data().oculta || user_rol == 'ADMIN'){
 			          		let user_id = this.userService.getUserId();
 				          	let user_results = await this.firestore.doc(`resultado_lecciones/${ user_id }-${ res.id }`).ref.get();

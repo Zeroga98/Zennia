@@ -5,7 +5,9 @@ import { MonacoEditorModule } from 'ngx-monaco-editor';
 import { FroalaEditorModule, FroalaViewModule } from 'angular-froala-wysiwyg';
 
 import { WorkspaceComponent } from "./workspace/workspace.component";
+import { ModalAdviseResultComponent } from "./modal-advise-result/modal-advise-result.component";
 import { ContentTematicComponent } from "./content-tematic/content-tematic.component";
+import { ModalModule } from 'ngx-bootstrap';
 
 @NgModule({
   imports: [
@@ -14,19 +16,23 @@ import { ContentTematicComponent } from "./content-tematic/content-tematic.compo
     ReactiveFormsModule,
     MonacoEditorModule.forRoot(),
     FroalaEditorModule.forRoot(), 
-    FroalaViewModule.forRoot()
+    FroalaViewModule.forRoot(),
+    ModalModule.forRoot()
   ],
   declarations: [
     WorkspaceComponent,
-    ContentTematicComponent
+    ContentTematicComponent,
+    ModalAdviseResultComponent
   ],
   exports: [
     WorkspaceComponent,
-    ContentTematicComponent
+    ContentTematicComponent,
+    ModalAdviseResultComponent
   ],
   entryComponents: [
     WorkspaceComponent,
-    ContentTematicComponent
+    ContentTematicComponent,
+    ModalAdviseResultComponent
   ]
 })
 export class ComponentsModule { }

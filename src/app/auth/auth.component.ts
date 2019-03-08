@@ -68,9 +68,10 @@ export class AuthComponent implements OnInit {
             this.loading = false;
             this.authService.saveDataLocalStorage(data.user);
             this.userService.setAuth(data.user)
-            this.router.navigate(['/curso/home']);
+            this.router.navigate(['/']);
           } else {
-            console.log(data.type);
+            this.loading = false;
+            this.showError = data.type == 'user_not_exist'? "El correo o contraseña no coinciden": "Lo sentimos tenemos un problema haznos saber";
           }
         });
     } else {
@@ -87,7 +88,7 @@ export class AuthComponent implements OnInit {
               this.authService.saveDataLocalStorage(data.user);
               console.log(data.user);
               this.userService.setAuth(data.user)
-              this.router.navigate(['/curso/home']);
+              this.router.navigate(['/']);
             } else {
               console.log(data.type);
             }
