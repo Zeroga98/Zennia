@@ -55,6 +55,8 @@ export class CreateComponent implements OnInit {
   }
 
   ngOnInit() {
+    setTimeout(() => document.getElementsByClassName("fr-wrapper")[0].firstElementChild.remove(), 20);
+
     this.subscribeUser = this.userService.$userCurrent.subscribe(user => this.user = user);
     this.activateRouter.parent.params.subscribe(params => {
         this.type = (this.router.url.indexOf("curso") != -1)? 'cursos' : 'maratones';

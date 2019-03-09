@@ -19,6 +19,7 @@ export class ContentTematicComponent implements OnInit {
 	}
 
 	ngOnInit() {
+		setTimeout(() => document.getElementsByClassName("fr-wrapper")[0].firstElementChild.remove(), 20);
 	}
 	
 	continue(){
